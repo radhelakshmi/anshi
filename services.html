@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08101f">
+<meta name="description" content="RL-33 Digital Services Studio — professional design and digital support.">
+<title>RL-33 Digital Services | EDH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="services-style.css">
+</head>
+<body>
+<div class="topbar"><span>RL-33 DIGITAL SERVICES</span><i>•</i><span>Professional</span><i>•</i><span>Affordable</span><i>•</i><span>WhatsApp Ordering</span></div>
+<header class="header">
+  <a class="brand" href="index.html" aria-label="Back to RL-33 main website">
+    <img src="assets/edh-logo.png" alt="EDH logo">
+    <span><b>RL-33</b><small>ESSENCE OF DESIGN HUB</small></span>
+  </a>
+  <button id="menu" class="menu" aria-label="Open menu">☰</button>
+  <nav id="nav">
+    <a href="index.html">Main Website</a><a href="#services">Services</a><a href="#portfolio">Portfolio</a><a href="#process">Process</a><a href="#application">Order</a>
+  </nav>
+  <a class="navbtn" href="#services">Explore Services ↘</a>
+</header>
+
+<main>
+<section class="hero wrap" id="home">
+  <div class="hero-copy">
+    <p class="eyebrow">RL-33 • DIGITAL SERVICES STUDIO</p>
+    <h1>Ideas into <span>professional</span> digital work.</h1>
+    <p class="lead">Design, document and digital-support services for students, creators, small businesses, events and personal projects — with a simple WhatsApp-first ordering flow.</p>
+    <div class="actions"><a class="btn gold" href="#services">View Services</a><a class="btn light" href="#application">Start a Project</a></div>
+    <div class="trust"><span>✓ Clear requirement brief</span><span>✓ Service-specific ordering</span><span>✓ Transparent starting prices</span></div>
+  </div>
+  <aside class="hero-card">
+    <div class="hero-card-top"><span>EDH SERVICE DESK</span><b>RL-33</b></div>
+    <div class="monogram">EDH</div>
+    <div class="hero-price"><small>SELECT SERVICES FROM</small><strong>₹29</strong></div>
+    <div class="hero-note">Final price and delivery time depend on the selected service and project requirements.</div>
+    <div class="orb orb1"></div><div class="orb orb2"></div>
+  </aside>
+</section>
+
+<section class="quickbar">
+  <div><b>08+</b><span>Core services</span></div><div><b>₹29+</b><span>Starting range</span></div><div><b>01</b><span>Simple order flow</span></div><div><b>WA</b><span>Direct communication</span></div>
+</section>
+
+<section class="section wrap" id="services">
+  <div class="sectionhead"><div><p class="eyebrow">SERVICE CATALOGUE</p><h2>Choose the work you need.</h2></div><p>Tap a service to see its starting range, then send a focused requirement to the EDH WhatsApp desk.</p></div>
+  <div class="filters" role="tablist" aria-label="Service filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="design">Design</button><button class="filter" data-filter="documents">Documents</button><button class="filter" data-filter="business">Business</button></div>
+  <div id="servicesGrid" class="service-grid"></div>
+</section>
+
+<section class="feature-band"><div class="wrap feature-band-inner"><div><p class="eyebrow">NOT JUST A BUTTON</p><h2>Every order starts with a proper brief.</h2><p>Instead of sending a generic message, the service flow collects the information that matters for that specific job.</p></div><div class="feature-points"><div><b>01</b><span>Choose service</span></div><div><b>02</b><span>Share requirements</span></div><div><b>03</b><span>Review details</span></div><div><b>04</b><span>Continue on WhatsApp</span></div></div></div></section>
+
+<section id="portfolio" class="dark"><div class="section wrap"><div class="sectionhead"><div><p class="eyebrow">SELECTED WORK</p><h2>EDH Sample Portfolio</h2></div><p>Reference samples only. Final work follows the customer's brief and the agreed scope.</p></div><div id="portfolioGrid" class="portfolio"></div></div></section>
+
+<section id="process" class="section wrap process-section"><div class="sectionhead"><div><p class="eyebrow">HOW IT WORKS</p><h2>Four clear steps.</h2></div><p>No complicated dashboard. The website prepares the brief; WhatsApp handles the conversation.</p></div><div class="process-grid"><article><span>01</span><h3>Select</h3><p>Choose the service that matches your requirement.</p></article><article><span>02</span><h3>Brief</h3><p>Fill only the fields relevant to that service.</p></article><article><span>03</span><h3>Send</h3><p>Your completed brief opens in WhatsApp for review.</p></article><article><span>04</span><h3>Confirm</h3><p>Discuss final scope, price, delivery and files directly.</p></article></div></section>
+
+<section id="application" class="section wrap"><div class="sectionhead"><div><p class="eyebrow">PROJECT APPLICATION</p><h2>Build your requirement.</h2></div><p>Select a service. The form changes automatically so you only see useful fields.</p></div>
+<div class="form-layout"><div class="form-intro"><div class="stepmark">01</div><h3>Start with the service.</h3><p>Give enough information for EDH to understand what you want before the WhatsApp conversation begins.</p><div class="mini-list"><span>✓ Service-specific questions</span><span>✓ Name & contact details</span><span>✓ Deadline & references</span><span>✓ Final review before sending</span></div></div>
+<div class="formcard"><form id="form"><div class="formsec"><h3>01 — SERVICE</h3><label>Service<select id="service" name="service"></select></label></div><div class="formsec"><h3>02 — CLIENT INFORMATION</h3><div class="two"><label>Full Name*<input name="name" required placeholder="Your name"></label><label>Business / Organisation<input name="business" placeholder="If applicable"></label></div><div class="two"><label>WhatsApp / Phone*<input name="phone" required placeholder="Your number"></label><label>Email<input type="email" name="email" placeholder="you@example.com"></label></div></div><div class="formsec" id="dynamic"></div><div class="formsec"><h3>04 — DEADLINE & NOTES</h3><div class="two"><label>Required By<input name="deadline" placeholder="e.g. 5 October"></label><label>Reference Link<input name="reference" placeholder="Optional"></label></div><label>Additional Instructions<textarea name="extra" placeholder="Photos, exact text, QR destination, special instructions, etc."></textarea></label></div><button class="submit" type="submit">REVIEW & OPEN WHATSAPP →</button><p class="fine">Check names, numbers, dates, prices and spellings before submitting.</p></form></div></div></section>
+
+<section class="about wrap"><div class="aboutbox"><p class="eyebrow">RL-33 × EDH</p><h2>A focused digital service desk.</h2><p>EDH — Essence of Design Hub — is presented here as an RL-33 digital service space for practical creative and document work. The website keeps discovery simple and moves detailed communication to WhatsApp.</p><div class="pillrow"><span>Design</span><span>Documents</span><span>Digital Support</span><span>Custom Briefs</span></div></div><div class="quote"><strong>“Your idea.<br>Our design.”</strong><span>EDH Creative Principle</span></div></section>
+
+<section id="contact" class="contact"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2>Start a conversation.</h2><p>For custom requirements, use the application above or contact the EDH desk directly.</p></div><div class="contactbox"><small>CALL / WHATSAPP</small><a href="https://wa.me/917084144501" target="_blank" rel="noopener">+91 70841 44501</a><small>EMAIL</small><a href="mailto:princessanshika22@gmail.com">Contact by Email</a></div></section>
+</main>
+<footer><b>RL-33</b><span>Essence of Design Hub</span><span>Discipline • Dharma • Dedication</span><span>© 2026 RL-33</span></footer>
+<script src="services-script.js"></script>
+</body></html>
