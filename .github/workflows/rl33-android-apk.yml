@@ -50,6 +50,25 @@ jobs:
           fi
 
           test -f android-app/www/index.html
+          cat > android-app/www/index.html <<'EOF'
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10182c">
+  <title>RL-33</title>
+</head>
+<body>
+  <p>Opening RL-33...</p>
+  <script>
+    window.location.replace(
+      "https://radhelakshmi.github.io/anshi/index.html"
+    );
+  </script>
+</body>
+</html>
+EOF
           test -f android-app/www/assets/rl33-logo.webp
 
           cat > android-app/package.json <<'EOF'
