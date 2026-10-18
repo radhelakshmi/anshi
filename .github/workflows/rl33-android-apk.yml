@@ -1,1 +1,96 @@
 
+name: RL-33 Full Website Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "index.html"
+      - "*.html"
+      - "*.css"
+      - "*.js"
+      - "assets/**"
+      - "samples/**"
+      - "institute-portal/**"
+      - ".github/workflows/rl33-android-apk.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout RL-33 Website
+        uses: actions/checkout@v5
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: "21"
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Copy Complete Website
+        shell: bash
+        run: |
+          mkdir -p android-app/www
+          cp ./*.html ./*.css ./*.js android-app/www/
+          cp -R assets android-app/www/
+          cp -R institute-portal android-app/www/
+
+          if [ -d samples ]; then
+            cp -R samples android-app/www/
+          fi
+
+          test -f android-app/www/index.html
+          test -f android-app/www/assets/rl33-logo.webp
+
+          cat > android-app/package.json <<'EOF'
+          {
+            "name": "rl33-full-website",
+            "version": "1.0.0",
+            "private": true,
+            "dependencies": {
+              "@capacitor/core": "^8.0.0",
+              "@capacitor/android": "^8.0.0"
+            },
+            "devDependencies": {
+              "@capacitor/cli": "^8.0.0"
+            }
+          }
+          EOF
+
+          cat > android-app/capacitor.config.json <<'EOF'
+          {
+            "appId": "com.rl33.website",
+            "appName": "RL-33",
+            "webDir": "www"
+          }
+          EOF
+
+      - name: Install Capacitor
+        working-directory: android-app
+        run: |
+          npm install
+          npx cap add android
+          npx cap sync android
+
+      - name: Build APK
+        working-directory: android-app/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RL33-Full-Website-APK
+          path: android-app/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
