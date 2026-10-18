@@ -3,16 +3,6 @@ name: RL-33 Full Website Android APK
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "index.html"
-      - "*.html"
-      - "*.css"
-      - "*.js"
-      - "assets/**"
-      - "samples/**"
-      - "institute-portal/**"
-      - ".github/workflows/rl33-android-apk.yml"
 
 permissions:
   contents: read
@@ -23,53 +13,48 @@ jobs:
     timeout-minutes: 40
 
     steps:
-      - name: Checkout RL-33 Website
+      - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set up Java
+      - name: Setup Java
         uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: "21"
 
-      - name: Set up Node
+      - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: "22"
 
-      - name: Copy Complete Website
+      - name: Prepare website
         shell: bash
         run: |
+          set -e
           mkdir -p android-app/www
           cp ./*.html ./*.css ./*.js android-app/www/
           cp -R assets android-app/www/
           cp -R institute-portal android-app/www/
-
-          if [ -d samples ]; then
-            cp -R samples android-app/www/
-          fi
-
+          if [ -d samples ]; then cp -R samples android-app/www/; fi
           test -f android-app/www/index.html
+          test -f android-app/www/institute-portal/index.html
           cat > android-app/www/index.html <<'EOF'
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10182c">
-  <title>RL-33</title>
-</head>
-<body>
-  <p>Opening RL-33...</p>
-  <script>
-    window.location.replace(
-      "https://radhelakshmi.github.io/anshi/index.html"
-    );
-  </script>
-</body>
-</html>
-EOF
-          test -f android-app/www/assets/rl33-logo.webp
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="theme-color" content="#10182c">
+            <title>RL-33</title>
+          </head>
+          <body>
+            <p>Opening RL-33...</p>
+            <script>
+              window.location.replace("https://radhelakshmi.github.io/anshi/index.html");
+            </script>
+          </body>
+          </html>
+          EOF
 
           cat > android-app/package.json <<'EOF'
           {
