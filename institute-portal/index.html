@@ -31,8 +31,41 @@
 <section id="page-missions" class="page"><div class="section-head"><div><h1>Missions & Day Targets</h1></div><div><button class="btn gold" onclick="openModal('missionModal')">＋ Mission</button> <button class="btn light" onclick="openModal('targetModal')">＋ Daily Target</button></div></div><div class="grid2"><div class="card pad"><h3>Member Missions</h3><div id="missionsList"></div></div><div class="card pad"><h3>Upcoming Targets</h3><div id="targetsList"></div></div></div></section>
 <section id="page-membertests" class="page"><div class="section-head"><h1>Member Academic Progress</h1><button class="btn gold" onclick="openModal('memberTestModal')">＋ Add Test</button></div><div class="card tablewrap"><table><thead><tr><th>Member</th><th>Type</th><th>Subject</th><th>Test</th><th>Score</th><th>Date</th></tr></thead><tbody id="memberTestsTable"></tbody></table></div></section>
 <section id="page-notices" class="page"><div class="section-head"><h1>RL-33 Notice Board</h1><button class="btn gold" onclick="openModal('noticeModal')">＋ Publish Notice</button></div><div id="noticesList"></div></section>
-<section id="page-memberreports" class="page"><div class="section-head"><div><h1>Member Progress Reports</h1><p class="muted">Approved records only • Weekly, monthly and mission-wise progress.</p></div><button class="btn gold" onclick="window.print()">Print / Save PDF</button></div><div class="toolbar"><select id="progressMember" class="field" onchange="renderMemberProgress()"></select><select id="progressPeriod" class="field" onchange="renderMemberProgress()"><option value="weekly">Weekly • Last 7 Days</option><option value="monthly">Monthly • Current Month</option><option value="all">Overall Mission Record</option></select></div><div id="memberProgress" class="report-paper printable" style="margin-top:16px"></div></section>
-</div></main></div>
+
+<section id="page-memberreports" class="page">
+  <div class="section-head">
+    <div>
+      <h1>Member Progress Reports</h1>
+      <p class="muted">Approved records only • Weekly, monthly, custom date range and overall progress.</p>
+    </div>
+    <button class="btn gold" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <div class="toolbar">
+    <select id="progressMember" class="field" onchange="renderMemberProgress()">
+    </select>
+
+    <select id="progressPeriod" class="field" onchange="renderMemberProgress()">
+      <option value="weekly">Weekly • Monday–Sunday</option>
+      <option value="monthly">Monthly • Full Calendar Month</option>
+      <option value="custom">Custom Date Range</option>
+      <option value="all">Overall Mission Record</option>
+    </select>
+
+    <input id="progressFrom" type="date" class="field"
+      aria-label="From date"
+      style="display:none"
+      onchange="renderMemberProgress()">
+
+    <input id="progressTo" type="date" class="field"
+      aria-label="To date"
+      style="display:none"
+      onchange="renderMemberProgress()">
+  </div>
+
+  <div id="memberProgress" class="report-paper printable" style="margin-top:16px"></div>
+</section>
+
 
 <div id="studentPortal" class="student-shell hidden"><div class="portal-top"><b>🎓 RL-INSTITUTE • Student Portal</b><button class="btn light" onclick="signOut()">Sign out</button></div><div class="portal-wrap"><div class="hero"><small>STRONGER FOUNDATION, CONFIDENT LEARNING</small><h1 id="studentName">Welcome</h1><p id="studentMeta"></p></div><div class="stats"><div class="stat">Attendance<b id="sAttendance">—</b></div><div class="stat">Test Average<b id="sAverage">—</b></div><div class="stat">Monthly Fee<b id="sFee">—</b></div><div class="stat">Status<b id="sStatus">—</b></div></div><div class="grid2"><div class="card pad"><h3>My Tests</h3><div id="sTests"></div></div><div class="card pad"><h3>Fee History</h3><div id="sFees"></div></div></div><div class="card pad" style="margin-top:16px"><h3>My Attendance</h3><div id="sAttList"></div></div><div class="card pad printable" id="sReport" style="margin-top:16px"></div><div style="margin:18px 0"><button class="btn primary" onclick="window.print()">Print My Report</button></div></div></div>
 
