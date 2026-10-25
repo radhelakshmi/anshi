@@ -1,4 +1,3 @@
-
 name: RL-33 Full Offline Android APK
 
 on:
@@ -26,8 +25,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "22"
-          cache: npm
-          cache-dependency-path: android-app/package-lock.json
 
       - name: Verify Existing Website
         shell: bash
