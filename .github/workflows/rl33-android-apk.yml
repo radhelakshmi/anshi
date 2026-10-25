@@ -1,5 +1,5 @@
 
-name: RL-33 Full Website Android APK
+name: RL-33 Full Offline Android APK
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 40
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v5
 
       - name: Setup Java
@@ -22,45 +22,61 @@ jobs:
           distribution: zulu
           java-version: "21"
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "22"
+          cache: npm
+          cache-dependency-path: android-app/package-lock.json
 
-      - name: Prepare website
+      - name: Verify Existing Website
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
+          test -f index.html
+          test -f institute-portal/index.html
+          echo "RL-33 website files verified."
+
+      - name: Prepare Bundled Website
+        shell: bash
+        run: |
+          set -euo pipefail
+
           mkdir -p android-app/www
-          cp ./*.html ./*.css ./*.js android-app/www/
-          cp -R assets android-app/www/
-          cp -R institute-portal android-app/www/
-          if [ -d samples ]; then cp -R samples android-app/www/; fi
+
+          # Copy the existing website, not a redirect page.
+          # Exclude generated files and the Android build folder.
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='android-app/' \
+            --exclude='node_modules/' \
+            --exclude='*.zip' \
+            ./ android-app/www/
+
           test -f android-app/www/index.html
           test -f android-app/www/institute-portal/index.html
-          cat > android-app/www/index.html <<'EOF'
-          <!doctype html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta name="theme-color" content="#10182c">
-            <title>RL-33</title>
-          </head>
-          <body>
-            <p>Opening RL-33...</p>
-            <script>
-              window.location.replace("https://radhelakshmi.github.io/anshi/index.html");
-            </script>
-          </body>
-          </html>
-          EOF
 
-          cat > android-app/package.json <<'EOF'
+          if grep -q 'window.location.replace("https://radhelakshmi.github.io/anshi/index.html")' \
+            android-app/www/index.html; then
+            echo "Unexpected redirect detected in bundled website."
+            exit 1
+          fi
+
+      - name: Configure Capacitor
+        working-directory: android-app
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > package.json <<'EOF'
           {
-            "name": "rl33-full-website",
+            "name": "rl33-full-offline-website",
             "version": "1.0.0",
             "private": true,
+            "scripts": {
+              "android:sync": "cap sync android"
+            },
             "dependencies": {
               "@capacitor/core": "^8.0.0",
               "@capacitor/android": "^8.0.0"
@@ -71,7 +87,7 @@ jobs:
           }
           EOF
 
-          cat > android-app/capacitor.config.json <<'EOF'
+          cat > capacitor.config.json <<'EOF'
           {
             "appId": "com.rl33.website",
             "appName": "RL-33",
@@ -79,22 +95,24 @@ jobs:
           }
           EOF
 
-      - name: Install Capacitor
-        working-directory: android-app
-        run: |
           npm install
           npx cap add android
           npx cap sync android
 
-      - name: Build APK
+      - name: Build Debug APK
         working-directory: android-app/android
+        shell: bash
         run: |
+          set -euo pipefail
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      - name: Upload APK
+          test -f app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: RL33-Full-Website-APK
+          name: RL33-Full-Offline-APK
           path: android-app/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+          retention-days: 14
