@@ -112,15 +112,230 @@ function editMember(id){let m=D.members.find(x=>x.id===id),pos=prompt('Position'
 $('missionForm').onsubmit=async e=>{e.preventDefault();let row={member_id:$('miMember').value,title:$('miTitle').value.trim(),category:$('miCategory').value,phase:$('miPhase').value.trim(),mission_lead:$('miLead').value.trim(),dedicated_to:$('miDedicated').value.trim(),objective:$('miObjective').value.trim(),start_date:$('miStart').value,end_date:$('miEnd').value||null,status:$('miStatus').value},id=$('miEditId').value,r=id?await sb.from('member_missions').update(row).eq('id',id):await sb.from('member_missions').insert(row);if(r.error)return toast(r.error.message);closeModal('missionModal');resetMissionForm();await loadAdmin();toast(id?'Mission updated':'Mission created')};$('targetForm').onsubmit=async e=>{e.preventDefault();let r=await sb.from('member_targets').insert({member_id:$('taMember').value,target_date:$('taDate').value,title:$('taTitle').value,details:$('taDetails').value,priority:$('taPriority').value});if(r.error)return toast(r.error.message);closeModal('targetModal');e.target.reset();await loadAdmin();toast('Target saved')};
 $('memberTestForm').onsubmit=async e=>{e.preventDefault();let sc=Number($('mtScore').value),tot=Number($('mtTotal').value);if(sc>tot)return toast('Marks cannot exceed total');let r=await sb.from('member_tests').insert({member_id:$('mtMember').value,test_type:$('mtType').value,subject:$('mtSubject').value,test_name:$('mtName').value,test_date:$('mtDate').value,marks_obtained:sc,total_marks:tot,remark:$('mtRemark').value});if(r.error)return toast(r.error.message);closeModal('memberTestModal');e.target.reset();await loadAdmin();toast('Member test saved')};$('noticeForm').onsubmit=async e=>{e.preventDefault();let {data:{user}}=await sb.auth.getUser(),r=await sb.from('member_notices').insert({title:$('noTitle').value,message:$('noMessage').value,priority:$('noPriority').value,audience:$('noAudience').value,created_by:user.id});if(r.error)return toast(r.error.message);closeModal('noticeModal');e.target.reset();await loadAdmin();toast('Notice published')};
 $('feeForm').onsubmit=async e=>{e.preventDefault();let {data:{user}}=await sb.auth.getUser(),r=await sb.from('fee_payments').insert({receipt_number:'RL-'+Date.now(),student_id:$('fpStudent').value,amount:Number($('fpAmount').value),payment_date:$('fpDate').value,fee_month:$('fpMonth').value+'-01',payment_method:$('fpMethod').value,created_by:user.id});if(r.error)return toast(r.error.message);closeModal('feeModal');e.target.reset();await loadAdmin();toast('Payment saved')};$('studentTestForm').onsubmit=async e=>{e.preventDefault();let sc=Number($('smScore').value),tot=Number($('smTotal').value);if(sc>tot)return toast('Marks cannot exceed total');let r=await sb.from('test_marks').insert({student_id:$('smStudent').value,test_name:$('smTest').value,test_date:$('smDate').value,marks_obtained:sc,total_marks:tot,teacher_remark:$('smRemark').value});if(r.error)return toast(r.error.message);closeModal('studentTestModal');e.target.reset();await loadAdmin();toast('Student result saved')};
-function openReview(id){reviewId=id;let r=D.reports.find(x=>x.id===id),sessions=[r.session_1,r.session_2,r.session_3].filter(Boolean).length,targets=Number(r.targets_completed??(r.target_status==='Completed'?3:r.target_status==='Partial'?1:0)),auto=Math.min(10,sessions+(r.revision_done?2:0)+(r.english_practice?1:0)+(targets>=3?2:targets>=1?1:0)+(r.study_minutes>=120?1:0)+(r.better_work?1:0));$('reviewBody').innerHTML=`<b>${esc(memberName(r.member_id))} · ${esc(r.report_date)}</b><p><b>Academic:</b> Sessions ${sessions}/3 · Revision ${r.revision_done?'Done':'No'} · English ${r.english_practice?'Done':'No'} · Targets ${targets}/3</p><p><b>Character / Routine:</b> Study ${(r.study_minutes/60).toFixed(1)}h · Screen ${(r.screen_minutes/60).toFixed(1)}h · Better work ${r.better_work?'Yes':'No'}</p><p>${esc(r.better_work_note||'')}</p><p><b>Reflection:</b> ${esc(r.reflection||'No reflection')}</p>`;$('reviewScore').value=auto;$('reviewRemark').value='';openModal('reviewModal')}
-async function reviewDecision(status){let {data:{user}}=await sb.auth.getUser(),patch={status,admin_remark:$('reviewRemark').value};if(status==='Approved'){patch.score=Number($('reviewScore').value);patch.approved_at=new Date().toISOString();patch.approved_by=user.id}else{patch.score=null;patch.approved_at=null;patch.approved_by=null}let r=await sb.from('member_daily_reports').update(patch).eq('id',reviewId).eq('status','Submitted');if(r.error)return toast(r.error.message);closeModal('reviewModal');await loadAdmin();toast(status==='Approved'?'Approved and locked':'Returned for correction')}
-function renderStudentReport(){let id=$('reportStudent').value,s=D.students.find(x=>x.id===id);if(!s)return $('studentReport').innerHTML='<p class="muted">Select a student.</p>';let tests=D.studentTests.filter(x=>x.student_id===id),att=D.attendance.filter(x=>x.student_id===id),present=att.filter(x=>['Present','Late'].includes(x.status)).length,avg=tests.length?tests.reduce((a,x)=>a+Number(x.marks_obtained)/Number(x.total_marks)*100,0)/tests.length:0;$('studentReport').innerHTML=`<div style="text-align:center"><img src="logo.png" style="width:80px"><h1>RL-INSTITUTE</h1><p>Stronger Foundation, Confident Learning.</p></div><hr><h2>${esc(s.full_name)}</h2><p>ID: ${esc(s.id)} · Class: ${esc(s.class_name)}</p><h3>Academic Summary</h3><p>Test Average: <b>${tests.length?avg.toFixed(1)+'%':'—'}</b> · Attendance: <b>${att.length?Math.round(present/att.length*100)+'%':'—'}</b></p><table><tr><th>Test</th><th>Date</th><th>Score</th></tr>${tests.map(x=>`<tr><td>${esc(x.test_name)}</td><td>${esc(x.test_date)}</td><td>${x.marks_obtained}/${x.total_marks}</td></tr>`).join('')}</table><p style="margin-top:30px">Admin Signature: ____________________</p>`}
-function renderMemberProgress(){let id=$('progressMember').value;if(!id)return $('memberProgress').innerHTML='<p class="muted">Select a member.</p>';renderProgressInto(id,'memberProgress',$('progressPeriod')?.value||'weekly')}
-function reportRange(period){let end=new Date(today()+'T23:59:59'),start=new Date(end);if(period==='weekly')start.setDate(end.getDate()-6);else if(period==='monthly'){start=new Date(end.getFullYear(),end.getMonth(),1)}else start=new Date('2000-01-01');return{start,end}}
-function progressStats(id,period='all',source=D.reports){let q=reportRange(period),r=source.filter(x=>x.member_id===id&&x.status==='Approved'&&new Date(x.report_date+'T12:00:00')>=q.start&&new Date(x.report_date+'T12:00:00')<=q.end),sessions=r.reduce((a,x)=>a+[x.session_1,x.session_2,x.session_3].filter(Boolean).length,0),possible=r.length*3,rev=r.length?r.filter(x=>x.revision_done).length/r.length*100:0,eng=r.length?r.filter(x=>x.english_practice).length/r.length*100:0,targets=r.reduce((a,x)=>a+Number(x.targets_completed??(x.target_status==='Completed'?3:x.target_status==='Partial'?1:0)),0),study=r.length?r.reduce((a,x)=>a+Number(x.study_minutes||0),0)/r.length:0,screen=r.length?r.reduce((a,x)=>a+Number(x.screen_minutes||0),0)/r.length:0,better=r.length?r.filter(x=>x.better_work).length/r.length*100:0,score=r.length?r.reduce((a,x)=>a+Number(x.score||0),0)/r.length:0;return{r,sessions,possible,sess:possible?sessions/possible*100:0,rev,eng,targets,targetPossible:r.length*3,tar:r.length?targets/(r.length*3)*100:0,study,screen,better,score}}
-function mins(v){let h=Math.floor(v/60),m=Math.round(v%60);return `${h}h ${String(m).padStart(2,'0')}m`}
-function renderProgressInto(id,target,period='all'){let m=D.members.find(x=>x.id===id);if(!m)return;let p=progressStats(id,period),tests=D.memberTests.filter(x=>x.member_id===id),school=tests.filter(x=>x.test_type==='School Test'),rl=tests.filter(x=>x.test_type==='RL-33 Test'),avg=a=>a.length?a.reduce((s,x)=>s+Number(x.marks_obtained)/Number(x.total_marks)*100,0)/a.length:0,mis=D.missions.filter(x=>x.member_id===id&&x.status==='Active'),academic=mis.filter(x=>(x.category||'Academic')==='Academic'),character=mis.filter(x=>x.category==='Character'),label=period==='weekly'?'WEEKLY • LAST 7 DAYS':period==='monthly'?'MONTHLY • CURRENT MONTH':'OVERALL MISSION RECORD';$(target).innerHTML=`<div style="text-align:center"><h1>RL-33 MEMBER PROGRESS REPORT</h1><p>${label} • Approved Records Only</p></div><hr><h2>${esc(m.full_name)}</h2><p>${esc(m.position)} · ${esc(m.designation||'')}</p><div class="report-summary"><div>Sessions<b>${p.sessions}/${p.possible}</b><span class="muted">${p.sess.toFixed(0)}% attendance</span></div><div>Targets<b>${p.targets}/${p.targetPossible}</b><span class="muted">Daily 3-target record</span></div><div>Revision<b>${p.rev.toFixed(0)}%</b></div><div>English<b>${p.eng.toFixed(0)}%</b></div><div>Avg Study<b>${mins(p.study)}</b></div><div>Avg Screen<b>${mins(p.screen)}</b></div></div><div class="grid2"><div class="academic-box" style="padding:12px"><h3>Academic Mission Progress</h3><p>Sessions ${p.sess.toFixed(0)}% · Revision ${p.rev.toFixed(0)}% · English ${p.eng.toFixed(0)}% · Targets ${p.tar.toFixed(0)}%</p><p>School Tests: <b>${school.length?avg(school).toFixed(1)+'%':'—'}</b> · RL-33 Tests: <b>${rl.length?avg(rl).toFixed(1)+'%':'—'}</b></p>${academic.map(x=>`<p><b>${esc(x.title)}</b> · ${missionDays(x).left??'—'} days left</p>`).join('')||'<p class="muted">No active academic mission.</p>'}</div><div class="character-box" style="padding:12px"><h3>Character & Routine Progress</h3><p>Average Study: <b>${mins(p.study)}</b><br>Average Screen: <b>${mins(p.screen)}</b><br>Better-work consistency: <b>${p.better.toFixed(0)}%</b></p>${character.map(x=>`<p><b>${esc(x.title)}</b> · ${missionDays(x).left??'—'} days left</p>`).join('')||'<p class="muted">No active character mission.</p>'}</div></div><h3>Approved Daily Record</h3><table><tr><th>Date</th><th>Sessions</th><th>Targets</th><th>Study</th><th>Screen</th><th>Score</th></tr>${p.r.sort((a,b)=>String(b.report_date).localeCompare(a.report_date)).slice(0,31).map(x=>`<tr><td>${x.report_date}</td><td>${[x.session_1,x.session_2,x.session_3].filter(Boolean).length}/3</td><td>${Number(x.targets_completed??(x.target_status==='Completed'?3:x.target_status==='Partial'?1:0))}/3</td><td>${mins(x.study_minutes||0)}</td><td>${mins(x.screen_minutes||0)}</td><td>${x.score??'—'}/10</td></tr>`).join('')}</table>`}
-async function loadStudent(id){let [s,a,t,f]=await Promise.all([sb.from('students').select('*').eq('id',id).single(),sb.from('attendance').select('*').eq('student_id',id).order('attendance_date',{ascending:false}),sb.from('test_marks').select('*').eq('student_id',id).order('test_date',{ascending:false}),sb.from('fee_payments').select('*').eq('student_id',id).order('payment_date',{ascending:false})]);if([s,a,t,f].some(x=>x.error))throw new Error([s,a,t,f].find(x=>x.error).error.message);let st=s.data,att=a.data,tests=t.data,fees=f.data,p=att.filter(x=>['Present','Late'].includes(x.status)).length,avg=tests.length?tests.reduce((q,x)=>q+Number(x.marks_obtained)/Number(x.total_marks)*100,0)/tests.length:0;$('studentName').textContent='Welcome, '+st.full_name;$('studentMeta').textContent=`${st.id} • ${st.class_name}`;$('sAttendance').textContent=att.length?Math.round(p/att.length*100)+'%':'—';$('sAverage').textContent=tests.length?avg.toFixed(1)+'%':'—';$('sFee').textContent=money(st.monthly_fee);$('sStatus').textContent=st.status;$('sTests').innerHTML=tests.map(x=>`<p><b>${esc(x.test_name)}</b> — ${x.marks_obtained}/${x.total_marks}<br><span class="muted">${esc(x.test_date)} · ${esc(x.teacher_remark||'')}</span></p>`).join('')||'No tests yet.';$('sFees').innerHTML=fees.map(x=>`<p><b>${money(x.amount)}</b> · ${esc(String(x.fee_month).slice(0,7))}<br><span class="muted">${esc(x.payment_date)} · ${esc(x.payment_method)}</span></p>`).join('')||'No payments yet.';$('sAttList').innerHTML=att.slice(0,20).map(x=>`${esc(x.attendance_date)} — <b>${esc(x.status)}</b>`).join('<br>')||'No attendance yet.';$('sReport').innerHTML=`<h2>RL-INSTITUTE Student Progress</h2><h3>${esc(st.full_name)}</h3><p>${esc(st.id)} · ${esc(st.class_name)}</p><p>Attendance: <b>${$('sAttendance').textContent}</b> · Test Average: <b>${$('sAverage').textContent}</b></p>`}
+
+function openReview(id){
+  reviewId=id;
+  let r=D.reports.find(x=>x.id===id);
+  if(!r)return;
+  let sessions=[r.session_1,r.session_2,r.session_3].filter(Boolean).length;
+  let targets=Number(r.targets_completed??(r.target_status==='Completed'?3:r.target_status==='Partial'?1:0));
+  let auto=Math.min(10,sessions+(r.revision_done?2:0)+(r.english_practice?1:0)+(targets>=3?2:targets>=1?1:0)+(r.study_minutes>=120?1:0)+(r.better_work?1:0));
+  $('reviewBody').innerHTML=`<b>${esc(memberName(r.member_id))} · ${esc(r.report_date)}</b><p><b>Academic:</b> Sessions ${sessions}/3 · Revision ${r.revision_done?'Done':'No'} · English ${r.english_practice?'Done':'No'} · Targets ${targets}/3</p><p><b>Character / Routine:</b> Study ${(r.study_minutes/60).toFixed(1)}h · Screen ${(r.screen_minutes/60).toFixed(1)}h · Better work ${r.better_work?'Yes':'No'}</p><p>${esc(r.better_work_note||'')}</p><p><b>Reflection:</b> ${esc(r.reflection||'No reflection')}</p>`;
+  $('reviewScore').value=auto;
+  $('reviewRemark').value='';
+  openModal('reviewModal');
+}
+
+async function reviewDecision(status){
+  let {data:{user}}=await sb.auth.getUser();
+  let patch={status,admin_remark:$('reviewRemark').value};
+  if(status==='Approved'){
+    patch.score=Number($('reviewScore').value);
+    patch.approved_at=new Date().toISOString();
+    patch.approved_by=user.id;
+  }else{
+    patch.score=null;
+    patch.approved_at=null;
+    patch.approved_by=null;
+  }
+  let r=await sb.from('member_daily_reports').update(patch).eq('id',reviewId).eq('status','Submitted');
+  if(r.error)return toast(r.error.message);
+  closeModal('reviewModal');
+  await loadAdmin();
+  toast(status==='Approved'?'Approved and locked':'Returned for correction');
+}
+
+function renderStudentReport(){
+  let id=$('reportStudent').value,s=D.students.find(x=>x.id===id);
+  if(!s)return $('studentReport').innerHTML='<p class="muted">Select a student.</p>';
+  let tests=D.studentTests.filter(x=>x.student_id===id),att=D.attendance.filter(x=>x.student_id===id);
+  let present=att.filter(x=>['Present','Late'].includes(x.status)).length;
+  let avg=tests.length?tests.reduce((a,x)=>a+Number(x.marks_obtained)/Number(x.total_marks)*100,0)/tests.length:0;
+  $('studentReport').innerHTML=`<div style="text-align:center"><img src="logo.png" style="width:80px"><h1>RL-INSTITUTE</h1><p>Stronger Foundation, Confident Learning.</p></div><hr><h2>${esc(s.full_name)}</h2><p>ID: ${esc(s.id)} · Class: ${esc(s.class_name)}</p><h3>Academic Summary</h3><p>Test Average: <b>${tests.length?avg.toFixed(1)+'%':'—'}</b> · Attendance: <b>${att.length?Math.round(present/att.length*100)+'%':'—'}</b></p><table><tr><th>Test</th><th>Date</th><th>Score</th></tr>${tests.map(x=>`<tr><td>${esc(x.test_name)}</td><td>${esc(x.test_date)}</td><td>${x.marks_obtained}/${x.total_marks}</td></tr>`).join('')}</table><p style="margin-top:30px">Admin Signature: ____________________</p>`;
+}
+
+function toggleProgressDates(){
+  let period=$('progressPeriod')?.value||'weekly';
+  let from=$('progressFrom'),to=$('progressTo');
+  if(from)from.style.display=period==='custom'?'':'none';
+  if(to)to.style.display=period==='custom'?'':'none';
+}
+
+function renderMemberProgress(){
+  let id=$('progressMember').value;
+  let period=$('progressPeriod')?.value||'weekly';
+  toggleProgressDates();
+
+  if(!id){
+    $('memberProgress').innerHTML='<p class="muted">Select a member.</p>';
+    return;
+  }
+  renderProgressInto(id,'memberProgress',period);
+}
+
+function reportRange(period){
+  let now=new Date();
+  let start,end;
+
+  if(period==='weekly'){
+    let offset=(now.getDay()+6)%7;
+    start=new Date(now.getFullYear(),now.getMonth(),now.getDate()-offset);
+    end=new Date(start.getFullYear(),start.getMonth(),start.getDate()+6);
+  }else if(period==='monthly'){
+    start=new Date(now.getFullYear(),now.getMonth(),1);
+    end=new Date(now.getFullYear(),now.getMonth()+1,0);
+  }else if(period==='custom'){
+    let from=$('progressFrom')?.value,to=$('progressTo')?.value;
+    if(!from||!to||from>to)return null;
+    start=new Date(from+'T00:00:00');
+    end=new Date(to+'T23:59:59.999');
+  }else{
+    start=new Date(2000,0,1);
+    end=new Date(2099,11,31,23,59,59,999);
+  }
+
+  start.setHours(0,0,0,0);
+  end.setHours(23,59,59,999);
+  return {start,end};
+}
+
+function progressStats(id,period='all',source=D.reports){
+  let q=reportRange(period);
+  if(!q)return {
+    r:[],sessions:0,possible:0,sess:0,rev:0,eng:0,
+    targets:0,targetPossible:0,tar:0,study:0,screen:0,better:0,score:0
+  };
+
+  let r=source.filter(x=>
+    x.member_id===id&&
+    x.status==='Approved'&&
+    new Date(x.report_date+'T12:00:00')>=q.start&&
+    new Date(x.report_date+'T12:00:00')<=q.end
+  );
+
+  let sessions=r.reduce((a,x)=>a+[x.session_1,x.session_2,x.session_3].filter(Boolean).length,0);
+  let possible=r.length*3;
+  let rev=r.length?r.filter(x=>x.revision_done).length/r.length*100:0;
+  let eng=r.length?r.filter(x=>x.english_practice).length/r.length*100:0;
+  let targets=r.reduce((a,x)=>a+Number(x.targets_completed??(x.target_status==='Completed'?3:x.target_status==='Partial'?1:0)),0);
+  let study=r.length?r.reduce((a,x)=>a+Number(x.study_minutes||0),0)/r.length:0;
+  let screen=r.length?r.reduce((a,x)=>a+Number(x.screen_minutes||0),0)/r.length:0;
+  let better=r.length?r.filter(x=>x.better_work).length/r.length*100:0;
+  let score=r.length?r.reduce((a,x)=>a+Number(x.score||0),0)/r.length:0;
+
+  return {
+    r,sessions,possible,
+    sess:possible?sessions/possible*100:0,
+    rev,eng,targets,targetPossible:r.length*3,
+    tar:r.length?targets/(r.length*3)*100:0,
+    study,screen,better,score
+  };
+}
+
+function mins(v){
+  let h=Math.floor(v/60),m=Math.round(v%60);
+  return `${h}h ${String(m).padStart(2,'0')}m`;
+}
+
+function renderProgressInto(id,target,period='all'){
+  let m=D.members.find(x=>x.id===id);
+  if(!m)return;
+
+  let q=reportRange(period);
+  if(!q){
+    $(target).innerHTML='<p class="muted">Please select valid From and To dates. From date must not be after To date.</p>';
+    return;
+  }
+
+  let p=progressStats(id,period);
+  let tests=D.memberTests.filter(x=>x.member_id===id);
+  let school=tests.filter(x=>x.test_type==='School Test');
+  let rl=tests.filter(x=>x.test_type==='RL-33 Test');
+  let avg=a=>a.length?a.reduce((s,x)=>s+Number(x.marks_obtained)/Number(x.total_marks)*100,0)/a.length:0;
+  let mis=D.missions.filter(x=>x.member_id===id&&x.status==='Active');
+  let academic=mis.filter(x=>(x.category||'Academic')==='Academic');
+  let character=mis.filter(x=>x.category==='Character');
+
+  let label=period==='weekly'?'WEEKLY • MONDAY–SUNDAY':
+    period==='monthly'?'MONTHLY • FULL CALENDAR MONTH':
+    period==='custom'?'CUSTOM DATE RANGE':'OVERALL MISSION RECORD';
+
+  let rangeText=`${q.start.toLocaleDateString('en-IN')} – ${q.end.toLocaleDateString('en-IN')}`;
+  let records=[...p.r].sort((a,b)=>String(b.report_date).localeCompare(String(a.report_date)));
+
+  $(target).innerHTML=`
+    <div style="text-align:center">
+      <h1>RL-33 MEMBER PROGRESS REPORT</h1>
+      <p>${label} • Approved Records Only</p>
+      <p>${rangeText}</p>
+    </div>
+    <hr>
+    <h2>${esc(m.full_name)}</h2>
+    <p>${esc(m.position)} · ${esc(m.designation||'')}</p>
+
+    <div class="report-summary">
+      <div>Sessions<b>${p.sessions}/${p.possible}</b><span class="muted">${p.sess.toFixed(0)}% attendance</span></div>
+      <div>Targets<b>${p.targets}/${p.targetPossible}</b><span class="muted">Daily 3-target record</span></div>
+      <div>Revision<b>${p.rev.toFixed(0)}%</b></div>
+      <div>English<b>${p.eng.toFixed(0)}%</b></div>
+      <div>Avg Study<b>${mins(p.study)}</b></div>
+      <div>Avg Screen<b>${mins(p.screen)}</b></div>
+    </div>
+
+    <div class="grid2">
+      <div class="academic-box" style="padding:12px">
+        <h3>Academic Mission Progress</h3>
+        <p>Sessions ${p.sess.toFixed(0)}% · Revision ${p.rev.toFixed(0)}% · English ${p.eng.toFixed(0)}% · Targets ${p.tar.toFixed(0)}%</p>
+        <p>School Tests: <b>${school.length?avg(school).toFixed(1)+'%':'—'}</b> · RL-33 Tests: <b>${rl.length?avg(rl).toFixed(1)+'%':'—'}</b></p>
+        ${academic.map(x=>`<p><b>${esc(x.title)}</b> · ${missionDays(x).left??'—'} days left</p>`).join('')||'<p class="muted">No active academic mission.</p>'}
+      </div>
+
+      <div class="character-box" style="padding:12px">
+        <h3>Character & Routine Progress</h3>
+        <p>Average Study: <b>${mins(p.study)}</b><br>Average Screen: <b>${mins(p.screen)}</b><br>Better-work consistency: <b>${p.better.toFixed(0)}%</b></p>
+        ${character.map(x=>`<p><b>${esc(x.title)}</b> · ${missionDays(x).left??'—'} days left</p>`).join('')||'<p class="muted">No active character mission.</p>'}
+      </div>
+    </div>
+
+    <h3>Approved Daily Record</h3>
+    <div class="tablewrap">
+      <table>
+        <tr><th>Date</th><th>Sessions</th><th>Targets</th><th>Study</th><th>Screen</th><th>Score</th></tr>
+        ${records.slice(0,31).map(x=>`<tr>
+          <td>${esc(x.report_date)}</td>
+          <td>${[x.session_1,x.session_2,x.session_3].filter(Boolean).length}/3</td>
+          <td>${Number(x.targets_completed??(x.target_status==='Completed'?3:x.target_status==='Partial'?1:0))}/3</td>
+          <td>${mins(x.study_minutes||0)}</td>
+          <td>${mins(x.screen_minutes||0)}</td>
+          <td>${x.score??'—'}/10</td>
+        </tr>`).join('')}
+      </table>
+    </div>`;
+}
+
+async function loadStudent(id){
+  let [s,a,t,f]=await Promise.all([
+    sb.from('students').select('*').eq('id',id).single(),
+    sb.from('attendance').select('*').eq('student_id',id).order('attendance_date',{ascending:false}),
+    sb.from('test_marks').select('*').eq('student_id',id).order('test_date',{ascending:false}),
+    sb.from('fee_payments').select('*').eq('student_id',id).order('payment_date',{ascending:false})
+  ]);
+  if([s,a,t,f].some(x=>x.error))throw new Error([s,a,t,f].find(x=>x.error).error.message);
+  let st=s.data,att=a.data,tests=t.data,fees=f.data;
+  let p=att.filter(x=>['Present','Late'].includes(x.status)).length;
+  let avg=tests.length?tests.reduce((q,x)=>q+Number(x.marks_obtained)/Number(x.total_marks)*100,0)/tests.length:0;
+  $('studentName').textContent='Welcome, '+st.full_name;
+  $('studentMeta').textContent=`${st.id} • ${st.class_name}`;
+  $('sAttendance').textContent=att.length?Math.round(p/att.length*100)+'%':'—';
+  $('sAverage').textContent=tests.length?avg.toFixed(1)+'%':'—';
+  $('sFee').textContent=money(st.monthly_fee);
+  $('sStatus').textContent=st.status;
+  $('sTests').innerHTML=tests.map(x=>`<p><b>${esc(x.test_name)}</b> — ${x.marks_obtained}/${x.total_marks}<br><span class="muted">${esc(x.test_date)} · ${esc(x.teacher_remark||'')}</span></p>`).join('')||'No tests yet.';
+  $('sFees').innerHTML=fees.map(x=>`<p><b>${money(x.amount)}</b> · ${esc(String(x.fee_month).slice(0,7))}<br><span class="muted">${esc(x.payment_date)} · ${esc(x.payment_method)}</span></p>`).join('')||'No payments yet.';
+  $('sAttList').innerHTML=att.slice(0,20).map(x=>`${esc(x.attendance_date)} — <b>${esc(x.status)}</b>`).join('<br>')||'No attendance yet.';
+  $('sReport').innerHTML=`<h2>RL-INSTITUTE Student Progress</h2><h3>${esc(st.full_name)}</h3><p>${esc(st.id)} · ${esc(st.class_name)}</p><p>Attendance: <b>${$('sAttendance').textContent}</b> · Test Average: <b>${$('sAverage').textContent}</b></p>`;
+}
+
 let memberPeriod='weekly';
 async function loadMember(id){currentMember=id;let [m,mi,ta,r,t,n]=await Promise.all([sb.from('members').select('*').eq('id',id).single(),sb.from('member_missions').select('*').eq('member_id',id).order('start_date',{ascending:false}),sb.from('member_targets').select('*').eq('member_id',id).order('target_date'),sb.from('member_daily_reports').select('*').eq('member_id',id).order('report_date',{ascending:false}),sb.from('member_tests').select('*').eq('member_id',id).order('test_date',{ascending:false}),sb.from('member_notices').select('*').order('created_at',{ascending:false})]);if([m,mi,ta,r,t,n].some(x=>x.error))throw new Error([m,mi,ta,r,t,n].find(x=>x.error).error.message);let mem=m.data,mis=mi.data||[],targets=ta.data||[],reports=r.data||[],tests=t.data||[],notices=n.data||[],approved=reports.filter(x=>x.status==='Approved');D.members=[mem];D.missions=mis;D.targets=targets;D.reports=reports;D.memberTests=tests;let p=progressStats(id,'all',reports);$('memName').textContent=mem.full_name;$('memRole').textContent=`${mem.position} • ${mem.designation||''}`;$('memScore').textContent=approved.length?p.score.toFixed(1)+'/10':'—';$('memSessions').textContent=approved.length?p.sess.toFixed(0)+'%':'—';$('memRevision').textContent=approved.length?p.rev.toFixed(0)+'%':'—';$('memTargets').textContent=approved.length?p.tar.toFixed(0)+'%':'—';$('memEnglish').textContent=approved.length?p.eng.toFixed(0)+'%':'—';let active=mis.filter(x=>x.status==='Active');$('memberMissions').innerHTML=active.map(x=>{let d=missionDays(x),cat=x.category||'Academic';return `<div class="mission-card ${cat==='Character'?'character':''}"><small>${esc(cat.toUpperCase())} MISSION</small><h2>${esc(x.title)}</h2><div class="meta"><span class="chip">${esc(x.phase||'Active')}</span><span class="chip">Day ${d.day}${d.total?' / '+d.total:''}</span></div><div class="days">${d.left==null?'Ongoing':d.left+' days left'}</div><p>${esc(x.objective||'')}</p><p><b>Mission Lead:</b> ${esc(x.mission_lead||'—')}<br><b>Dedicated To:</b> ${esc(x.dedicated_to||'—')}</p><div class="progressbar"><span style="width:${d.pct}%"></span></div></div>`}).join('')||'<div class="card pad">No active mission assigned.</div>';let ac=active.filter(x=>(x.category||'Academic')==='Academic'),ch=active.filter(x=>x.category==='Character');$('academicProgress').innerHTML=`<p><b>${ac.length} active mission(s)</b></p><p>Sessions ${p.sess.toFixed(0)}% · Revision ${p.rev.toFixed(0)}% · English ${p.eng.toFixed(0)}% · Targets ${p.tar.toFixed(0)}%</p>`;$('characterProgress').innerHTML=`<p><b>${ch.length} active mission(s)</b></p><p>Avg study ${mins(p.study)} · Avg screen ${mins(p.screen)} · Better-work ${p.better.toFixed(0)}%</p>`;$('todayTargets').innerHTML=targets.filter(x=>x.target_date===today()).map(x=>`<div class="notice"><b>${esc(x.title)}</b> · ${esc(x.priority)}<br>${esc(x.details||'')}</div>`).join('')||'<p class="muted">No target assigned for today.</p>';$('memberNotices').innerHTML=notices.slice(0,5).map(x=>`<div class="notice"><b>${esc(x.title)}</b><br>${esc(x.message)}</div>`).join('')||'No notices.';$('memberDailyHistory').innerHTML=reports.slice(0,10).map(x=>`<p><b>${esc(x.report_date)}</b> · <span class="badge ${x.status==='Approved'?'ok':x.status==='Returned'?'bad':'warn'}">${x.status}</span>${x.score!=null?' · '+x.score+'/10':''}<br><span class="muted">${esc(x.admin_remark||'')}</span></p>`).join('')||'No reports yet.';$('memberTestHistory').innerHTML=tests.map(x=>`<p><b>${esc(x.test_type)} · ${esc(x.subject)}</b><br>${esc(x.test_name)} — ${x.marks_obtained}/${x.total_marks}</p>`).join('')||'No tests yet.';let existing=reports.find(x=>x.report_date===today());$('dailyForm').classList.toggle('hidden',!!existing&&existing.status!=='Returned');$('dailyMsg').textContent=existing?`Today's report is ${existing.status}. ${existing.status==='Returned'?'You may correct and resubmit it.':'Approved reports stay locked; submitted reports await Admin review.'}`:'';renderProgressInto(id,'memberPrintable',memberPeriod)}
 document.querySelectorAll('[data-memperiod]').forEach(b=>b.onclick=()=>{memberPeriod=b.dataset.memperiod;document.querySelectorAll('[data-memperiod]').forEach(x=>x.classList.toggle('active',x===b));renderProgressInto(currentMember,'memberPrintable',memberPeriod)});
