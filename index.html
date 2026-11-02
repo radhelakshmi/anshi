@@ -277,7 +277,7 @@ footer p{font-size:.8rem;margin-top:7px;color:#9fb0c1}
 .quick-links span,.quick-links small{display:block}.quick-links span{font-size:.66rem;font-weight:900;letter-spacing:1.1px;color:#f3dfb0}.quick-links small{font-size:.56rem;color:#9fafc1;margin-top:1px}
 .menu-toggle{width:44px;height:44px;border-radius:12px;border:1px solid rgba(240,209,138,.35);background:rgba(255,255,255,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;flex:none}.menu-toggle i{width:4px;height:4px;border-radius:50%;background:#f0d18a;display:block;transition:.2s}
 .menu-overlay{position:fixed;inset:0;background:rgba(1,8,18,.62);backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:.25s;z-index:998}.menu-overlay.open{opacity:1;pointer-events:auto}
-.side-menu{position:fixed;right:0;top:0;height:100vh;width:min(430px,92vw);background:linear-gradient(160deg,#4a1028,#711b3b 65%,#35101f);border-left:1px solid rgba(240,209,138,.24);box-shadow:-25px 0 80px rgba(0,0,0,.35);padding:26px;transform:translateX(105%);transition:.3s cubic-bezier(.2,.75,.25,1);z-index:999;overflow:auto}.side-menu.open{transform:translateX(0)}
+.side-menu{position:fixed;right:0;top:0;height:100vh;height:100dvh;width:min(430px,92vw);background:linear-gradient(160deg,#4a1028,#711b3b 65%,#35101f);border-left:1px solid rgba(240,209,138,.24);box-shadow:-25px 0 80px rgba(0,0,0,.35);padding:26px;transform:translateX(110%);visibility:hidden;pointer-events:none;transition:transform .3s cubic-bezier(.2,.75,.25,1),visibility 0s linear .3s;z-index:999;overflow:auto;overscroll-behavior:contain}.side-menu.open{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform .3s cubic-bezier(.2,.75,.25,1),visibility 0s}
 .side-menu-head{display:flex;justify-content:space-between;align-items:flex-start;color:#fff}.side-kicker{font-size:.62rem;letter-spacing:2px;color:#dcb967;font-weight:900}.side-menu-head h3{font:700 2rem Georgia,serif;margin-top:4px}.menu-close{width:38px;height:38px;border-radius:50%;border:1px solid rgba(240,209,138,.3);background:rgba(255,255,255,.05);color:#f0d18a;font-size:1.4rem;cursor:pointer}.side-feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}.side-feature-grid a{display:block;padding:15px;border:1px solid rgba(240,209,138,.15);border-radius:14px;background:rgba(255,255,255,.045);transition:.2s}.side-feature-grid a:hover{border-color:rgba(240,209,138,.5);transform:translateY(-2px)}.side-feature-grid b{display:block;color:#92763b;font-size:.65rem}.side-feature-grid strong{display:block;color:#fff;font:700 1rem Georgia,serif;margin-top:7px}.side-feature-grid small{display:block;color:#9eb0c3;font-size:.65rem;margin-top:3px}.side-divider{height:1px;background:rgba(240,209,138,.15);margin:24px 0}.side-links{display:grid;gap:3px}.side-links a{display:flex;justify-content:space-between;align-items:center;padding:12px 5px;color:#dce5ee;border-bottom:1px solid rgba(255,255,255,.06);font-size:.83rem}.side-links a:hover{color:#f0d18a}.side-links span{color:#d6aa55}.side-contact{margin-top:25px;padding:17px;border-radius:15px;background:linear-gradient(135deg,rgba(214,170,85,.13),rgba(255,255,255,.04));border:1px solid rgba(240,209,138,.18)}.side-contact a{display:block;color:#fff;font-size:.78rem;font-weight:700;margin-top:8px;word-break:break-word}.side-contact a:hover{color:#f0d18a}
 .contact-section{padding:72px 0;background:linear-gradient(135deg,#f8f1e3,#fffdf8);border-top:1px solid var(--line)}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.contact-section h2{font:700 clamp(2rem,4vw,3rem)/1.1 Georgia,serif;color:var(--navy);margin-top:6px}.contact-section p{color:var(--muted);max-width:620px;margin-top:10px}.contact-cards{display:grid;gap:10px}.contact-card{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #e7dcc9;border-radius:15px;background:#fff;box-shadow:0 8px 25px rgba(7,23,46,.05);transition:.2s}.contact-card:hover{transform:translateY(-2px);border-color:#d6b978}.contact-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#f8efd9;color:#8f6b27;font-weight:900}.contact-card small{display:block;color:#9b742d;font-size:.58rem;font-weight:900;letter-spacing:1.5px}.contact-card strong{display:block;color:var(--navy);font-size:.86rem;margin-top:2px;word-break:break-word}
 .footer-main{display:flex;justify-content:space-between;gap:30px;align-items:center}.footer-brand{display:flex;align-items:center;gap:15px;text-align:left}.footer-brand .logo{margin:0;width:62px;height:62px}.footer-brand strong{display:block}.footer-brand p{margin-top:4px}.footer-links{display:flex;flex-wrap:wrap;gap:16px;justify-content:flex-end}.footer-links a{font-size:.72rem;color:#c8d4e0}.footer-links a:hover{color:#f0d18a}.footer-bottom{margin-top:25px;padding-top:17px;border-top:1px solid rgba(240,209,138,.12);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:.65rem;color:#8294a8}
@@ -1030,14 +1030,34 @@ if(posterModal) posterModal.addEventListener('click',e=>{if(e.target===posterMod
 
 
 
-// Premium three-line navigation
+// Premium three-line navigation — always closed on fresh load / page restore
 const menuToggle=document.getElementById('menuToggle');
 const sideMenu=document.getElementById('sideMenu');
 const menuClose=document.getElementById('menuClose');
 const menuOverlay=document.getElementById('menuOverlay');
-function openSideMenu(){sideMenu.classList.add('open');menuOverlay.classList.add('open');menuToggle.setAttribute('aria-expanded','true');sideMenu.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-function closeSideMenu(){sideMenu.classList.remove('open');menuOverlay.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');sideMenu.setAttribute('aria-hidden','true');document.body.style.overflow='';}
-if(menuToggle)menuToggle.addEventListener('click',openSideMenu);
+function closeSideMenu(){
+  if(!sideMenu||!menuOverlay||!menuToggle)return;
+  sideMenu.classList.remove('open');
+  menuOverlay.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded','false');
+  sideMenu.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+function openSideMenu(){
+  if(!sideMenu||!menuOverlay||!menuToggle)return;
+  sideMenu.classList.add('open');
+  menuOverlay.classList.add('open');
+  menuToggle.setAttribute('aria-expanded','true');
+  sideMenu.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+// Explicitly reset any restored/stale open state before interaction.
+closeSideMenu();
+window.addEventListener('pageshow',closeSideMenu);
+if(menuToggle)menuToggle.addEventListener('click',()=>{
+  if(sideMenu?.classList.contains('open'))closeSideMenu();
+  else openSideMenu();
+});
 if(menuClose)menuClose.addEventListener('click',closeSideMenu);
 if(menuOverlay)menuOverlay.addEventListener('click',closeSideMenu);
 sideMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeSideMenu));
