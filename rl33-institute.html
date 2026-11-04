@@ -3,56 +3,74 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071426">
+<meta name="theme-color" content="#45172f">
 <meta name="description" content="RL-33 Institute — Structured tuition for Pre-Nursery to Class 8.">
-<title>RL-33 Institute | Stronger Foundation, Confident Learning</title>
+<title>RL-33 Institute | Anniversary Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#45172f;--wine2:#65213f;--wine3:#7e3153;--rose:#a94f70;--gold:#c69b4b;--gold2:#e4c77e;--ink:#351528;--muted:#857681;--ivory:#fffaf6;--paper:#fffdfb;--line:#eadde2;--blush:#f8edf0;--shadow:0 22px 60px rgba(65,22,46,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--ivory);color:var(--ink);font-family:"DM Sans",sans-serif}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+.anniversary-strip{background:linear-gradient(90deg,#321024,#551b38,#321024);color:#f1d99b;text-align:center;padding:10px 18px;font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.site-header{height:86px;padding:0 clamp(20px,5vw,76px);display:flex;align-items:center;justify-content:space-between;background:rgba(255,250,246,.96);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:12px;min-width:175px}.brand img{width:56px;height:56px;object-fit:contain;border-radius:50%;background:#fff;border:2px solid #e6cc91;box-shadow:0 4px 16px #6a29401c}.brand strong{display:block;font:600 25px "Playfair Display",serif;letter-spacing:.02em;color:var(--wine)}.brand small{display:block;margin-top:1px;color:#a17c43;font-size:9px;font-weight:800;letter-spacing:.22em}
+.nav{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}.nav a{font-size:12px;font-weight:700;color:#655762;transition:.2s}.nav a:hover{color:var(--rose)}.nav-cta{padding:13px 18px;border-radius:12px;background:var(--wine);color:#fff!important;box-shadow:0 7px 18px #45172f20}.menu-toggle{display:none;border:1px solid #e5d3da;background:#fff7f5;color:var(--wine);border-radius:12px;padding:10px 13px;font-size:21px}
+.hero{position:relative;overflow:hidden;padding:clamp(70px,9vw,126px) clamp(24px,7vw,104px) 90px;background:radial-gradient(circle at 80% 12%,#f4dce3 0,transparent 28%),linear-gradient(135deg,#fffaf7,#f8edf0 60%,#f4e4e8);display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:7vw;min-height:620px}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #c79a5a30;border-radius:50%;pointer-events:none}.hero:before{width:650px;height:650px;right:-180px;top:-310px}.hero:after{width:480px;height:480px;right:-95px;top:-225px}
+.hero-copy,.hero-card{position:relative;z-index:1}.eyebrow,.kicker{font-size:10px;font-weight:800;letter-spacing:.25em;color:#a17b43;text-transform:uppercase}.hero h1{font:600 clamp(48px,6vw,78px)/1.03 "Playfair Display",serif;letter-spacing:-.035em;margin:20px 0;color:#351528;max-width:720px}.hero h1 span{color:#b18437}.hero-copy>p{font-size:16px;line-height:1.9;color:#7f707b;max-width:610px;margin:24px 0 30px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:49px;padding:0 21px;border-radius:12px;font-size:13px;font-weight:800;transition:transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px)}.btn.gold{background:linear-gradient(120deg,#d8b35d,#b78632);color:#351528;box-shadow:0 10px 22px #b7863230}.btn.outline{background:#fffdfa;border:1px solid #e8dce0;color:#57364a}.trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:28px;color:#8a7d85;font-size:11px;font-weight:600}
+.hero-card{justify-self:center;width:min(100%,390px);min-height:430px;padding:40px 38px;border-radius:34px;background:radial-gradient(circle at 100% 100%,#8a3156 0,transparent 38%),linear-gradient(145deg,#3c142b,#65213f 72%,#7d3454);color:#fff8f2;box-shadow:0 28px 65px #481a3533;border:1px solid #d8b76c80;text-align:left}.hero-card:before{content:"";position:absolute;inset:12px;border:1px solid #e5c77a45;border-radius:25px;pointer-events:none}.hero-logo{width:116px;height:116px;padding:7px;margin:0 auto 24px;border-radius:50%;background:#fff9ef;border:3px solid #dfbd70;box-shadow:0 0 0 7px #ffffff12}.hero-logo img{width:100%;height:100%;object-fit:contain;border-radius:50%}.hero-card .mini{font-size:9px;letter-spacing:.25em;color:#e6ce91;font-weight:800}.hero-card h2{font:600 39px/1.12 "Playfair Display",serif;margin:13px 0 19px}.hero-card .gold-line{height:4px;width:76px;background:linear-gradient(90deg,#e7ca82,#b98538);margin:22px 0}.hero-card p:last-child{font-size:12px;line-height:1.9;color:#e2cfd8;margin:0}
+.anniversary-note{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:18px 24px;background:#4b1832;color:#f7e9d2;text-align:center;font-size:12px;letter-spacing:.04em}.anniversary-note strong{color:#e7c878;letter-spacing:.12em}
+.section{padding:100px clamp(24px,7vw,104px)}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}.section-head h2{font:600 clamp(34px,4vw,52px)/1.12 "Playfair Display",serif;color:var(--wine);margin:12px 0 0;max-width:600px}.section-head>p{max-width:440px;color:var(--muted);font-size:13px;line-height:1.9;margin:0}
+.class-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.class-card{position:relative;padding:32px 30px 28px;border:1px solid var(--line);border-radius:23px;background:linear-gradient(150deg,#fff,#fffaf7);box-shadow:var(--shadow);overflow:hidden;transition:.25s}.class-card:hover{transform:translateY(-5px);box-shadow:0 25px 55px #45172f18}.class-card:after{content:"";position:absolute;width:170px;height:170px;right:-90px;top:-100px;border:1px solid #d9bd8238;border-radius:50%}.class-card.featured{border:1.5px solid #d5b36a;box-shadow:0 18px 45px #9d71351b}.class-top{display:flex;justify-content:space-between;align-items:center;color:#a1814e;font-size:9px;font-weight:800;letter-spacing:.2em}.class-top b{font-size:18px;color:#d6c8ce}.class-card h3{font:600 24px "Playfair Display",serif;margin:30px 0 8px;color:#492039}.subjects{color:#93848d;font-size:12px;min-height:20px}.fee{display:flex;align-items:baseline;gap:8px;margin:28px 0 20px}.fee strong{font:700 40px "DM Sans",sans-serif;color:#a77c32}.fee span{font-size:11px;color:#9b8d95}.class-card ul{padding:0;margin:0 0 24px;list-style:none}.class-card li{padding:11px 0;border-bottom:1px solid #f0e8eb;color:#7c6e78;font-size:12px}.class-card li:before{content:"✓";color:#b18a42;font-weight:900;margin-right:10px}.badge{position:absolute;right:24px;top:22px;background:#f4e9cc;color:#96702e;border-radius:30px;padding:6px 11px;font-size:8px;font-weight:900;letter-spacing:.14em}.apply,.submit{width:100%;border:0;border-radius:11px;padding:15px 18px;background:linear-gradient(110deg,#d9b75f,#b78736);color:#3c2030;font-size:11px;font-weight:900;letter-spacing:.08em;cursor:pointer;box-shadow:0 8px 18px #b7873625}.disclaimer{margin:22px 0 0;color:#998d94;font-size:11px;line-height:1.7}
+.dark{background:linear-gradient(135deg,#3e142c,#5b1e3c 65%,#6d294b);color:#fff7f0;position:relative;overflow:hidden}.dark:before{content:"";position:absolute;width:560px;height:560px;border:1px solid #e6c77b24;border-radius:50%;right:-200px;top:-260px}.dark .section-head h2{color:#fff6ef}.dark .section-head>p{color:#d7c1cc}.dark .kicker{color:#e0c17a}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}.feature-grid>div{padding:27px 23px;border:1px solid #ffffff20;border-radius:17px;background:#ffffff09;min-height:180px}.feature-grid span{font-size:10px;color:#e4c77d;letter-spacing:.16em;font-weight:800}.feature-grid h3{font:600 20px "Playfair Display",serif;margin:19px 0 8px;color:#fff5ef}.feature-grid p{font-size:11px;line-height:1.8;color:#d6c1cb;margin:0}
+.process{background:#fffdfb}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.steps>div{padding:26px 24px;border-left:2px solid #d2ad61;background:linear-gradient(130deg,#fff,#fff8f4);border-radius:0 15px 15px 0}.steps b{font-size:11px;color:#b28b45;letter-spacing:.16em}.steps h3{font:600 22px "Playfair Display",serif;color:#51223d;margin:14px 0 7px}.steps p{font-size:12px;color:#8b7c85;line-height:1.7;margin:0}
+.help{background:linear-gradient(120deg,#f8edf0,#fffaf6)}.form-card{max-width:900px;margin:auto;padding:34px;border:1px solid #ead9e0;border-radius:24px;background:#fffdfa;box-shadow:var(--shadow)}form label{display:block;font-size:11px;font-weight:800;color:#725969;margin-bottom:18px}input,select,textarea{display:block;width:100%;margin-top:8px;border:1px solid #e8dce1;border-radius:10px;padding:14px 15px;background:#fffaf8;color:#432039;outline:none;font-size:13px}input:focus,select:focus,textarea:focus{border-color:#c39b54;box-shadow:0 0 0 3px #c39b541c}textarea{min-height:120px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.submit{max-width:330px}
+.contact{padding:82px clamp(24px,7vw,104px);display:grid;grid-template-columns:1fr .8fr;gap:50px;align-items:center;background:#fffdfb}.contact h2{font:600 clamp(34px,4vw,50px)/1.12 "Playfair Display",serif;color:var(--wine);margin:14px 0}.contact p{color:#8c7c86;font-size:13px;line-height:1.8}.contact-card{padding:34px;border:1px solid #e8d9df;border-radius:22px;background:linear-gradient(145deg,#fff,#fff6f4);box-shadow:var(--shadow);display:grid;gap:9px}.contact-card span{font-size:9px;font-weight:900;letter-spacing:.2em;color:#a17b43;margin-top:8px}.contact-card strong,.contact-card>a:not(.small-cta){font-size:19px;color:#55233f;font-weight:800}.small-cta{margin-top:14px;display:inline-flex;justify-content:center;padding:14px;border-radius:10px;background:#4a1832;color:#fff5ed;font-size:12px;font-weight:800}
+footer{padding:34px clamp(24px,7vw,104px);background:#351227;color:#e9dce2;display:flex;justify-content:space-between;align-items:center;gap:25px;flex-wrap:wrap}footer strong{display:block;font:600 22px "Playfair Display",serif;color:#fff6ee}footer span{display:block;color:#c5aeb9;font-size:10px;margin-top:6px}footer .footer-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}footer a{font-size:11px;color:#e5c77c}
+@media(max-width:980px){.nav{gap:12px}.nav a{font-size:11px}.hero{gap:35px}.feature-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.site-header{height:74px;padding:0 18px}.brand img{width:48px;height:48px}.brand strong{font-size:22px}.menu-toggle{display:block}.nav{display:none;position:absolute;top:74px;left:0;right:0;padding:18px;background:#fffaf7;border-bottom:1px solid var(--line);box-shadow:0 16px 25px #45172f14;align-items:stretch;flex-direction:column;gap:0}.nav.open{display:flex}.nav a{padding:13px 8px;border-bottom:1px solid #f1e8eb;font-size:13px}.nav .nav-cta{margin-top:12px;text-align:center}.hero{grid-template-columns:1fr;padding:65px 24px 60px;gap:48px}.hero h1{font-size:52px}.hero-card{width:min(100%,370px);min-height:390px}.section{padding:72px 22px}.section-head{display:block}.section-head>p{margin-top:18px}.class-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr;gap:0}.form-card{padding:22px}.contact{grid-template-columns:1fr;padding:70px 22px;gap:25px}footer{padding:30px 22px}}
+@media(max-width:430px){.hero h1{font-size:44px}.hero-card{padding:32px 28px}.feature-grid,.steps{grid-template-columns:1fr}.trust{gap:12px}.anniversary-strip{font-size:8px;letter-spacing:.12em}}
+</style>
 </head>
 <body>
-<div class="notice">ADMISSIONS OPEN • PRE-NURSERY TO CLASS 8 • 1 HOUR STRUCTURED TUITION</div>
-
-<header>
-  <a class="brand" href="#home">
+<div class="anniversary-strip">RL-33 • SECOND ANNIVERSARY EDITION • 15 NOVEMBER 2026</div>
+<header class="site-header">
+  <a class="brand" href="#home" aria-label="RL-33 Institute home">
     <img src="assets/rl33-institute-logo.png" alt="RL-33 Institute logo">
     <span><strong>RL-33</strong><small>INSTITUTE</small></span>
   </a>
-  <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
-  <nav id="nav">
+  <button class="menu-toggle" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav class="nav" id="nav">
     <a href="#home">Home</a>
-    <a href="index.html">← RL-33 Main Website</a>
+    <a href="index.html">RL-33 Main Website</a>
     <a href="#classes">Classes & Fees</a>
     <a href="#features">Why RL-33</a>
     <a href="#help">Other Help</a>
-    <a href="institute-portal/">Student / Member Portal</a>
     <a href="#contact">Contact</a>
   </nav>
-  <a class="header-cta" href="institute-portal/">Student / Member Portal</a>
 </header>
-
 <main>
 <section id="home" class="hero">
   <div class="hero-copy">
-    <div class="kicker">RL-33 INSTITUTE</div>
-    <h1>Stronger Foundation.<br><span>Confident Learning.</span></h1>
+    <div class="eyebrow">RL-33 INSTITUTE • ESTABLISHED 2024</div>
+    <h1>Stronger<br>Foundation.<br><span>Confident Learning.</span></h1>
     <p>Structured tuition for young learners with concept-based teaching, regular practice and individual attention.</p>
     <div class="hero-actions">
-      <a class="btn gold" href="#classes">Explore Classes</a>
+      <a class="btn gold" href="#classes">Explore Classes <span aria-hidden="true">&nbsp;→</span></a>
       <a class="btn outline" href="#help">Ask a Question</a>
-      <a class="btn outline" href="institute-portal/">Admin / Student / Member Login</a>
     </div>
     <div class="trust"><span>✓ Weekly Tests</span><span>✓ Individual Focus</span><span>✓ 1-Hour Classes</span></div>
   </div>
   <div class="hero-card">
-    <div class="hero-logo"><img src="assets/rl33-institute-logo.png" alt=""></div>
-    <p>LEARNING PROGRAMME</p>
+    <div class="hero-logo"><img src="assets/rl33-institute-logo.png" alt="RL-33 emblem"></div>
+    <div class="mini">THE LEARNING PROGRAMME</div>
     <h2>Pre-Nursery<br>to Class 8</h2>
-    <div class="line"></div>
-    <small>Affordable monthly plans • Structured study • Progress-focused learning</small>
+    <div class="gold-line"></div>
+    <p>Affordable monthly plans • Structured study • Progress-focused learning</p>
   </div>
 </section>
+<div class="anniversary-note"><strong>TWO YEARS • ONE MISSION • A STRONGER FOUNDATION</strong><span>Celebrating the journey of learning, discipline and growth.</span></div>
 
 <section id="classes" class="section">
   <div class="section-head">
@@ -107,9 +125,7 @@
 </section>
 
 <section class="section process">
-  <div class="section-head">
-    <div><div class="kicker">OUR APPROACH</div><h2>Learn. Practise. Improve.</h2></div>
-  </div>
+  <div class="section-head"><div><div class="kicker">OUR APPROACH</div><h2>Learn. Practise. Improve.</h2></div></div>
   <div class="steps">
     <div><b>01</b><h3>Understand</h3><p>Build the concept from the basics.</p></div>
     <div><b>02</b><h3>Practise</h3><p>Use examples, questions and guided work.</p></div>
@@ -140,23 +156,33 @@
 </section>
 
 <section id="contact" class="contact">
-  <div>
-    <div class="kicker">CONTACT RL-33 INSTITUTE</div>
-    <h2>Let's start with the right<br>learning plan.</h2>
-    <p>For admission, fees, timings or any other query, contact us directly.</p>
-  </div>
+  <div><div class="kicker">CONTACT RL-33 INSTITUTE</div><h2>Let's start with the right<br>learning plan.</h2><p>For admission, fees, timings or any other query, contact us directly.</p></div>
   <div class="contact-card">
-    <span>WHATSAPP / CALL</span><a href="https://wa.me/919625706356">9625706356</a>
+    <span>WHATSAPP / CALL</span><a href="https://wa.me/919625706356">+91 96257 06356</a>
     <span>INSTITUTE</span><strong>RL-33 Institute</strong>
     <a class="small-cta" href="https://wa.me/919625706356?text=Hello%20RL-33%20Institute%2C%20I%20want%20to%20know%20more%20about%20the%20tuition%20programme.">Chat on WhatsApp →</a>
   </div>
 </section>
 </main>
-
 <footer>
   <div><strong>RL-33 INSTITUTE</strong><span>Stronger Foundation • Confident Learning</span></div>
-  <div><span>Pre-Nursery to Class 8</span><span>1 Hour Structured Tuition</span> <a href="index.html">← RL-33 Main Website</a> <span>© 2026 RL-33 Institute</span></div>
+  <div class="footer-links"><span>Pre-Nursery to Class 8</span><span>1 Hour Structured Tuition</span><a href="index.html">RL-33 Main Website ↗</a><span>© 2026 RL-33 Institute</span></div>
 </footer>
+<script>
+(function(){
+  const button=document.getElementById('hamburger');
+  const nav=document.getElementById('nav');
+  if(button&&nav){
+    button.addEventListener('click',function(){
+      const opened=nav.classList.toggle('open');
+      button.setAttribute('aria-expanded',String(opened));
+      button.setAttribute('aria-label',opened?'Close menu':'Open menu');
+      button.textContent=opened?'×':'☰';
+    });
+    nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');button.setAttribute('aria-expanded','false');button.textContent='☰';}));
+  }
+})();
+</script>
 <script src="script.js"></script>
 </body>
 </html>
