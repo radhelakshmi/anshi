@@ -525,163 +525,191 @@ td{color:#51404a;border-bottom-color:#f0e5e8}
   .notice-title{font-size:18px}
 }
 
-
-
-/* ============================================================
-   RL-33 SECOND ANNIVERSARY — CENTRAL PORTAL PREMIUM REFINEMENT
-   Shared identity, right-side navigation, readable mission cards,
-   consistent page headers and one contact panel per workspace.
-   Application IDs, Supabase calls and business logic are retained.
-   ============================================================ */
+</style>
+<style id="rl33-final-anniversary-premium">
 :root{
-  --rl-wine:#351326;--rl-wine-deep:#210d1b;--rl-wine-mid:#64213f;
-  --rl-gold:#d7b36d;--rl-gold-soft:#f0d9a4;--rl-ivory:#fbf6f3;
-  --rl-paper:#fffdfb;--rl-ink:#492033;--rl-muted:#81747b;--rl-line:#eadde0;
+ --rl-wine:#351326;--rl-wine2:#571d3c;--rl-rose:#8f365c;--rl-pink:#c66a88;
+ --rl-gold:#d9b66d;--rl-gold-light:#f2dba9;--rl-ivory:#fffaf7;
+ --rl-ink:#421b30;--rl-muted:#887681;--rl-line:#ead9df;
 }
-body{background:radial-gradient(ellipse at 90% 0,#f1dfe6 0,transparent 36%),#fbf6f3;color:var(--rl-ink)}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #d7b36d88;outline-offset:2px}
-/* Login: large identity, role welcome and gold active state */
-.login{background:radial-gradient(ellipse at 82% 4%,#853452 0,transparent 35%),radial-gradient(ellipse at 12% 88%,#6d304c 0,transparent 30%),linear-gradient(135deg,#1d0b1a,#40152f 56%,#230f21)}
-.login-card{width:min(560px,100%);padding:clamp(22px,4vw,38px);border-radius:30px;background:linear-gradient(145deg,#fffdfa,#fff7f5);box-shadow:0 34px 100px #16071288,0 0 0 7px #d7b36d20}
-.login-brand{align-items:center;gap:18px;padding-bottom:20px}
-.login-brand img{width:92px;height:92px;flex:0 0 92px;border-radius:50%;padding:5px;border:2px solid var(--rl-gold);background:#fffaf2;box-shadow:0 0 0 7px #d7b36d24,0 12px 28px #35132620}
-.login-brand small{display:block;font-size:9px;font-weight:900;letter-spacing:.16em;color:#9a754a;margin-bottom:5px}
-.login-brand h1{font:700 clamp(29px,5vw,38px)/1.04 Georgia,serif!important;color:#42172f!important;letter-spacing:-.025em}
-.login-welcome{display:grid;gap:3px;padding:15px 17px;margin-top:18px;border:1px solid #ead9d5;border-left:4px solid var(--rl-gold);border-radius:15px;background:linear-gradient(110deg,#fbf0ed,#fffaf5)}
-.login-welcome-kicker{font-size:9px;letter-spacing:.16em;font-weight:900;color:#a27a49}
-.login-welcome strong{font:700 20px Georgia,serif;color:#4a1b32}
-.login-welcome small{font-size:12px;color:#897783}
-.tabs{margin:19px 0 18px;background:#f3e8e9;border:1px solid #ead9dc;border-radius:15px;padding:5px;gap:5px}
-.tabs button{min-height:48px;border-radius:11px;color:#7f6875;font-weight:800;transition:.2s}
-.tabs button.active{background:linear-gradient(120deg,#f5e2b8,#d7b36d);color:#42172f;border:1px solid #c59a50;box-shadow:0 5px 16px #8d653322}
-.login-card label{font-size:10px;letter-spacing:.1em;color:#79596a}
-.login-card .field{min-height:48px;padding:12px 14px;border-radius:13px;background:#fffefd}
-.login-card form .btn{min-height:50px;margin-top:18px!important;font-size:14px;letter-spacing:.02em}
-#loginMsg{min-height:18px;font-size:12px;color:#a63250}
-/* Admin shell: full-width canvas and right-side drawer matching the public homepage */
-#adminApp{display:block;min-height:100vh}
-#adminApp .side{position:fixed;inset:0 0 0 auto;width:min(370px,92vw);height:100dvh;z-index:85;display:block;overflow-y:auto;transform:translateX(110%);transition:transform .28s cubic-bezier(.2,.8,.2,1);padding:22px 20px 28px;background:radial-gradient(ellipse at 100% 0,#87345266,transparent 34%),linear-gradient(180deg,#351326,#501a36 58%,#260f22);border-left:1px solid #d7b36d88;border-right:0;box-shadow:-22px 0 65px #210d1b35}
-#adminApp.nav-open .side{transform:translateX(0)}
-#adminApp .side-brand{padding:8px 5px 21px;gap:15px;border-bottom:1px solid #d7b36d55}
-#adminApp .side-brand img{width:86px;height:86px;flex:0 0 86px;border-radius:50%;padding:4px;border:2px solid var(--rl-gold);background:#fffaf3;box-shadow:0 0 0 7px #d7b36d20,0 10px 25px #17091455}
-#adminApp .side-brand b{font:700 31px Georgia,serif;letter-spacing:.025em;color:#fff7ec}
-#adminApp .side-brand small{font-size:9px!important;letter-spacing:.14em;line-height:1.6;color:#f0d5a0!important}
-#adminApp .nav{gap:6px;margin-top:19px;padding-bottom:8px}
-#adminApp .nav:before{content:'NAVIGATION';display:block;margin:0 5px 7px;color:#e4c486;font-size:9px;font-weight:900;letter-spacing:.2em}
-#adminApp .nav button{min-height:43px;padding:11px 13px;border:1px solid transparent;border-radius:12px;color:#f0dfe5;font-size:13px;font-weight:700;text-align:left;transition:background .18s,border-color .18s,color .18s,transform .18s}
-#adminApp .nav button:before{content:'›';width:17px;height:17px;flex:0 0 17px;display:grid;place-items:center;border:1px solid #d7b36d;border-radius:50%;font-size:14px;line-height:1;color:#e7c984;transform:none}
-#adminApp .nav button:hover{background:#ffffff12;color:#ffe8b8;transform:translateX(-2px)}
-#adminApp .nav button.active{background:linear-gradient(100deg,#d7b36d2e,#b84d7133);border-color:#d7b36d99;color:#ffe5ae;box-shadow:inset 3px 0 #e8c77f}
-#adminApp .nav hr{border:0;border-top:1px solid #ffffff24!important;margin:9px 3px}
-#adminApp .main{margin:0;width:100%;min-width:0;transition:none}
-#adminApp .top{height:82px;padding:0 86px 0 30px;background:#fffaf8ed;border-bottom:1px solid #eadde0}
-#adminApp .top b{font:700 23px Georgia,serif;color:#4a1b32}
-#adminApp .top .muted{font-size:11px!important;letter-spacing:.04em}
-#adminApp .content{max-width:1580px;padding:28px clamp(16px,3vw,38px) 46px}
-#adminApp .side-toggle{position:fixed;z-index:90;top:17px;right:19px;left:auto;width:48px;height:48px;border-radius:14px;background:linear-gradient(145deg,#351326,#682443);border:1px solid var(--rl-gold);color:#f5dca5;font-size:24px;line-height:1;box-shadow:0 8px 24px #35132628;display:grid;place-items:center}
-#adminApp .side-toggle:hover{background:linear-gradient(145deg,#57203d,#853452)}
-#adminApp.nav-open:after{content:'';position:fixed;inset:0;background:#1c0a18a6;backdrop-filter:blur(3px);z-index:80}
-#adminApp.nav-open .side{z-index:85}
-/* Consistent identity banner at the top of every admin sub-page */
-.page-identity{display:flex;align-items:center;gap:20px;margin:0 0 21px;padding:22px 25px;border-radius:23px;background:radial-gradient(circle at 88% 12%,#d98ca52c,transparent 28%),linear-gradient(115deg,#351326,#571b38 68%,#813052);border:1px solid #d7b36d;box-shadow:0 16px 38px #35132618;color:#fff8ef}
-.page-identity img{width:88px;height:88px;flex:0 0 88px;object-fit:contain;border-radius:50%;padding:4px;background:#fff8ed;border:2px solid #e2c17b;box-shadow:0 0 0 6px #d7b36d20}
-.page-identity .eyebrow{display:block;color:#f0d49a;font-size:9px;font-weight:900;letter-spacing:.19em}
-.page-identity h1{margin:5px 0 4px;color:#fff8ef;font:700 clamp(25px,3.2vw,35px)/1.1 Georgia,serif}
-.page-identity p{margin:0;color:#f2dfe5;font-size:12px}
-/* Mission card contrast fix: every mission title and detail stays readable */
-.mission-card{color:#fffaf4!important;background:radial-gradient(circle at 100% 0,#d85b8330,transparent 32%),linear-gradient(140deg,#2b1028,#622047 65%,#7d3458)!important;border:1px solid #d7b36d99!important}
-.mission-card.character{background:radial-gradient(circle at 100% 0,#e9c77c35,transparent 30%),linear-gradient(140deg,#35182e,#63314e 70%,#8b4c5c)!important}
-.mission-card small,.mission-card p,.mission-card .meta,.mission-card .chip{color:#fff1e9!important}
-.mission-card h2,.mission-card h3,.mission-card b{color:#fffaf2!important}
-.mission-card h2{font:700 clamp(21px,2.4vw,27px)/1.2 Georgia,serif!important;margin:12px 0 8px!important;overflow-wrap:anywhere;text-shadow:0 1px 8px #210d1b66}
-.mission-card .days{color:#f4d58f!important;font-size:clamp(23px,2.6vw,29px);line-height:1.2}
-.mission-card .chip{background:#ffffff20!important;border:1px solid #ffffff28}
-.mission-card .progressbar{height:9px;background:#ffffff3a}
-.mission-card .progressbar span{background:linear-gradient(90deg,#e3b65f,#ffe7ad)!important}
-/* Member and student portals share the same header, canvas and navigation drawer */
-.member-shell,.student-shell{position:relative;min-height:100vh;background:radial-gradient(ellipse at 90% 0,#f1e1e6 0,transparent 38%),#fbf5f4}
-.portal-top{min-height:88px;padding:13px 88px 13px 28px;position:relative;background:radial-gradient(circle at 90% 0,#d45c8240,transparent 30%),linear-gradient(105deg,#250d23,#5a1d42 68%,#8a3d5c);border-bottom:2px solid #d7b36d}
-.portal-top:before{left:22px;width:66px;height:66px;border:2px solid #dfbf77;box-shadow:0 0 0 5px #d5ad5424}
-.portal-top b{font:700 21px Georgia,serif;color:#fff2df}
-.portal-top .btn{margin-left:auto}
-.portal-wrap{max-width:1420px;padding:27px clamp(15px,3vw,34px) 42px}
-.member-brandbar,.student-brandbar{min-height:160px;padding:27px 30px;gap:22px;margin-bottom:22px}
-.member-brandbar img,.student-brandbar img{width:118px;height:118px;flex:0 0 118px}
-.member-brandbar h1,.student-brandbar h1{font-size:clamp(32px,4vw,48px)}
-.member-brandbar p,.student-brandbar p{margin:5px 0}
-.student-brandbar{display:flex}
-.portal-drawer{position:fixed;inset:0 0 0 auto;width:min(370px,92vw);height:100dvh;z-index:85;overflow-y:auto;padding:22px 20px 28px;background:radial-gradient(ellipse at 100% 0,#87345266,transparent 34%),linear-gradient(180deg,#351326,#501a36 58%,#260f22);border-left:1px solid #d7b36d88;box-shadow:-22px 0 65px #210d1b35;transform:translateX(110%);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
-.portal-drawer.open{transform:translateX(0)}
-.portal-drawer-head{display:flex;align-items:center;gap:15px;padding:8px 4px 20px;border-bottom:1px solid #d7b36d55}
-.portal-drawer-head img{width:86px;height:86px;object-fit:contain;border-radius:50%;padding:4px;background:#fffaf3;border:2px solid var(--rl-gold);box-shadow:0 0 0 7px #d7b36d20}
-.portal-drawer-head strong{display:block;font:700 30px Georgia,serif;color:#fff7ec}
-.portal-drawer-head small{display:block;color:#f0d5a0;font-size:9px;font-weight:900;letter-spacing:.14em}
-.portal-drawer-title{margin:20px 5px 9px;color:#e4c486;font-size:9px;font-weight:900;letter-spacing:.2em}
-.portal-drawer a,.portal-drawer button{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;margin:5px 0;padding:11px 13px;border:1px solid transparent;border-radius:12px;background:transparent;color:#f0dfe5;text-align:left;text-decoration:none;font:700 13px Inter,system-ui,sans-serif;cursor:pointer}
-.portal-drawer a:before{content:'›';display:grid;place-items:center;width:18px;height:18px;border:1px solid #d7b36d;border-radius:50%;color:#e7c984}
-.portal-drawer a:hover,.portal-drawer a.active{background:linear-gradient(100deg,#d7b36d2e,#b84d7133);border-color:#d7b36d99;color:#ffe5ae}
-.portal-menu-toggle{position:fixed;top:17px;right:19px;z-index:90;width:48px;height:48px;border:1px solid var(--rl-gold);border-radius:14px;background:linear-gradient(145deg,#351326,#682443);color:#f5dca5;font-size:23px;box-shadow:0 8px 24px #35132628;cursor:pointer}
-.portal-nav-backdrop{position:fixed;inset:0;z-index:80;background:#1c0a18a6;backdrop-filter:blur(3px);display:none}
-.portal-nav-backdrop.show{display:block}
-.portal-contact{margin:24px 0 0;padding:25px;border:1px solid #d7b36d;border-top:3px solid #d7b36d;border-radius:22px;background:radial-gradient(circle at 95% 0,#e5c17a22,transparent 28%),linear-gradient(110deg,#fffdfb,#f8edf0);box-shadow:0 12px 30px #48172d0d}
-.portal-contact .contact-eyebrow{color:#a9793d;font-size:9px;font-weight:900;letter-spacing:.19em}
-.portal-contact h2{margin:5px 0;color:#4a1b32;font:700 clamp(22px,3vw,29px) Georgia,serif}
-.portal-contact p{margin:0 0 15px;color:#81747b}
-.portal-contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.portal-contact-item{min-width:0;padding:15px 16px;border:1px solid #eadde0;border-radius:15px;background:#fffdfb;box-shadow:0 7px 18px #48172d08}
-.portal-contact-item span{display:block;margin-bottom:5px;color:#a17a4e;font-size:9px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
-.portal-contact-item strong,.portal-contact-item a{color:#54203a;font-size:13px;font-weight:750;overflow-wrap:anywhere;text-decoration:none}
-.portal-contact-item a:hover{text-decoration:underline;color:#8d3b61}
-.portal-footer{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px;padding:17px 2px 0;border-top:1px solid #eadde0;color:#8b7882;font-size:10px}
-/* Better internal content rhythm, forms and tables */
-.page .section-head{align-items:flex-end;margin:6px 0 17px}
-.page .section-head h1{font-size:clamp(25px,3vw,32px)}
-.page .toolbar{padding:12px;border:1px solid #eadde0;border-radius:15px;background:#fffdfb}
-.tablewrap{box-shadow:0 10px 28px #48172d0a}
-th{font-size:10px;letter-spacing:.08em}
-td{font-size:13px}
-.field{min-height:43px;border-radius:11px}
-.modal{max-height:92dvh}
-#memberPortal .mission h1{color:#fff8ef!important}
-#memberPortal .mission small{color:#f3d99c}
-#memberPortal .member-welcome-line{color:#f4d99e!important}
-#memberPortal .member-welcome-line b{color:#fff!important}
-@media(max-width:850px){.portal-contact-grid{grid-template-columns:1fr 1fr}.member-brandbar,.student-brandbar{padding:22px}.member-brandbar img,.student-brandbar img{width:92px;height:92px;flex-basis:92px}}
-@media(max-width:650px){
- #adminApp .top{height:76px;padding:0 78px 0 16px}
- #adminApp .top b{font-size:19px}
- #adminApp .content{padding:16px 13px 34px}
- #adminApp .side{width:min(340px,91vw);padding:17px 15px 24px}
- #adminApp .side-brand img,.portal-drawer-head img{width:74px;height:74px;flex-basis:74px}
- #adminApp .side-brand b,.portal-drawer-head strong{font-size:27px}
- #adminApp .side-toggle,.portal-menu-toggle{top:13px;right:13px;width:46px;height:46px}
- .page-identity{padding:17px;gap:13px;border-radius:19px}
- .page-identity img{width:68px;height:68px;flex-basis:68px}
- .page-identity h1{font-size:24px}
- .portal-top{min-height:76px;padding:10px 72px 10px 78px}
- .portal-top:before{left:12px;width:54px;height:54px}
- .portal-top b{font-size:16px}
- .portal-wrap{padding:16px 13px 32px}
- .member-brandbar,.student-brandbar{min-height:0;padding:18px 16px;gap:13px;border-radius:20px}
- .member-brandbar img,.student-brandbar img{width:70px;height:70px;flex:0 0 70px}
- .member-brandbar span,.student-brandbar span{font-size:8px;letter-spacing:1.2px}
- .member-brandbar h1,.student-brandbar h1{font-size:25px}
- .member-brandbar .brand-seal,.student-brandbar .brand-seal{display:none}
- .portal-contact{padding:18px 15px;border-radius:18px}
- .portal-contact-grid{grid-template-columns:1fr;gap:9px}
- .portal-contact-item{padding:13px}
+html{scroll-behavior:smooth;scroll-padding-top:105px}
+body{background:radial-gradient(ellipse at 90% 0%,#f4dfe6 0,transparent 32%),linear-gradient(180deg,#fff9f7,#f8eff1 60%,#fff9f5);color:var(--rl-ink)}
+/* Shared anniversary identity hero */
+.portal-identity{
+ position:relative;isolation:isolate;overflow:hidden;text-align:center;
+ min-height:620px;margin:22px 0 28px;padding:42px 24px 38px;
+ border:1px solid rgba(225,190,120,.72);border-radius:32px;
+ background:
+  radial-gradient(circle at 50% 24%,rgba(255,220,173,.14),transparent 24%),
+  radial-gradient(circle at 10% 90%,rgba(206,91,132,.24),transparent 34%),
+  radial-gradient(circle at 92% 10%,rgba(215,154,174,.24),transparent 30%),
+  linear-gradient(135deg,#321024 0%,#551a39 54%,#7b2b50 100%);
+ color:#fff8f3;box-shadow:0 22px 65px rgba(66,20,45,.17);
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
-@media(max-width:390px){.login-brand img{width:72px;height:72px;flex-basis:72px}.login-brand h1{font-size:27px!important}.login-card{padding:21px 16px}.page-identity img{width:58px;height:58px;flex-basis:58px}.page-identity h1{font-size:21px}}
-@media(prefers-reduced-motion:reduce){.portal-drawer,#adminApp .side{transition:none}}
-@media print{.portal-menu-toggle,.portal-drawer,.portal-nav-backdrop,#adminApp .side-toggle,#adminApp .side{display:none!important}.portal-contact{break-inside:avoid}}
+.portal-identity:before,.portal-identity:after{content:"";position:absolute;z-index:-1;border:1px solid rgba(239,210,158,.15);border-radius:50%;pointer-events:none}
+.portal-identity:before{width:560px;height:560px;max-width:90vw;top:-235px;left:50%;transform:translateX(-50%)}
+.portal-identity:after{width:690px;height:690px;max-width:110vw;top:-300px;left:50%;transform:translateX(-50%)}
+.anniversary-kicker{color:#f0d39a;font-size:10px;font-weight:900;letter-spacing:.22em;line-height:1.8;margin-bottom:18px}
+.identity-emblem{
+ display:block;width:clamp(164px,24vw,238px);height:clamp(164px,24vw,238px);
+ object-fit:cover;border-radius:50%;background:#fff9ef;
+ border:5px solid #e8c982;padding:4px;
+ box-shadow:0 0 0 9px rgba(235,199,126,.13),0 18px 48px rgba(15,4,12,.35);
+ margin:0 auto 25px;
+}
+.identity-overline{color:#f2d7a3;font-size:10px;font-weight:900;letter-spacing:.24em;margin-bottom:8px}
+.portal-identity h1{font:700 clamp(42px,7vw,76px)/1.04 Georgia,"Times New Roman",serif;color:#fffaf6;margin:8px 0 10px;letter-spacing:-.035em}
+.portal-identity h1 span{color:#f1d49c}
+.identity-subtitle{font-size:12px;font-weight:800;letter-spacing:.17em;color:#f1d9df}
+.identity-welcome{margin:23px 0 5px;color:#f0d39a;font-size:13px;letter-spacing:.13em;font-weight:800}
+.identity-welcome strong{color:#fff;font-size:15px;letter-spacing:.06em}
+.identity-description{max-width:650px;margin:10px auto 0;color:#f1dfe5;font-size:14px;line-height:1.8}
+.identity-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;margin-top:27px}
+.identity-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:13px;text-decoration:none;font-size:12px;font-weight:900;letter-spacing:.025em;cursor:pointer;transition:.2s}
+.identity-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.gold-action{background:linear-gradient(135deg,#f1dca8,#d0a456);color:#42172e;border:1px solid #f2d99c;box-shadow:0 9px 22px #1b071633}
+.light-action{background:#fff8f5;color:#4a1932;border:1px solid #fff}
+.outline-action{background:#ffffff0c;color:#fff6f2;border:1px solid #f0d9df77}
+.admin-identity{min-height:650px}
+.student-identity,.member-identity{min-height:640px}
+/* Login portal */
+.login{background:radial-gradient(circle at 50% 15%,#8a3157 0,transparent 35%),radial-gradient(circle at 12% 90%,#6d2349 0,transparent 32%),linear-gradient(145deg,#210d1d,#4a1734 60%,#712749);padding:24px}
+.login-card{background:linear-gradient(145deg,#fffdfb,#fff5f3);border:1px solid #e5c98d;border-radius:30px;box-shadow:0 30px 100px #16061388;padding:30px}
+.login-brand{align-items:center;gap:16px;padding-bottom:20px;border-bottom:1px solid #eddee2}
+.login-brand img{width:88px;height:88px;object-fit:cover;border-radius:50%;padding:3px;border:2px solid #d9b66d;box-shadow:0 0 0 5px #d9b66d22}
+.login-brand h1{font:700 34px Georgia,serif;color:#4a1933}
+.login-brand .muted{color:#8c7580}
+.tabs{background:#f5e9ed;border:1px solid #ecd9df;border-radius:15px}
+.tabs button{color:#785d6a}
+.tabs button.active{background:linear-gradient(135deg,#f0d9a2,#d0a458);color:#43172e;box-shadow:0 5px 14px #b98d4938}
+#loginLabel{color:#70475b;font-weight:900}
+#loginForm .primary{background:linear-gradient(110deg,#511a39,#923b61);color:#fff}
+/* Admin topbar and right-side navigation drawer */
+#adminApp .main{margin:0;width:100%;min-width:0}
+#adminApp .side{
+ position:fixed;z-index:130;top:0;right:0;bottom:0;left:auto;
+ width:min(390px,91vw);height:100dvh;overflow-y:auto;
+ background:radial-gradient(circle at 100% 0,#a64a6d42,transparent 35%),linear-gradient(155deg,#351326,#571d3c 68%,#76294c);
+ border-left:1px solid #dfbd79;box-shadow:-24px 0 65px #260b1d55;
+ transform:translateX(110%);visibility:hidden;transition:transform .3s ease,visibility .3s ease;
+ padding:25px 20px;
+}
+#adminApp.drawer-open .side{transform:translateX(0);visibility:visible}
+#adminApp .side-brand{padding:8px 8px 22px;border-bottom:1px solid #ffffff25;gap:14px}
+#adminApp .side-brand img{width:72px;height:72px;object-fit:cover;border-radius:50%;padding:3px;border:2px solid #e4c37d;box-shadow:0 0 0 5px #e4c37d20}
+#adminApp .side-brand b{font:700 30px Georgia,serif;color:#fff8f3}
+#adminApp .side-brand small{color:#f0d49b!important;font-size:9px;letter-spacing:.13em;line-height:1.7}
+#adminApp .nav{gap:7px;margin-top:20px}
+#adminApp .nav button{min-height:45px;padding:12px 14px;border:1px solid #ffffff14;border-radius:12px;background:#ffffff08;color:#f7eaf0;font-size:13px;font-weight:750}
+#adminApp .nav button:hover,#adminApp .nav button.active{background:#f0d39a20;border-color:#d8b66e;color:#ffe3a6}
+#adminApp .side hr{border-color:#ffffff24!important}
+.admin-drawer-backdrop{position:fixed;z-index:120;inset:0;background:#1c0818a8;opacity:0;visibility:hidden;transition:.25s}
+#adminApp.drawer-open .admin-drawer-backdrop{opacity:1;visibility:visible}
+#adminApp .top{height:82px;padding:0 clamp(16px,3vw,38px);background:#fffaf8ed;border-bottom:1px solid #ead9df;box-shadow:0 5px 22px #48172c0b;z-index:100}
+.top-identity{display:flex;align-items:center;gap:13px;min-width:0}
+.top-identity img{width:52px;height:52px;object-fit:cover;border-radius:50%;border:2px solid #d8b66e;padding:2px}
+.top-identity #pageTitle{font:700 clamp(22px,3vw,30px) Georgia,serif;color:#4b1934}
+.top-identity .muted{color:#957d88;letter-spacing:.08em;font-size:9px!important;font-weight:800}
+.top-actions{display:flex;align-items:center;gap:12px}
+.drawer-toggle{width:48px;height:48px;display:grid;place-items:center;border:1px solid #d9b66d;border-radius:14px;background:linear-gradient(135deg,#48162f,#782849);color:#f7dfa9;font-size:23px;font-weight:700;cursor:pointer;box-shadow:0 7px 18px #47152e24}
+#adminApp .content{max-width:1480px;padding:clamp(14px,2.8vw,34px)}
+/* Student and member portal topbars */
+.premium-portal-top{position:sticky;top:0;z-index:90;min-height:78px;padding:10px clamp(15px,3vw,34px);background:linear-gradient(105deg,#351326,#571d3c 70%,#782b4e);border-bottom:1px solid #d9b66d;box-shadow:0 9px 26px #38102526}
+.portal-top-brand{display:flex;align-items:center;gap:13px;min-width:0}
+.portal-top-brand img{width:58px;height:58px;object-fit:cover;border-radius:50%;padding:2px;background:#fff9f2;border:2px solid #e3c17a;box-shadow:0 0 0 4px #e3c17a20}
+.portal-top-brand b{display:block;font:700 26px Georgia,serif;color:#fff8f3}
+.portal-top-brand small{display:block;color:#f0d39a;font-size:9px;font-weight:900;letter-spacing:.14em}
+.portal-top-actions{display:flex;align-items:center;gap:11px}
+.portal-drawer-toggle{display:grid}
+.portal-drawer{position:fixed;z-index:150;top:0;right:0;bottom:0;width:min(390px,91vw);height:100dvh;overflow-y:auto;padding:28px 22px;background:radial-gradient(circle at 100% 0,#a64a6d42,transparent 35%),linear-gradient(155deg,#351326,#571d3c 68%,#76294c);border-left:1px solid #dfbd79;box-shadow:-24px 0 65px #260b1d55;transform:translateX(110%);visibility:hidden;transition:.3s}
+.portal-drawer.open{transform:translateX(0);visibility:visible}
+.portal-drawer-backdrop{position:fixed;z-index:140;inset:0;border:0;background:#1c0818a8;opacity:0;visibility:hidden;pointer-events:none;transition:.25s}
+.portal-drawer.open + .portal-drawer-backdrop{opacity:1;visibility:visible;pointer-events:auto}
+.drawer-heading{position:relative;padding:6px 45px 20px 4px;margin-bottom:14px;border-bottom:1px solid #ffffff25}
+.drawer-heading small{display:block;color:#f0d39a;font-size:9px;font-weight:900;letter-spacing:.14em;margin-bottom:9px}
+.drawer-heading b{font:700 29px Georgia,serif;color:#fff8f3}
+.drawer-close{position:absolute;right:0;top:0;width:38px;height:38px;border:1px solid #d9b66d;border-radius:50%;background:#ffffff12;color:#fff0d0;font-size:25px;cursor:pointer}
+.portal-drawer>a{display:flex;align-items:center;min-height:48px;margin:7px 0;padding:12px 15px;border:1px solid #ffffff17;border-radius:13px;background:#ffffff09;color:#f8eaf0;text-decoration:none;font-size:13px;font-weight:750}
+.portal-drawer>a:hover{border-color:#d9b66d;background:#f0d39a20;color:#ffe3a6}
+.portal-wrap{max-width:1320px;padding:clamp(14px,2.6vw,32px);margin:auto}
+#studentPortal,#memberPortal{background:radial-gradient(ellipse at 90% 0%,#f4dfe6 0,transparent 32%),linear-gradient(180deg,#fff9f7,#f8eff1 60%,#fff9f5)}
+#studentPortal .stats{margin:22px 0}
+#studentPortal .stat,#studentPortal .card,#memberPortal .card,#memberPortal .kpi{border:1px solid #ead9df;border-radius:19px;background:linear-gradient(145deg,#fffefd,#fff8f7);box-shadow:0 12px 32px #55213b0c}
+#studentPortal h3,#memberPortal h3{color:#4b1934;font-family:Georgia,serif}
+#memberPortal .mission{background:radial-gradient(circle at 90% 0,#d89ab322,transparent 35%),linear-gradient(115deg,#351326,#74264a 70%,#a16c3b);border:1px solid #d9b66d;box-shadow:0 16px 40px #48162e1b}
+#memberPortal .mission h1{color:#fff8f3}
+#memberPortal .score{color:#f3d49c}
+#memberPortal .mission-grid>*,#memberPortal .kpi-grid>*{min-width:0}
+#memberPortal .mission-grid .mission-card,#memberPortal .mission-grid>div{color:#fff8f3}
+#memberPortal .progressbar{background:#ffffff35}
+#memberPortal .progressbar span{background:linear-gradient(90deg,#f3dca6,#d4a456)}
+/* Contact system */
+.portal-contact{width:min(1320px,calc(100% - 28px));margin:28px auto 22px!important;padding:25px!important;border:1px solid #dfc17d!important;border-radius:22px!important;background:linear-gradient(135deg,#fffdfb,#f9e9ed)!important;box-shadow:0 14px 38px #55213b10}
+.portal-contact>small,.portal-contact .section-head small{color:#a16c43!important;font-weight:900;letter-spacing:.17em}
+.portal-contact h2{font:700 28px Georgia,serif;color:#4b1934}
+.portal-contact p{color:#887681}
+.portal-contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.portal-contact-grid a{display:flex;flex-direction:column;gap:7px;min-width:0;padding:18px;border:1px solid #ead9df;border-radius:16px;background:#fffdfb;color:#4c2037;text-decoration:none;overflow-wrap:anywhere}
+.portal-contact-grid small{color:#a16c43;font-size:9px;font-weight:900;letter-spacing:.15em}
+.portal-contact-grid b{font-size:13px}
+#adminApp .contact-strip{border:1px solid #dfc17d;border-radius:20px;background:linear-gradient(110deg,#fffdfb,#f9e9ed);box-shadow:0 12px 30px #55213b0c}
+@media(max-width:760px){
+ .portal-identity{min-height:570px;padding:35px 18px;border-radius:24px}
+ .identity-emblem{width:176px;height:176px}
+ .anniversary-kicker{font-size:8px;letter-spacing:.13em}
+ .portal-identity h1{font-size:clamp(37px,10vw,55px)}
+ .identity-overline{font-size:9px;letter-spacing:.16em}
+ .identity-subtitle{font-size:10px;letter-spacing:.1em}
+ .identity-actions{gap:8px}
+ .identity-btn{min-height:43px;padding:0 13px;font-size:11px}
+ #adminApp .content{padding:13px}
+ #adminApp .top{height:72px;padding:0 12px}
+ .top-identity img{width:43px;height:43px}
+ .top-identity .muted{font-size:7px!important;letter-spacing:.04em}
+ .top-actions{gap:7px}
+ .drawer-toggle{width:43px;height:43px}
+ .premium-portal-top{min-height:70px;padding:8px 12px}
+ .portal-top-brand img{width:48px;height:48px}
+ .portal-top-brand b{font-size:22px}
+ .portal-top-brand small{font-size:8px}
+ .portal-wrap{padding:14px}
+ .portal-contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:430px){
+ .login{padding:12px}
+ .login-card{padding:22px 17px}
+ .login-brand img{width:68px;height:68px}
+ .login-brand h1{font-size:28px}
+ .identity-emblem{width:154px;height:154px}
+ .portal-identity{min-height:535px;padding:28px 14px}
+ .portal-identity h1{font-size:38px}
+ .identity-description{font-size:12px}
+ .identity-actions{flex-direction:column;width:100%;max-width:270px}
+ .identity-btn{width:100%}
+ #adminApp .top-identity .muted{max-width:180px;line-height:1.4}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head><body>
+<div id="loginGate" class="login"><div class="login-card"><div class="login-brand"><img src="logo.png" alt="RL-33 official anniversary emblem"><div><small class="muted">15 NOVEMBER 2024 — 15 NOVEMBER 2026</small><h1 style="margin:0">RL-33 Portal</h1><div class="muted" id="loginWelcome">SECOND ANNIVERSARY · ADMINISTRATION · LEARNING · MISSION</div></div></div><div class="tabs"><button class="active" data-role="admin">Admin</button><button data-role="student">Student</button><button data-role="member">Member</button></div><form id="loginForm"><label id="loginLabel">Admin registered email</label><input id="loginId" class="field" required placeholder="Enter registered email"><label style="display:block;margin-top:12px">Password</label><input id="loginPassword" type="password" class="field" required><button class="btn primary" style="width:100%;margin-top:16px">Sign in</button></form><p id="loginMsg" class="muted"></p><a href="../index.html" class="muted">← Back to RL-33 website</a></div></div>
 
-</style></head><body>
-<div id="loginGate" class="login"><div class="login-card"><div class="login-brand"><img src="logo.png"><div><small class="muted">RL-33 • SECOND ANNIVERSARY 2026</small><h1 style="margin:0">RL-33 Portal</h1><div class="muted">Institute & Member Command System</div></div></div><div class="login-welcome"><span class="login-welcome-kicker">SECURE ACCESS · ANNIVERSARY EDITION</span><strong id="loginWelcome">Welcome, Administrator</strong><small id="loginWelcomeSub">Enter your registered credentials to continue.</small></div><div class="tabs"><button class="active" data-role="admin">Admin</button><button data-role="student">Student</button><button data-role="member">Member</button></div><form id="loginForm"><label id="loginLabel">Admin registered email</label><input id="loginId" class="field" required placeholder="Enter registered email"><label style="display:block;margin-top:12px">Password</label><input id="loginPassword" type="password" class="field" required><button class="btn primary" style="width:100%;margin-top:16px">Sign in</button></form><p id="loginMsg" class="muted"></p><a href="../index.html" class="muted">← Back to RL-33 website</a></div></div>
-
-<div id="adminApp" class="shell hidden"><aside class="side"><div class="side-brand"><img src="logo.png"><div><b>RL-33</b><small style="display:block;color:#f1c9d5">SECOND ANNIVERSARY • CENTRAL MANAGEMENT</small></div></div><div class="nav"><button data-page="home" class="active">Central Home</button><button data-page="institute">RL-INSTITUTE</button><button data-page="students">Students</button><button data-page="attendance">Attendance</button><button data-page="fees">Fees</button><button data-page="studenttests">Student Tests</button><button data-page="studentreports">Student Reports</button><hr style="border-color:#ffffff18;width:100%"><button data-page="members">RL-33 Members</button><button data-page="reviews">Daily Reviews</button><button data-page="missions">Missions & Targets</button><button data-page="membertests">Member Tests</button><button data-page="notices">Notice Board</button><button data-page="memberreports">Progress Reports</button></div></aside><main class="main"><header class="top"><div><b id="pageTitle">Central Dashboard</b><div class="muted" style="font-size:11px">WELCOME, ADMINISTRATOR · SECOND ANNIVERSARY 2026</div></div><button class="btn light" onclick="signOut()">Sign out</button></header><div class="content">
+<div id="adminApp" class="shell hidden"><aside class="side"><div class="side-brand"><img src="logo.png"><div><b>RL-33</b><small style="display:block;color:#f1c9d5">SECOND ANNIVERSARY • CENTRAL MANAGEMENT</small></div></div><div class="nav"><button data-page="home" class="active">Central Home</button><button data-page="institute">RL-INSTITUTE</button><button data-page="students">Students</button><button data-page="attendance">Attendance</button><button data-page="fees">Fees</button><button data-page="studenttests">Student Tests</button><button data-page="studentreports">Student Reports</button><hr style="border-color:#ffffff18;width:100%"><button data-page="members">RL-33 Members</button><button data-page="reviews">Daily Reviews</button><button data-page="missions">Missions & Targets</button><button data-page="membertests">Member Tests</button><button data-page="notices">Notice Board</button><button data-page="memberreports">Progress Reports</button></div></aside><div class="admin-drawer-backdrop" id="adminDrawerBackdrop" onclick="setAdminDrawer(false)"></div><main class="main"><header class="top"><div class="top-identity"><img src="logo.png" alt="RL-33"><div><b id="pageTitle">Central Dashboard</b><div class="muted" style="font-size:11px">WELCOME, ADMINISTRATOR · SECOND ANNIVERSARY 2026</div></div></div><div class="top-actions"><button class="btn light" onclick="signOut()">Sign out</button><button class="drawer-toggle" id="adminDrawerToggle" aria-label="Open navigation" aria-expanded="false">☰</button></div></header><div class="content">
 <section id="page-home" class="page active">
-<div class="home-brandbar"><img src="logo.png" alt="RL-33 logo"><div><span>15 NOVEMBER 2024 — 15 NOVEMBER 2026 · SECOND ANNIVERSARY</span><h1>RL-33 <em>Command Centre</em></h1><p>MISSION LP-2030 · ONE MISSION · NINE SOULS · ONE LEGACY</p></div><div class="brand-seal">RL<br><b>33</b></div></div>
-<div class="hero goldhero"><small>✦ CENTRAL ADMINISTRATION · SECURE WORKSPACE</small><h1>One mission. Every function, organised.</h1><p>Choose a workspace below. Student academic records and RL-33 member mission records remain in their own sections.</p></div>
+<section class="portal-identity admin-identity">
+  <div class="anniversary-kicker">15 NOVEMBER 2024 — 15 NOVEMBER 2026 · SECOND ANNIVERSARY</div>
+  <img class="identity-emblem" src="logo.png" alt="RL-33 official emblem">
+  <div class="identity-overline">ONE MISSION · NINE SOULS · ONE LEGACY</div>
+  <h1>RL-33 <span>Command Centre</span></h1>
+  <div class="identity-subtitle">MISSION LP-2030 · CENTRAL ADMINISTRATION</div>
+  <p class="identity-welcome">WELCOME, <strong>ADMINISTRATOR</strong></p>
+  <p class="identity-description">A dedicated command space for academic management, member missions, records and progress.</p>
+  <div class="identity-actions">
+    <button class="identity-btn gold-action" onclick="showPage('institute')">Open Institute ↗</button>
+    <button class="identity-btn light-action" onclick="showPage('members')">Open Member Workspace ↗</button>
+    <a class="identity-btn outline-action" href="../index.html">Main Website ↗</a>
+  </div>
+</section>
 <div class="workspace"><div class="card feature-card member-feature"><div class="icon crest-icon">RL-33</div><small>MISSION LP-2030</small><h2>RL-33 Members</h2><p class="muted">Missions, daily reviews, approvals, member tests, notices and progress reports.</p><button class="btn gold" onclick="showPage('members')">Open Member Workspace ↗</button></div><div class="card feature-card institute-feature"><div class="icon institute-icon">RI</div><small>LEARNING HUB</small><h2>RL-INSTITUTE</h2><p class="muted">Students, attendance, fees, tests and printable academic reports.</p><button class="btn primary" onclick="showPage('institute')">Open Institute Workspace ↗</button></div></div>
 <div class="section-head home-section-head"><div><h2>Quick Access</h2><p class="muted">Every important tool in its own tile.</p></div><span class="badge">ADMIN TOOLS</span></div>
 <div class="quick-grid">
@@ -698,7 +726,7 @@ td{font-size:13px}
 <button class="quick-tile pink-tile" onclick="showPage('memberreports')"><span class="tile-icon">RP</span><b>Progress Reports</b><small>Weekly & monthly</small></button>
 <button class="quick-tile navy-tile" onclick="showPage('institute')"><span class="tile-icon">IN</span><b>Institute Overview</b><small>Academic summary</small></button>
 </div>
-
+<div class="contact-strip"><div class="contact-mark">RL-33</div><div><b>Contact RL-33</b><p>Institute support, member system and portal assistance.</p><a href="mailto:radhelakshmi33@gmail.com">radhelakshmi33@gmail.com</a> · <a href="tel:+919625706356">+91 96257 06356</a></div></div>
 </section>
 <section id="page-institute" class="page"><div class="hero"><small>RL-INSTITUTE</small><h1>Tuition Management</h1><p>Stronger Foundation, Confident Learning.</p></div><div class="stats"><div class="stat">Students<b id="iStudents">0</b></div><div class="stat">This month collected<b id="iCollected">₹0</b></div><div class="stat">Pending<b id="iPending">₹0</b></div><div class="stat">Tests recorded<b id="iTests">0</b></div></div><div class="toolbar"><button class="btn primary" onclick="showPage('students')">Manage Students</button><button class="btn light" onclick="showPage('attendance')">Attendance</button><button class="btn light" onclick="showPage('fees')">Fees</button><button class="btn light" onclick="showPage('studenttests')">Tests</button></div></section>
 <section id="page-students" class="page"><div class="section-head"><div><h1>Institute Students</h1><p class="muted">Student accounts and profiles.</p></div><button class="btn primary" onclick="openModal('studentModal')">＋ Add Student</button></div><div class="card tablewrap"><table><thead><tr><th>ID</th><th>Name</th><th>Class</th><th>Fee</th><th>Status</th></tr></thead><tbody id="studentsTable"></tbody></table></div></section>
@@ -754,29 +782,67 @@ td{font-size:13px}
 </div>
 </main>
 </div>
-<div id="studentPortal" class="student-shell hidden"><div class="portal-top"><b>RL-33 · Student Academic Centre</b><button class="btn light" onclick="signOut()">Sign out</button></div><div class="portal-wrap"><div class="home-brandbar student-brandbar"><img src="logo.png" alt="RL-33 official anniversary logo"><div><span>RL-33 · SECOND ANNIVERSARY 2026</span><h1>RL-33 <em>Student Centre</em></h1><p>ONE MISSION · NINE SOULS · ONE LEGACY</p><p class="member-welcome-line">WELCOME, <b>STUDENT</b></p></div><div class="brand-seal">RL<br><b>33</b></div></div><div class="hero"><small>STRONGER FOUNDATION, CONFIDENT LEARNING</small><h1 id="studentName">Welcome</h1><p id="studentMeta"></p></div><div class="stats"><div class="stat">Attendance<b id="sAttendance">—</b></div><div class="stat">Test Average<b id="sAverage">—</b></div><div class="stat">Monthly Fee<b id="sFee">—</b></div><div class="stat">Status<b id="sStatus">—</b></div></div><div class="grid2"><div class="card pad"><h3>My Tests</h3><div id="sTests"></div></div><div class="card pad"><h3>Fee History</h3><div id="sFees"></div></div></div><div class="card pad" style="margin-top:16px"><h3>My Attendance</h3><div id="sAttList"></div></div><div class="card pad printable" id="sReport" style="margin-top:16px"></div><div style="margin:18px 0"><button class="btn primary" onclick="window.print()">Print My Report</button></div></div></div>
-
-<div id="memberPortal" class="member-shell hidden"><div class="portal-top"><b>👑 RL-33 • Member Mission Centre</b><button class="btn light" onclick="signOut()">Sign out</button></div><div class="portal-wrap">
-<div class="home-brandbar member-brandbar">
-  <img src="logo.png" alt="RL-33 Institute official logo">
-  <div>
-    <span>RL-33 • MEMBER MISSION CENTRE • MISSION LP-2030</span>
-    <h1>RL-33 <em>Member Centre</em></h1>
-    <p>ONE MISSION · NINE SOULS · ONE LEGACY</p>
-    <p class="member-welcome-line">WELCOME BACK, <b id="memberWelcomeName">MEMBER</b></p>
+<div id="studentPortal" class="student-shell hidden">
+  <header class="portal-top premium-portal-top">
+    <div class="portal-top-brand"><img src="logo.png" alt="RL-33"><div><b>RL-33</b><small>STUDENT ACADEMIC CENTRE</small></div></div>
+    <div class="portal-top-actions"><button class="btn light" onclick="signOut()">Sign out</button><button class="drawer-toggle portal-drawer-toggle" data-drawer="studentDrawer" aria-label="Open navigation" aria-expanded="false">☰</button></div>
+  </header>
+  <aside class="portal-drawer" id="studentDrawer" aria-label="Student navigation">
+    <div class="drawer-heading"><small>RL-33 · SECOND ANNIVERSARY 2026</small><b>Student Navigation</b><button type="button" class="drawer-close" data-close-drawer="studentDrawer" aria-label="Close navigation">×</button></div>
+    <a href="#studentOverview" data-drawer-link="studentDrawer">Overview</a><a href="#studentStats" data-drawer-link="studentDrawer">My Performance</a><a href="#studentTests" data-drawer-link="studentDrawer">My Tests</a><a href="#studentFees" data-drawer-link="studentDrawer">Fee History</a><a href="#studentAttendance" data-drawer-link="studentDrawer">Attendance</a><a href="#studentReport" data-drawer-link="studentDrawer">My Report</a><a href="#studentContact" data-drawer-link="studentDrawer">Contact RL-33</a>
+  </aside>
+  <button class="portal-drawer-backdrop" type="button" data-close-drawer="studentDrawer" aria-label="Close student navigation"></button>
+  <div class="portal-wrap">
+    <section class="portal-identity student-identity" id="studentOverview">
+      <div class="anniversary-kicker">15 NOVEMBER 2024 — 15 NOVEMBER 2026 · SECOND ANNIVERSARY</div>
+      <img class="identity-emblem" src="logo.png" alt="RL-33 official emblem">
+      <div class="identity-overline">STRONGER FOUNDATION · CONFIDENT LEARNING</div>
+      <h1>RL-33 <span>Student Centre</span></h1>
+      <div class="identity-subtitle">LEARNING HUB · ACADEMIC SUPPORT</div>
+      <p class="identity-welcome">WELCOME, <strong id="studentName">STUDENT</strong></p>
+      <p class="identity-description" id="studentMeta">Your learning progress, attendance and academic records in one place.</p>
+      <div class="identity-actions"><a class="identity-btn gold-action" href="#studentStats">View My Progress ↓</a><a class="identity-btn outline-action" href="#studentReportPanel">My Report ↓</a></div>
+    </section>
+    <div class="stats" id="studentStats"><div class="stat">Attendance<b id="sAttendance">—</b></div><div class="stat">Test Average<b id="sAverage">—</b></div><div class="stat">Monthly Fee<b id="sFee">—</b></div><div class="stat">Status<b id="sStatus">—</b></div></div>
+    <div class="grid2"><div class="card pad" id="studentTests"><h3>My Tests</h3><div id="sTests"></div></div><div class="card pad" id="studentFees"><h3>Fee History</h3><div id="sFees"></div></div></div>
+    <div class="card pad" id="studentAttendance" style="margin-top:16px"><h3>My Attendance</h3><div id="sAttList"></div></div>
+    <div class="card pad printable" id="studentReportPanel" style="margin-top:16px"><div id="sReport"></div></div>
+    <div style="margin:18px 0"><button class="btn primary" onclick="window.print()">Print My Report</button></div>
+    <section class="portal-contact" id="studentContact"><small>RL-33 · OFFICIAL CONTACT</small><h2>Stay connected with RL-33.</h2><p>For academic support, attendance, fee records and student assistance.</p><div class="portal-contact-grid"><a href="mailto:radhelakshmi33@gmail.com"><small>EMAIL</small><b>radhelakshmi33@gmail.com</b></a><a href="tel:+919625706356"><small>MOBILE</small><b>+91 96257 06356</b></a><a href="https://wa.me/919625706356" target="_blank" rel="noopener"><small>WHATSAPP</small><b>Chat with RL-33 ↗</b></a></div></section>
   </div>
-  <div class="brand-seal">RL<br><b>33</b></div>
 </div>
-<div class="mission"><div class="subhero"><div><small>OFFICIAL MEMBER RECORD</small><h1 id="memName">Member</h1><div id="memRole"></div></div><div><small>APPROVED PERFORMANCE</small><div class="score" id="memScore">—</div></div></div></div>
-<div style="margin-top:18px"><div class="section-head"><div><h2 style="margin:0">My Active Missions</h2><p class="muted" style="margin:4px 0">Mission details are controlled by Admin.</p></div></div><div id="memberMissions" class="mission-grid"></div></div>
-<div class="kpi-grid" style="margin-top:18px"><div class="kpi"><span class="muted">Session Attendance</span><strong id="memSessions">—</strong></div><div class="kpi"><span class="muted">Revision</span><strong id="memRevision">—</strong></div><div class="kpi"><span class="muted">Target Completion</span><strong id="memTargets">—</strong></div><div class="kpi"><span class="muted">English Practice</span><strong id="memEnglish">—</strong></div></div>
+
+<div id="memberPortal" class="member-shell hidden">
+<div class="portal-top premium-portal-top">
+  <div class="portal-top-brand"><img src="logo.png" alt="RL-33"><div><b>RL-33</b><small>MEMBER MISSION CENTRE</small></div></div>
+  <div class="portal-top-actions"><button class="btn light" onclick="signOut()">Sign out</button><button class="drawer-toggle portal-drawer-toggle" data-drawer="memberDrawer" aria-label="Open navigation" aria-expanded="false">☰</button></div>
+</div>
+<aside class="portal-drawer" id="memberDrawer" aria-label="Member navigation">
+  <div class="drawer-heading"><small>RL-33 · SECOND ANNIVERSARY 2026</small><b>Member Navigation</b><button type="button" class="drawer-close" data-close-drawer="memberDrawer" aria-label="Close navigation">×</button></div>
+  <a href="#memberOverview" data-drawer-link="memberDrawer">Overview</a><a href="#memberRecord" data-drawer-link="memberDrawer">Official Member Record</a><a href="#memberMissionsSection" data-drawer-link="memberDrawer">Active Missions</a><a href="#memberPerformance" data-drawer-link="memberDrawer">Performance</a><a href="#memberTargetsSection" data-drawer-link="memberDrawer">Today's Targets</a><a href="#memberReviewSection" data-drawer-link="memberDrawer">Daily Review</a><a href="#memberReportsSection" data-drawer-link="memberDrawer">Progress Reports</a><a href="#memberContact" data-drawer-link="memberDrawer">Contact RL-33</a>
+</aside>
+<button class="portal-drawer-backdrop" type="button" data-close-drawer="memberDrawer" aria-label="Close member navigation"></button>
+<div class="portal-wrap">
+<section class="portal-identity member-identity" id="memberOverview">
+  <div class="anniversary-kicker">15 NOVEMBER 2024 — 15 NOVEMBER 2026 · SECOND ANNIVERSARY</div>
+  <img class="identity-emblem" src="logo.png" alt="RL-33 official emblem">
+  <div class="identity-overline">ONE MISSION · NINE SOULS · ONE LEGACY</div>
+  <h1>RL-33 <span>Member Centre</span></h1>
+  <div class="identity-subtitle">MISSION LP-2030 · MEMBER MISSION SYSTEM</div>
+  <p class="identity-welcome">WELCOME BACK, <strong id="memberWelcomeName">MEMBER</strong></p>
+  <p class="identity-description">Your official member record, active missions, daily execution and progress reports.</p>
+  <div class="identity-actions"><a class="identity-btn gold-action" href="#memberMissions">Explore My Missions ↓</a><a class="identity-btn outline-action" href="#memberReportsSection">Progress Reports ↓</a></div>
+</section>
+<div class="mission" id="memberRecord"><div class="subhero"><div><small>OFFICIAL MEMBER RECORD</small><h1 id="memName">Member</h1><div id="memRole"></div></div><div><small>APPROVED PERFORMANCE</small><div class="score" id="memScore">—</div></div></div></div>
+<div id="memberMissionsSection" style="margin-top:18px"><div class="section-head"><div><h2 style="margin:0">My Active Missions</h2><p class="muted" style="margin:4px 0">Mission details are controlled by Admin.</p></div></div><div id="memberMissions" class="mission-grid"></div></div>
+<div class="kpi-grid" id="memberPerformance" style="margin-top:18px"><div class="kpi"><span class="muted">Session Attendance</span><strong id="memSessions">—</strong></div><div class="kpi"><span class="muted">Revision</span><strong id="memRevision">—</strong></div><div class="kpi"><span class="muted">Target Completion</span><strong id="memTargets">—</strong></div><div class="kpi"><span class="muted">English Practice</span><strong id="memEnglish">—</strong></div></div>
 <div class="grid2" style="margin-top:16px"><div class="card pad academic-box"><h3>📘 Academic Progress</h3><div id="academicProgress"></div></div><div class="card pad character-box"><h3>🌱 Character & Routine Progress</h3><div id="characterProgress"></div></div></div>
-<div class="grid2" style="margin-top:16px"><div class="card pad"><h3>🎯 Today's Targets</h3><div id="todayTargets"></div></div><div class="card pad"><div style="padding:12px 14px;border-radius:13px;background:linear-gradient(110deg,#4b1838,#873456);color:#fff;margin-bottom:13px"><small style="letter-spacing:.14em;color:#f3d38f;font-weight:900">PERSONAL NOTICE BOARD</small><h3 id="memberNoticeIdentity" style="margin:4px 0;color:#fff">Official Notices</h3><div style="font-size:11px;color:#f7e8ee">Member-specific announcements and official updates</div></div><div id="memberNotices"></div></div></div>
-<div class="card pad" style="margin-top:16px"><h3>Submit Daily Report</h3><p class="muted">Submit your record for Admin review. Approved records are permanently locked for members.</p><form id="dailyForm"><div class="grid3"><label><input id="rS1" type="checkbox"> Session 1 attended</label><label><input id="rS2" type="checkbox"> Session 2 attended</label><label><input id="rS3" type="checkbox"> Session 3 attended</label></div><div class="grid2" style="margin-top:12px"><div><label>Revision</label><select id="rRevision" class="field"><option value="true">Done</option><option value="false">Not done</option></select></div><div><label>English practice</label><select id="rEnglish" class="field"><option value="true">Done</option><option value="false">Not done</option></select></div><div><label>Targets completed today (out of 3)</label><select id="rTargetsDone" class="field"><option value="3">3 / 3</option><option value="2">2 / 3</option><option value="1">1 / 3</option><option value="0">0 / 3</option></select></div><div><label>Study hours</label><input id="rStudy" type="number" min="0" max="24" step="0.25" class="field" required></div><div><label>Screen time hours</label><input id="rScreen" type="number" min="0" max="24" step="0.25" class="field" required></div><div><label>Did something better / responsible?</label><select id="rBetter" class="field"><option value="false">No</option><option value="true">Yes</option></select></div></div><label>Better work / responsibility note</label><input id="rBetterNote" class="field" placeholder="Short factual note (optional)"><label>Daily reflection</label><textarea id="rReflection" class="field" rows="3" placeholder="What did you complete, learn, or need to improve?"></textarea><button class="btn gold" style="margin-top:12px">Submit for Admin Review</button></form><p id="dailyMsg" class="muted"></p></div>
-<div class="card pad" style="margin-top:16px"><div class="section-head"><div><h3 style="margin:0">My Progress Reports</h3><p class="muted" style="margin:4px 0">Generated automatically from Admin-approved records.</p></div><button class="btn gold" onclick="window.print()">Print Report</button></div><div class="report-tabs"><button class="btn light active" data-memperiod="weekly">Weekly</button><button class="btn light" data-memperiod="monthly">Monthly</button><button class="btn light" data-memperiod="all">Mission / Overall</button></div><div class="printable" id="memberPrintable"></div></div>
+<div class="grid2" style="margin-top:16px"><div class="card pad" id="memberTargetsSection"><h3>🎯 Today's Targets</h3><div id="todayTargets"></div></div><div class="card pad"><div style="padding:12px 14px;border-radius:13px;background:linear-gradient(110deg,#4b1838,#873456);color:#fff;margin-bottom:13px"><small style="letter-spacing:.14em;color:#f3d38f;font-weight:900">PERSONAL NOTICE BOARD</small><h3 id="memberNoticeIdentity" style="margin:4px 0;color:#fff">Official Notices</h3><div style="font-size:11px;color:#f7e8ee">Member-specific announcements and official updates</div></div><div id="memberNotices"></div></div></div>
+<div class="card pad" id="memberReviewSection" style="margin-top:16px"><h3>Submit Daily Report</h3><p class="muted">Submit your record for Admin review. Approved records are permanently locked for members.</p><form id="dailyForm"><div class="grid3"><label><input id="rS1" type="checkbox"> Session 1 attended</label><label><input id="rS2" type="checkbox"> Session 2 attended</label><label><input id="rS3" type="checkbox"> Session 3 attended</label></div><div class="grid2" style="margin-top:12px"><div><label>Revision</label><select id="rRevision" class="field"><option value="true">Done</option><option value="false">Not done</option></select></div><div><label>English practice</label><select id="rEnglish" class="field"><option value="true">Done</option><option value="false">Not done</option></select></div><div><label>Targets completed today (out of 3)</label><select id="rTargetsDone" class="field"><option value="3">3 / 3</option><option value="2">2 / 3</option><option value="1">1 / 3</option><option value="0">0 / 3</option></select></div><div><label>Study hours</label><input id="rStudy" type="number" min="0" max="24" step="0.25" class="field" required></div><div><label>Screen time hours</label><input id="rScreen" type="number" min="0" max="24" step="0.25" class="field" required></div><div><label>Did something better / responsible?</label><select id="rBetter" class="field"><option value="false">No</option><option value="true">Yes</option></select></div></div><label>Better work / responsibility note</label><input id="rBetterNote" class="field" placeholder="Short factual note (optional)"><label>Daily reflection</label><textarea id="rReflection" class="field" rows="3" placeholder="What did you complete, learn, or need to improve?"></textarea><button class="btn gold" style="margin-top:12px">Submit for Admin Review</button></form><p id="dailyMsg" class="muted"></p></div>
+<div class="card pad" id="memberReportsSection" style="margin-top:16px"><div class="section-head"><div><h3 style="margin:0">My Progress Reports</h3><p class="muted" style="margin:4px 0">Generated automatically from Admin-approved records.</p></div><button class="btn gold" onclick="window.print()">Print Report</button></div><div class="report-tabs"><button class="btn light active" data-memperiod="weekly">Weekly</button><button class="btn light" data-memperiod="monthly">Monthly</button><button class="btn light" data-memperiod="all">Mission / Overall</button></div><div class="printable" id="memberPrintable"></div></div>
 <div class="grid2" style="margin-top:16px"><div class="card pad"><h3>Recent Daily Reports</h3><div id="memberDailyHistory"></div></div><div class="card pad"><h3>School & RL-33 Tests</h3><div id="memberTestHistory"></div></div></div></div></div>
 
-
+<div class="card pad portal-contact" id="memberContact" style="margin-top:18px;border-top:3px solid var(--gold)"><div class="section-head"><div><small style="color:var(--amber);font-weight:900;letter-spacing:.16em">RL-33 · OFFICIAL CONTACT</small><h2 style="margin:4px 0">Stay connected with the RL-33 mission.</h2><p class="muted" style="margin:0">For member records, mission support and official enquiries.</p></div></div><div class="grid3"><div class="kpi"><span class="muted">Email</span><strong style="font-size:14px;overflow-wrap:anywhere">radhelakshmi33@gmail.com</strong></div><div class="kpi"><span class="muted">Mobile</span><strong style="font-size:14px">+91 96257 06356</strong></div><div class="kpi"><span class="muted">WhatsApp</span><strong style="font-size:14px"><a href="https://wa.me/919625706356" target="_blank" rel="noopener" style="color:#8b6827">Chat with RL-33 ↗</a></strong></div></div></div>
 
 <!-- MODALS -->
 <div id="studentModal" class="modalbg"><div class="modal"><div class="modalhead"><h2>Add Institute Student</h2><button class="btn light" onclick="closeModal('studentModal')">✕</button></div><form id="studentForm"><div class="form grid2"><div><label>Student ID</label><input id="stId" class="field" required></div><div><label>Password</label><input id="stPass" type="password" minlength="8" class="field" required></div><div><label>Name</label><input id="stName" class="field" required></div><div><label>Class</label><input id="stClass" class="field" required></div><div><label>Parent</label><input id="stParent" class="field"></div><div><label>Phone</label><input id="stPhone" class="field"></div><div><label>Monthly Fee</label><input id="stFee" type="number" class="field" required></div><div><label>Joining</label><input id="stJoin" type="date" class="field"></div></div><div class="modalfoot"><button class="btn primary">Create Student</button></div></form></div></div>
@@ -792,7 +858,7 @@ td{font-size:13px}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 const sb=window.supabase.createClient('https://brlptuyehzdrduslnzeg.supabase.co','sb_publishable_qzyAVRpJJ69mHw9Y3PQ30w_LsIgWgg2');const $=id=>document.getElementById(id),today=()=>new Date().toISOString().slice(0,10),month=()=>today().slice(0,7),money=n=>'₹'+Number(n||0).toLocaleString('en-IN'),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let role='admin',D={students:[],attendance:[],fees:[],studentTests:[],members:[],missions:[],targets:[],reports:[],memberTests:[],notices:[]},currentMember='',reviewId=null;
 function toast(x){$('toast').textContent=x;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2500)}function openModal(id){$(id).classList.add('show')}function closeModal(id){$(id).classList.remove('show')}document.querySelectorAll('.modalbg').forEach(x=>x.onclick=e=>{if(e.target===x)x.classList.remove('show')});
-document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{role=b.dataset.role;document.querySelectorAll('[data-role]').forEach(x=>x.classList.toggle('active',x===b));$('loginLabel').textContent=role==='admin'?'Admin registered email':role==='student'?'Student ID':'Member ID';$('loginId').placeholder=role==='admin'?'Enter registered email':role==='student'?'Enter Student ID':'Enter Member ID';$('loginWelcome').textContent=role==='admin'?'Welcome, Administrator':role==='student'?'Welcome, Students':'Welcome, RL-33 Members';$('loginWelcomeSub').textContent=role==='admin'?'Access the Central Command and management workspace.':role==='student'?'Access your academic records and learning workspace.':'Access your personal missions and member workspace.'});
+document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{role=b.dataset.role;document.querySelectorAll('[data-role]').forEach(x=>x.classList.toggle('active',x===b));$('loginLabel').textContent=role==='admin'?'Admin registered email':role==='student'?'Student ID':'Member ID';$('loginId').placeholder=role==='admin'?'Enter registered email':role==='student'?'Enter Student ID':'Enter Member ID';$('loginWelcome').textContent=role==='admin'?'WELCOME, ADMINISTRATOR · CENTRAL COMMAND':role==='student'?'WELCOME, STUDENT · LEARNING HUB':'WELCOME, MEMBER · MISSION LP-2030'});
 $('loginForm').onsubmit=async e=>{e.preventDefault();$('loginMsg').textContent='Signing in…';try{const id=$('loginId').value.trim();const email=role==='student'?`${id.toLowerCase()}@students.rl-institute.invalid`:role==='member'?`${id.toLowerCase()}@members.rl33.invalid`:id;const {data,error}=await sb.auth.signInWithPassword({email,password:$('loginPassword').value});if(error)throw error;const p=await sb.from('profiles').select('role,student_id,member_id').eq('user_id',data.user.id).single();if(p.error)throw p.error;if(!p.data||p.data.role!==role)throw new Error('Account role does not match selected login.');if(role==='admin'){await loadAdmin();$('adminApp').classList.remove('hidden')}else if(role==='student'){await loadStudent(p.data.student_id);$('studentPortal').classList.remove('hidden')}else{await loadMember(p.data.member_id);$('memberPortal').classList.remove('hidden')}$('loginGate').classList.add('hidden');$('loginMsg').textContent='';}catch(x){$('loginMsg').textContent='Login failed: '+(x?.message||'Please try again.');}};
 async function signOut(){await sb.auth.signOut();location.reload()}function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id==='page-'+p));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===p));$('pageTitle').textContent=({home:'Central Dashboard',institute:'RL-INSTITUTE',members:'RL-33 Members'}[p]||p);if(p==='studentreports')renderStudentReport();if(p==='memberreports')renderMemberProgress()};document.querySelectorAll('.nav button[data-page]').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 async function loadAdmin(){const qs=[['students','*'],['attendance','*'],['fee_payments','*'],['test_marks','*'],['members','*'],['member_missions','*'],['member_targets','*'],['member_daily_reports','*'],['member_tests','*'],['member_notices','*']];let rs=await Promise.all(qs.map(([t,s])=>sb.from(t).select(s)));let bad=rs.find(x=>x.error);if(bad)throw bad.error;[D.students,D.attendance,D.fees,D.studentTests,D.members,D.missions,D.targets,D.reports,D.memberTests,D.notices]=rs.map(x=>x.data||[]);let pr=await sb.from('profiles').select('user_id,role,member_id');D.profiles=pr.error?[]:(pr.data||[]);renderAdmin()}
@@ -1129,71 +1195,45 @@ $('dailyForm').onsubmit=async e=>{e.preventDefault();let done=Number($('rTargets
 ['attDate','fpDate','smDate','mtDate','miStart','taDate'].forEach(id=>$(id).value=today());
 if($('progressMonth'))$('progressMonth').value=month();$('feeMonth').value=month();$('fpMonth').value=month();
 
-// RL-33 shared right-side navigation and per-page identity/contact system.
+// Accessible three-dot navigation control; existing page handlers remain intact.
 (function(){
- const admin=document.getElementById('adminApp');
- const contactHTML=`<section class="portal-contact"><span class="contact-eyebrow">RL-33 · OFFICIAL CONTACT</span><h2>Stay connected with the RL-33 mission.</h2><p>For member records, institute support and official enquiries, use the official channels below.</p><div class="portal-contact-grid"><div class="portal-contact-item"><span>Email</span><a href="mailto:radhelakshmi33@gmail.com">radhelakshmi33@gmail.com</a></div><div class="portal-contact-item"><span>Mobile</span><a href="tel:+919625706356">+91 96257 06356</a></div><div class="portal-contact-item"><span>WhatsApp</span><a href="https://wa.me/919625706356" target="_blank" rel="noopener">Chat with RL-33 ↗</a></div></div><div class="portal-footer"><span>RL-33 · Mission LP-2030 · Established 2024</span><span>ONE MISSION · NINE SOULS · ONE LEGACY</span><span>© 2026 RL-33</span></div></section>`;
- const pageMeta={
-  institute:['RL-INSTITUTE','Learning Hub · Academic Administration'],students:['Student Management','Profiles, accounts and academic records'],attendance:['Attendance Centre','Daily student attendance management'],fees:['Fee Management','Payments, dues and monthly records'],studenttests:['Student Examination Centre','Student assessments, scores and remarks'],studentreports:['Academic Reports','Student report cards and printable records'],members:['RL-33 Member Records','Official member profiles and responsibilities'],reviews:['Daily Review Centre','Member submissions, review and approvals'],missions:['Mission Architecture','Member missions, daily targets and milestones'],membertests:['Member Assessment Centre','School and RL-33 member test records'],notices:['Official Notice Board','Announcements and mission communication'],memberreports:['Progress Reports','Weekly, monthly and overall performance reports']
- };
- function addContact(container){if(container&&!container.querySelector(':scope > .portal-contact'))container.insertAdjacentHTML('beforeend',contactHTML)}
- if(admin){
-  const side=admin.querySelector('.side');
-  if(side){
-   const nav=side.querySelector('.nav');
-   if(nav&&!nav.querySelector('[data-page="home"]'))nav.insertAdjacentHTML('afterbegin','<button data-page="home">Central Home</button>');
-   const toggle=document.createElement('button');toggle.type='button';toggle.className='side-toggle';toggle.setAttribute('aria-label','Open navigation');toggle.title='Open navigation';toggle.textContent='☰';admin.appendChild(toggle);
-   const backdrop=document.createElement('div');backdrop.className='portal-nav-backdrop';backdrop.id='adminNavBackdrop';admin.appendChild(backdrop);
-   const close=()=>{admin.classList.remove('nav-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');};
-   const open=()=>{admin.classList.add('nav-open');toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','Close navigation');};
-   toggle.addEventListener('click',()=>admin.classList.contains('nav-open')?close():open());
-   backdrop.addEventListener('click',close);
-   side.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',close));
-   document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  }
-  admin.querySelectorAll('.page').forEach(page=>{
-   const id=page.id.replace('page-','');
-   if(id!=='home'){
-    const meta=pageMeta[id]||[id.replace(/\b\w/g,c=>c.toUpperCase()),'RL-33 Central Administration'];
-    if(!page.querySelector(':scope > .page-identity'))page.insertAdjacentHTML('afterbegin',`<div class="page-identity"><img src="logo.png" alt="RL-33 anniversary logo"><div><span class="eyebrow">RL-33 · SECOND ANNIVERSARY 2026</span><h1>${meta[0]}</h1><p>${meta[1]} · MISSION LP-2030</p></div></div>`);
-   }
-   addContact(page);
-  });
- }
- function setupPortal(rootId,kind){
-  const root=document.getElementById(rootId);if(!root)return;
-  const links=kind==='member'?
-   [['Overview','#memberOverview'],['Active Missions','#memberMissions'],['Performance','#memberPerformance'],["Today's Targets",'#memberTargets'],['Notice Board','#memberNoticeSection'],['Daily Report','#memberDailyForm'],['Progress Reports','#memberProgressReports'],['Contact','#memberContact']]:
-   [['Overview','#studentOverview'],['My Tests','#studentTestsSection'],['Fee History','#studentFeesSection'],['Attendance','#studentAttendanceSection'],['Report Card','#sReport'],['Contact','#studentContact']];
-  const drawer=document.createElement('aside');drawer.className='portal-drawer';drawer.innerHTML=`<div class="portal-drawer-head"><img src="logo.png" alt="RL-33 anniversary logo"><div><strong>RL-33</strong><small>SECOND ANNIVERSARY · 2026</small></div></div><div class="portal-drawer-title">NAVIGATION</div>${links.map(([label,href])=>`<a href="${href}">${label}</a>`).join('')}<button type="button" data-portal-signout>Sign out ↗</button><div class="portal-footer"><span>MISSION LP-2030</span><span>ONE MISSION · NINE SOULS · ONE LEGACY</span></div>`;
-  const toggle=document.createElement('button');toggle.type='button';toggle.className='portal-menu-toggle';toggle.textContent='☰';toggle.setAttribute('aria-label','Open navigation');toggle.setAttribute('aria-expanded','false');
-  const backdrop=document.createElement('div');backdrop.className='portal-nav-backdrop';
-  root.append(drawer,toggle,backdrop);
-  const close=()=>{drawer.classList.remove('open');backdrop.classList.remove('show');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation')};
-  const open=()=>{drawer.classList.add('open');backdrop.classList.add('show');toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','Close navigation')};
-  toggle.addEventListener('click',()=>drawer.classList.contains('open')?close():open());backdrop.addEventListener('click',close);
-  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>{const target=root.querySelector(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});drawer.querySelectorAll('a').forEach(x=>x.classList.toggle('active',x===a));close()}}));
-  drawer.querySelector('[data-portal-signout]').addEventListener('click',signOut);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-  const wrap=root.querySelector('.portal-wrap');
-  if(kind==='member'){
-   const brand=root.querySelector('.member-brandbar');if(brand)brand.id='memberOverview';
-   const mission=root.querySelector('#memberMissions')?.closest('div[style]');if(mission)mission.id='memberMissionsSection';
-   const kpis=root.querySelector('.kpi-grid');if(kpis)kpis.id='memberPerformance';
-   const target=root.querySelector('#todayTargets')?.closest('.card');if(target)target.id='memberTargets';
-   const notice=root.querySelector('#memberNotices')?.closest('.card');if(notice)notice.id='memberNoticeSection';
-   const form=root.querySelector('#dailyForm')?.closest('.card');if(form)form.id='memberDailyForm';
-   const reports=root.querySelector('#memberPrintable')?.closest('.card');if(reports)reports.id='memberProgressReports';
-  }else{
-   const brand=root.querySelector('.student-brandbar');if(brand)brand.id='studentOverview';
-   const tests=root.querySelector('#sTests')?.closest('.card');if(tests)tests.id='studentTestsSection';
-   const fees=root.querySelector('#sFees')?.closest('.card');if(fees)fees.id='studentFeesSection';
-   const attendance=root.querySelector('#sAttList')?.closest('.card');if(attendance)attendance.id='studentAttendanceSection';
-   const report=root.querySelector('#sReport');if(report)report.id='sReport';
-  }
-  if(wrap){addContact(wrap);const c=wrap.querySelector(':scope > .portal-contact');if(c)c.id=kind==='member'?'memberContact':'studentContact'}
- }
- setupPortal('studentPortal','student');setupPortal('memberPortal','member');
+ const app=document.getElementById('adminApp');
+ const side=app&&app.querySelector('.side');
+ if(!app||!side)return;
+ const toggle=document.createElement('button');
+ toggle.type='button';toggle.className='side-toggle';toggle.setAttribute('aria-label','Open navigation menu');toggle.setAttribute('title','Navigation menu');toggle.textContent='⋮';
+ app.appendChild(toggle);
+ toggle.addEventListener('click',()=>{
+   if(window.matchMedia('(max-width: 650px)').matches){app.classList.toggle('mobile-nav-open');toggle.setAttribute('aria-label',app.classList.contains('mobile-nav-open')?'Close navigation menu':'Open navigation menu');}
+   else{app.classList.toggle('sidebar-collapsed');toggle.setAttribute('aria-label',app.classList.contains('sidebar-collapsed')?'Show sidebar':'Hide sidebar');}
+ });
+ side.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click',()=>app.classList.remove('mobile-nav-open')));
+ window.addEventListener('resize',()=>{if(!window.matchMedia('(max-width: 650px)').matches)app.classList.remove('mobile-nav-open')});
 })();
 
+
+function setAdminDrawer(open){
+  const app=$('adminApp'),btn=$('adminDrawerToggle'),backdrop=$('adminDrawerBackdrop');
+  if(!app)return;
+  app.classList.toggle('drawer-open',!!open);
+  if(btn){btn.setAttribute('aria-expanded',open?'true':'false');btn.setAttribute('aria-label',open?'Close navigation':'Open navigation');btn.textContent=open?'×':'☰';}
+  if(backdrop)backdrop.setAttribute('aria-hidden',open?'false':'true');
+}
+document.addEventListener('DOMContentLoaded',()=>{const memberContactPanel=$('memberContact'),memberPortalRoot=$('memberPortal');if(memberContactPanel&&memberPortalRoot)memberPortalRoot.appendChild(memberContactPanel);
+  const adminToggle=$('adminDrawerToggle');
+  if(adminToggle)adminToggle.addEventListener('click',()=>setAdminDrawer(!$('adminApp').classList.contains('drawer-open')));
+  document.querySelectorAll('.nav button[data-page]').forEach(b=>b.addEventListener('click',()=>setAdminDrawer(false)));
+  document.querySelectorAll('[data-drawer]').forEach(b=>b.addEventListener('click',()=>{
+    const id=b.getAttribute('data-drawer'),drawer=$(id);
+    if(drawer){drawer.classList.toggle('open');const opened=drawer.classList.contains('open');b.setAttribute('aria-expanded',opened?'true':'false');b.setAttribute('aria-label',opened?'Close navigation':'Open navigation');b.textContent=opened?'×':'☰';}
+  }));
+  document.querySelectorAll('[data-close-drawer]').forEach(b=>b.addEventListener('click',()=>{
+    const drawer=$(b.getAttribute('data-close-drawer'));if(drawer)drawer.classList.remove('open');
+    document.querySelectorAll('[data-drawer="'+b.getAttribute('data-close-drawer')+'"]').forEach(x=>{x.setAttribute('aria-expanded','false');x.textContent='☰';});
+  }));
+  document.querySelectorAll('[data-drawer-link]').forEach(a=>a.addEventListener('click',()=>{
+    const drawer=$(a.getAttribute('data-drawer-link'));if(drawer)drawer.classList.remove('open');
+    document.querySelectorAll('[data-drawer="'+a.getAttribute('data-drawer-link')+'"]').forEach(x=>{x.setAttribute('aria-expanded','false');x.textContent='☰';});
+  }));
+});
 </script></body></html>
