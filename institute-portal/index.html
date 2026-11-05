@@ -573,6 +573,106 @@ td{color:#51404a;border-bottom-color:#f0e5e8}
   body.print-idcard-mode .idcard-actions{display:none!important}
 }
 
+
+/* Member dashboard progress graphics and horizontal daily targets */
+#memberPortal .member-progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#memberPortal .member-progress-card{min-width:0;border:1px solid #e7d8d8;border-radius:22px;background:linear-gradient(145deg,#fffefd,#fbf3f1);box-shadow:0 12px 30px rgba(53,19,38,.07);padding:22px}
+#memberPortal .member-progress-card.academic-box{border-top:4px solid #bd8c3d}
+#memberPortal .member-progress-card.character-box{border-top:4px solid #4c8a72}
+.member-progress-title{display:flex;align-items:center;gap:12px;margin-bottom:17px}
+.member-progress-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#f5e8d1;font-size:21px}
+.member-progress-title h3{margin:0;color:#4a1b32;font:700 20px Georgia,serif}
+.member-progress-title small{display:block;color:#8a737d;font-size:11px;margin-top:3px}
+.member-progress-count{padding:11px 13px;border:1px solid #eadde0;border-radius:13px;background:#fffaf8;margin-bottom:15px}
+.member-progress-count b,.member-progress-count span{display:block}
+.member-progress-count b{color:#51223b;font-size:14px}
+.member-progress-count span{font-size:11px;color:#907d85;margin-top:3px}
+.member-meter-list{display:grid;gap:14px}
+.member-meter-label{display:flex;justify-content:space-between;gap:12px;color:#68515c;font-size:12px;margin-bottom:6px}
+.member-meter-label b{color:#51223b;font-size:13px}
+.member-meter-track{height:10px;border-radius:20px;background:#eee5e5;overflow:hidden}
+.member-meter-track span{height:100%;display:block;border-radius:20px;background:linear-gradient(90deg,#a86d38,#e0c078)}
+.academic-box .member-meter-track span{background:linear-gradient(90deg,#8c5570,#d8a45d)}
+.character-box .member-meter-track span{background:linear-gradient(90deg,#397b68,#a9c99c)}
+.member-routine-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.member-routine-kpi{padding:13px 11px;border-radius:14px;border:1px solid #e8dcd5;background:#fff;min-width:0}
+.member-routine-kpi small,.member-routine-kpi strong,.member-routine-kpi span{display:block}
+.member-routine-kpi small{font-size:9px;font-weight:900;letter-spacing:.07em;color:#8b737b;line-height:1.4;min-height:26px}
+.member-routine-kpi strong{font:700 19px Georgia,serif;color:#4b2338;margin:6px 0 3px;overflow-wrap:anywhere}
+.member-routine-kpi span{font-size:10px;color:#917e85;line-height:1.4}
+.member-routine-kpi.study{border-top:3px solid #c49b53}.member-routine-kpi.screen{border-top:3px solid #9a6b8b}.member-routine-kpi.focus{border-top:3px solid #5e9479}
+.routine-meter{margin-top:17px}
+#memberPortal .daily-target-panel{overflow:hidden}
+#memberPortal .daily-target-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#memberPortal .daily-target-card{display:flex;flex-direction:column;align-items:flex-start;min-height:190px;padding:15px;border:1px solid #e7d7d9;border-top:3px solid #d4ad62;border-radius:16px;background:linear-gradient(160deg,#fff,#fff9f6);box-shadow:0 7px 18px rgba(66,30,48,.05)}
+#memberPortal .daily-target-card .target-number{width:34px;height:34px;flex:0 0 34px;margin:0 0 12px;background:linear-gradient(135deg,#4b1838,#a34c6b);box-shadow:0 4px 10px #4b183822}
+#memberPortal .daily-target-card b{font-size:14px;line-height:1.5;margin-bottom:7px}
+#memberPortal .daily-target-card p{font-size:12px;line-height:1.55;margin-bottom:12px}
+#memberPortal .daily-target-card .notice-tag{margin-top:auto}
+@media(max-width:850px){#memberPortal .member-progress-grid{grid-template-columns:1fr}}
+@media(max-width:650px){#memberPortal .daily-target-grid{grid-template-columns:repeat(3,minmax(145px,1fr));overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}#memberPortal .daily-target-card{min-height:180px;scroll-snap-align:start}#memberPortal .member-routine-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}#memberPortal .member-routine-kpi{padding:10px 8px}#memberPortal .member-routine-kpi strong{font-size:16px}}
+@media(max-width:390px){#memberPortal .member-routine-kpis{grid-template-columns:1fr}#memberPortal .member-routine-kpi small{min-height:0}}
+
+
+/* Member report controls and complete official print layout */
+.member-report-filters{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin:10px 0 16px;padding:13px 15px;border:1px solid #eadfe1;border-radius:15px;background:#fffaf8}
+.member-report-filters label{display:grid;gap:5px;min-width:180px;color:#765568;font-size:11px;font-weight:800}
+.member-report-filters .field{min-width:180px}
+.rl-profile-photo-wrap{margin:0 0 10px}.rl-profile-photo-wrap img{width:72px;height:72px;object-fit:cover;border-radius:12px;border:2px solid #d6ad67}\n.rl-member-profile-print{margin:18px 0;padding:16px;border:1px solid #e8d9dc;border-radius:14px;background:#fffdfa;break-inside:avoid}
+.rl-profile-print-heading{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #eadfe1}
+.rl-profile-print-heading>span{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#4b1838;color:#f4d995;font-weight:900}
+.rl-profile-print-heading b{display:block;color:#4b1838;letter-spacing:.08em;font-size:12px}
+.rl-profile-print-heading small{display:block;color:#8b7882;font-size:10px}
+.rl-profile-print-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.rl-profile-print-grid>div{padding:9px 10px;background:#fbf5f3;border:1px solid #f0e4e5;border-radius:9px;min-width:0}
+.rl-profile-print-grid>div.wide{grid-column:1/-1}
+.rl-profile-print-grid small{display:block;color:#967b87;font-size:9px;font-weight:900;letter-spacing:.08em;margin-bottom:3px}
+.rl-profile-print-grid b{display:block;color:#352331;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:560px){.member-report-filters{display:grid;grid-template-columns:1fr}.member-report-filters label,.member-report-filters .field{min-width:0;width:100%}.rl-profile-print-grid{grid-template-columns:1fr 1fr}}
+@page{size:A4 portrait;margin:15mm 13mm 16mm}
+@media print{
+  body.member-report-print{background:#fff!important}
+  body.member-report-print *{visibility:hidden!important}
+  body.member-report-print #memberPortal,
+  body.member-report-print #memberPortal .printable,
+  body.member-report-print #memberPortal .printable *{visibility:visible!important}
+  body.member-report-print #memberPortal{display:block!important;position:absolute!important;inset:0!important;width:100%!important;background:#fff!important}
+  body.member-report-print #memberPortal .portal-top,
+  body.member-report-print #memberPortal .portal-drawer,
+  body.member-report-print #memberPortal .section-head,
+  body.member-report-print #memberPortal .report-tabs,
+  body.member-report-print #memberPortal .member-report-filters,
+  body.member-report-print #memberPortal #memberReviewSection,
+  body.member-report-print #memberPortal #memberMissionsSection,
+  body.member-report-print #memberPortal .member-profile-panel,
+  body.member-report-print #memberPortal .member-average-panel,
+  body.member-report-print #memberPortal .member-progress-grid,
+  body.member-report-print #memberPortal .grid2,
+  body.member-report-print #memberPortal .portal-contact{display:none!important}
+  body.member-report-print #memberPortal .portal-wrap{display:block!important;max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+  body.member-report-print #memberPortal #memberReportsSection{display:block!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;background:#fff!important}
+  body.member-report-print #memberPortal #memberPrintable{display:block!important;position:relative!important;width:100%!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;background:#fff!important;overflow:visible!important}
+  body.member-report-print .rl-print-masthead{display:flex!important;position:fixed!important;top:-8mm!important;left:0!important;right:0!important;height:19mm!important;align-items:center!important;gap:10px!important;padding:0 0 5px!important;margin:0!important;border-bottom:2px solid #b9974d!important;background:#fff!important;z-index:9999!important}
+  body.member-report-print .rl-print-masthead img{display:block!important;width:15mm!important;height:15mm!important;object-fit:contain!important;border:1px solid #e7dfca!important;border-radius:50%!important;padding:2px!important;background:#fff!important}
+  body.member-report-print .rl-print-masthead>div:nth-child(2){display:grid!important;gap:1px!important;flex:1!important}
+  body.member-report-print .rl-print-masthead strong{font:700 17px Georgia,serif!important;letter-spacing:.08em!important;color:#351326!important}
+  body.member-report-print .rl-print-masthead span{font-size:7px!important;letter-spacing:.08em!important;color:#987638!important;font-weight:900!important}
+  body.member-report-print .rl-print-masthead small{font-size:7px!important;color:#667085!important}
+  body.member-report-print .rl-print-document-tag{font-size:7px!important;line-height:1.4!important;text-align:right!important;color:#8a6a2d!important}
+  body.member-report-print #memberPrintable{padding-top:21mm!important}
+  body.member-report-print .rl-report-hero{margin-top:0!important;break-inside:avoid!important}
+  body.member-report-print .rl-member-profile-print{break-inside:avoid!important}
+  body.member-report-print .rl-report-kpi,
+  body.member-report-print .rl-report-chart,
+  body.member-report-print .rl-report-section,
+  body.member-report-print .rl-report-note{break-inside:avoid!important}
+  body.member-report-print .rl-report-footer{break-inside:avoid!important}
+  body.member-report-print .rl-report-table{min-width:0!important;width:100%!important}
+  body.member-report-print .tablewrap{overflow:visible!important}
+  body.member-report-print .rl-report-table th,
+  body.member-report-print .rl-report-table td{font-size:8px!important;padding:5px 4px!important;white-space:normal!important}
+}
+
 </style>
 <style id="rl33-final-anniversary-premium">
 :root{
@@ -918,10 +1018,17 @@ body{background:radial-gradient(ellipse at 90% 0%,#f4dfe6 0,transparent 32%),lin
 <section class="member-profile-panel" id="memberRecord"><div class="member-profile-heading"><div class="member-profile-person"><div class="member-profile-avatar-wrap"><img id="memberProfilePhoto" src="" alt="Member profile photo" class="member-profile-avatar"><span class="member-profile-seal">RL-33</span></div><div class="member-profile-title"><small class="member-eyebrow">OFFICIAL MEMBER RECORD</small><h1 id="memName">Member</h1><div id="memRole" class="member-role-line"></div><div class="member-heading-meta"><span>MEMBER PROFILE</span><i></i><span>ESTABLISHED 2024</span></div></div></div><button class="btn gold member-profile-id-button" onclick="openMemberCard()">View Digital ID Card ↗</button></div><div class="member-profile-details-wrap"><div class="member-profile-section-title"><span>01</span><div><b>Member Information</b><small>Official identity and personal mission details</small></div></div><div class="member-detail-grid" id="memberProfileDetails"></div></div></section>
 <section class="member-average-panel" id="memberAveragePanel"><div class="member-average-heading"><div><small class="member-eyebrow">PERFORMANCE DIVISION</small><h2>Average Performance</h2><p>Calculated from Admin-approved daily reports only.</p></div><div class="member-average-status" id="memberPerformanceStatus">Awaiting records</div></div><div class="member-average-content"><div class="member-average-score"><small>AVERAGE SCORE</small><div><strong id="memScore">—</strong><span>/ 10</span></div><b id="memScorePercent">—</b><small>Overall performance percentage</small></div><div class="member-average-chart"><div class="member-chart-title"><b>Performance Graph</b><span id="memberPerformanceCount">0 approved reports</span></div><div class="member-score-track"><div id="memberScoreBar" class="member-score-fill" style="width:0%"></div></div><div class="member-chart-scale"><span>0%</span><b id="memberScoreGraphLabel">No score data</b><span>100%</span></div><div class="member-mini-metrics"><div><small>Session Attendance</small><b id="memSessions">—</b></div><div><small>Revision</small><b id="memRevision">—</b></div><div><small>Target Completion</small><b id="memTargets">—</b></div><div><small>English Practice</small><b id="memEnglish">—</b></div></div></div></div><div class="member-average-foot">RL-33 · MEMBER PERFORMANCE RECORD <span>Verified approved entries</span></div></section>
 <div id="memberMissionsSection" style="margin-top:18px"><div class="section-head"><div><h2 style="margin:0">My Active Missions</h2><p class="muted" style="margin:4px 0">Mission details are controlled by Admin.</p></div></div><div id="memberMissions" class="mission-grid"></div></div>
-<div class="grid2" style="margin-top:16px"><div class="card pad academic-box"><h3>📘 Academic Progress</h3><div id="academicProgress"></div></div><div class="card pad character-box"><h3>🌱 Character & Routine Progress</h3><div id="characterProgress"></div></div></div>
+<div class="member-progress-grid" style="margin-top:16px"><section class="card pad member-progress-card academic-box"><div class="member-progress-title"><span class="member-progress-icon">📘</span><div><h3>Academic Progress</h3><small>Learning, revision and target execution</small></div></div><div id="academicProgress"></div></section><section class="card pad member-progress-card character-box"><div class="member-progress-title"><span class="member-progress-icon">🌱</span><div><h3>Character & Routine Progress</h3><small>Study discipline, screen balance and better-work routine</small></div></div><div id="characterProgress"></div></section></div>
 <div class="grid2" style="margin-top:16px"><div class="card pad" id="memberTargetsSection"><h3>🎯 Today's Targets</h3><div id="todayTargets"></div></div><div class="card pad"><div style="padding:12px 14px;border-radius:13px;background:linear-gradient(110deg,#4b1838,#873456);color:#fff;margin-bottom:13px"><small style="letter-spacing:.14em;color:#f3d38f;font-weight:900">PERSONAL NOTICE BOARD</small><h3 id="memberNoticeIdentity" style="margin:4px 0;color:#fff">Official Notices</h3><div style="font-size:11px;color:#f7e8ee">Member-specific announcements and official updates</div></div><div id="memberNotices"></div></div></div>
 <div class="card pad" id="memberReviewSection" style="margin-top:16px"><h3>Submit Daily Report</h3><p class="muted">Submit your record for Admin review. Approved records are permanently locked for members.</p><form id="dailyForm"><div class="grid3"><label><input id="rS1" type="checkbox"> Session 1 attended</label><label><input id="rS2" type="checkbox"> Session 2 attended</label><label><input id="rS3" type="checkbox"> Session 3 attended</label></div><div class="grid2" style="margin-top:12px"><div><label>Revision</label><select id="rRevision" class="field"><option value="true">Done</option><option value="false">Not done</option></select></div><div><label>English practice</label><select id="rEnglish" class="field"><option value="true">Done</option><option value="false">Not done</option></select></div><div><label>Targets completed today (out of 3)</label><select id="rTargetsDone" class="field"><option value="3">3 / 3</option><option value="2">2 / 3</option><option value="1">1 / 3</option><option value="0">0 / 3</option></select></div><div><label>Study hours</label><input id="rStudy" type="number" min="0" max="24" step="0.25" class="field" required></div><div><label>Screen time hours</label><input id="rScreen" type="number" min="0" max="24" step="0.25" class="field" required></div><div><label>Did something better / responsible?</label><select id="rBetter" class="field"><option value="false">No</option><option value="true">Yes</option></select></div></div><label>Better work / responsibility note</label><input id="rBetterNote" class="field" placeholder="Short factual note (optional)"><label>Daily reflection</label><textarea id="rReflection" class="field" rows="3" placeholder="What did you complete, learn, or need to improve?"></textarea><button class="btn gold" style="margin-top:12px">Submit for Admin Review</button></form><p id="dailyMsg" class="muted"></p></div>
-<div class="card pad" id="memberReportsSection" style="margin-top:16px"><div class="section-head"><div><h3 style="margin:0">My Progress Reports</h3><p class="muted" style="margin:4px 0">Generated automatically from Admin-approved records.</p></div><button class="btn gold" onclick="window.print()">Print Report</button></div><div class="report-tabs"><button class="btn light active" data-memperiod="weekly">Weekly</button><button class="btn light" data-memperiod="monthly">Monthly</button><button class="btn light" data-memperiod="all">Mission / Overall</button></div><div class="printable" id="memberPrintable"></div></div>
+<div class="card pad" id="memberReportsSection" style="margin-top:16px"><div class="section-head"><div><h3 style="margin:0">My Progress Reports</h3><p class="muted" style="margin:4px 0">Generated automatically from Admin-approved records.</p></div><button class="btn gold" onclick="printMemberProgress()">Print / Save PDF</button></div><div class="report-tabs"><button class="btn light active" data-memperiod="weekly">Weekly</button><button class="btn light" data-memperiod="monthly">Monthly</button><button class="btn light" data-memperiod="custom">Custom Dates</button><button class="btn light" data-memperiod="all">Mission / Overall</button></div>
+<div class="member-report-filters">
+  <label id="memberMonthWrap" class="hidden">Select month<input id="memberReportMonth" type="month" class="field"></label>
+  <label id="memberFromWrap" class="hidden">From date<input id="memberReportFrom" type="date" class="field"></label>
+  <label id="memberToWrap" class="hidden">To date<input id="memberReportTo" type="date" class="field"></label>
+  <button type="button" class="btn light" id="memberApplyRange">Apply date range</button>
+</div>
+<div class="printable" id="memberPrintable"></div></div>
 <div class="grid2" style="margin-top:16px"><div class="card pad"><h3>Recent Daily Reports</h3><div id="memberDailyHistory"></div></div><div class="card pad"><h3>School & RL-33 Tests</h3><div id="memberTestHistory"></div></div></div></div></div>
 
 <div class="card pad portal-contact" id="memberContact" style="margin-top:18px;border-top:3px solid var(--gold)"><div class="section-head"><div><small style="color:var(--amber);font-weight:900;letter-spacing:.16em">RL-33 · OFFICIAL CONTACT</small><h2 style="margin:4px 0">Stay connected with the RL-33 mission.</h2><p class="muted" style="margin:0">For member records, mission support and official enquiries.</p></div></div><div class="grid3"><div class="kpi"><span class="muted">Email</span><strong style="font-size:14px;overflow-wrap:anywhere">radhelakshmi33@gmail.com</strong></div><div class="kpi"><span class="muted">Mobile</span><strong style="font-size:14px">+91 96257 06356</strong></div><div class="kpi"><span class="muted">WhatsApp</span><strong style="font-size:14px"><a href="https://wa.me/919625706356" target="_blank" rel="noopener" style="color:#8b6827">Chat with RL-33 ↗</a></strong></div></div></div>
@@ -1111,8 +1218,28 @@ function renderMemberProgress(){
   renderProgressInto(id,'memberProgress',period);
 }
 
-function reportRange(period){
+function reportRange(period,rangeOverride=null){
   let now=new Date(),start,end;
+  if(rangeOverride){
+    if(rangeOverride.type==='monthly'){
+      const v=rangeOverride.month;
+      if(!/^\\d{4}-\\d{2}$/.test(v||''))return null;
+      const a=v.split('-').map(Number);
+      start=new Date(a[0],a[1]-1,1);end=new Date(a[0],a[1],0);
+    }else if(rangeOverride.type==='custom'){
+      const f=rangeOverride.from,t=rangeOverride.to;
+      if(!f||!t||f>t)return null;
+      start=new Date(f+'T00:00:00');end=new Date(t+'T23:59:59.999');
+    }else if(rangeOverride.type==='weekly'){
+      let off=(now.getDay()+6)%7;
+      start=new Date(now.getFullYear(),now.getMonth(),now.getDate()-off);
+      end=new Date(start.getFullYear(),start.getMonth(),start.getDate()+6);
+    }else{
+      start=new Date(2000,0,1);end=new Date(2099,11,31,23,59,59,999);
+    }
+    start.setHours(0,0,0,0);end.setHours(23,59,59,999);
+    return {start,end};
+  }
   if(period==='weekly'){
     let offset=(now.getDay()+6)%7;
     start=new Date(now.getFullYear(),now.getMonth(),now.getDate()-offset);
@@ -1175,17 +1302,17 @@ function mins(v){
   return `${h}h ${String(m).padStart(2,'0')}m`;
 }
 
-function renderProgressInto(id,target,period='all'){
+function renderProgressInto(id,target,period='all',rangeOverride=null){
   let m=D.members.find(x=>x.id===id);
   if(!m)return;
 
-  let q=reportRange(period);
+  let q=reportRange(period,rangeOverride);
   if(!q){
     $(target).innerHTML='<p class="muted">Please select valid From and To dates. From date must not be after To date.</p>';
     return;
   }
 
-  let p=progressStats(id,period);
+  let p=progressStats(id,period,D.reports,rangeOverride);
 
   // Apply the SAME selected report date range to every test record.
   // test_date is stored as YYYY-MM-DD, so compare date keys (not UTC timestamps).
@@ -1219,7 +1346,7 @@ function renderProgressInto(id,target,period='all'){
   let records=[...p.r].sort((a,b)=>String(b.report_date).localeCompare(String(a.report_date)));
 
   const schoolAvg=avg(school),rlAvg=avg(rl);
-  const selectedMonth=$('progressMonth')?.value||'';
+  const selectedMonth=rangeOverride?.month||$('progressMonth')?.value||'';
   const periodDetail=period==='monthly'&&selectedMonth
     ?new Date(selectedMonth+'-01T12:00:00').toLocaleDateString('en-IN',{month:'long',year:'numeric'})
     :rangeText;
@@ -1234,8 +1361,8 @@ function renderProgressInto(id,target,period='all'){
   $(target).innerHTML=`
     <div class="rl-print-masthead">
       <img src="logo.png" alt="RL-33 Official Logo" onerror="this.style.display='none'">
-      <div><strong>RL-33</strong><span>ONE MISSION · NINE SOULS · ONE LEGACY</span><small>Central Management • Member Performance Division</small></div>
-      <div class="rl-print-document-tag">OFFICIAL<br>PROGRESS REPORT</div>
+      <div><strong>RL-33</strong><span>ONE MISSION · NINE SOULS · ONE LEGACY</span><small>ESTABLISHED 2024 · CENTRAL MANAGEMENT · MEMBER PERFORMANCE DIVISION</small><small>${esc(m.full_name)} · ${esc(m.id)} · ${esc(periodDetail)}</small></div>
+      <div class="rl-print-document-tag">OFFICIAL<br>MEMBER PROGRESS REPORT</div>
     </div>
     <div class="rl-report-hero">
       <div class="eyebrow">RL-33 • CENTRAL MANAGEMENT</div>
@@ -1255,8 +1382,24 @@ function renderProgressInto(id,target,period='all'){
       <div class="rl-report-kpi"><small>Study average</small><strong>${p.r.length?mins(p.study):'—'}</strong><span>${p.r.length?'Per approved daily record':'No approved records'}</span></div>
     </div>
 
-    <h2>${esc(m.full_name)}</h2>
-    <p>${esc(m.position)} · ${esc(m.designation||'')}</p>
+    <div class="rl-member-profile-print">
+      <div class="rl-profile-print-heading"><span>01</span><div><b>OFFICIAL MEMBER PROFILE</b><small>Identity, career direction and personal mission</small></div></div>
+      ${m.photo_url?`<div class="rl-profile-photo-wrap"><img src="${esc(m.photo_url)}" alt="Member photograph" onerror="this.parentElement.style.display='none'"></div>`:''}
+      <div class="rl-profile-print-grid">
+        <div><small>MEMBER NAME</small><b>${esc(m.full_name||'—')}</b></div>
+        <div><small>MEMBER ID</small><b>${esc(m.id||'—')}</b></div>
+        <div><small>POSITION</small><b>${esc(m.position||'Member')}</b></div>
+        <div><small>DESIGNATION</small><b>${esc(m.designation||'—')}</b></div>
+        <div><small>AIM / CAREER GOAL</small><b>${esc(m.aim||'—')}</b></div>
+        <div><small>SESSION</small><b>${esc(m.session||'—')}</b></div>
+        <div><small>JOINING DATE</small><b>${esc(m.joining_date||'—')}</b></div>
+        <div><small>INSPIRED BY</small><b>${esc(m.inspired_by||'—')}</b></div>
+        <div><small>DEVOTEE OF</small><b>${esc(m.devotee_of||'—')}</b></div>
+        <div class="wide"><small>PRIMARY RESPONSIBILITY</small><b>${esc(m.responsibility||'—')}</b></div>
+        <div class="wide"><small>DREAM</small><b>${esc(m.dream||'—')}</b></div>
+        <div class="wide"><small>WHY / PURPOSE</small><b>${esc(m.why||'—')}</b></div>
+      </div>
+    </div>
 
     <div class="rl-report-section">
       <h3>Performance Overview</h3>
@@ -1308,7 +1451,7 @@ function renderProgressInto(id,target,period='all'){
     <div class="tablewrap">
       <table>
         <tr><th>Date</th><th>Sessions</th><th>Targets</th><th>Study</th><th>Screen</th><th>Score</th></tr>
-        ${records.length?records.slice(0,31).map(x=>`<tr>
+        ${records.length?records.map(x=>`<tr>
           <td>${esc(x.report_date)}</td>
           <td>${[x.session_1,x.session_2,x.session_3].filter(Boolean).length}/3</td>
           <td>${Number(x.targets_completed??(x.target_status==='Completed'?3:x.target_status==='Partial'?1:0))}/3</td>
@@ -1348,11 +1491,34 @@ async function loadStudent(id){
 }
 
 let memberPeriod='weekly';
-async function loadMember(id){currentMember=id;let [m,mi,ta,r,t,n]=await Promise.all([sb.from('members').select('*').eq('id',id).single(),sb.from('member_missions').select('*').eq('member_id',id).order('start_date',{ascending:false}),sb.from('member_targets').select('*').eq('member_id',id).order('target_date'),sb.from('member_daily_reports').select('*').eq('member_id',id).order('report_date',{ascending:false}),sb.from('member_tests').select('*').eq('member_id',id).order('test_date',{ascending:false}),sb.from('member_notices').select('*').order('created_at',{ascending:false})]);if([m,mi,ta,r,t,n].some(x=>x.error))throw new Error([m,mi,ta,r,t,n].find(x=>x.error).error.message);let mem=m.data,mis=mi.data||[],targets=ta.data||[],reports=r.data||[],tests=t.data||[],notices=n.data||[],approved=reports.filter(x=>x.status==='Approved');D.members=[mem];let pr=await sb.from('profiles').select('user_id,role,member_id');D.profiles=pr.error?[]:(pr.data||[]);D.missions=mis;D.targets=targets;D.reports=reports;D.memberTests=tests;let p=progressStats(id,'all',reports);$('memberProfilePhoto').src=mem.photo_url||'';$('memberProfilePhoto').style.display=mem.photo_url?'block':'none';$('memName').textContent=mem.full_name;if($('memberWelcomeName'))$('memberWelcomeName').textContent=mem.full_name;if($('memberNoticeIdentity'))$('memberNoticeIdentity').textContent=`${mem.full_name} · ID: ${mem.id}`;$('memRole').textContent=`${mem.position} • ${mem.designation||''}`;$('memberProfileDetails').innerHTML=[
+function memberReportRange(){
+  if(memberPeriod==='monthly')return {type:'monthly',month:$('memberReportMonth')?.value||month()};
+  if(memberPeriod==='custom')return {type:'custom',from:$('memberReportFrom')?.value,to:$('memberReportTo')?.value};
+  return {type:memberPeriod};
+}
+function renderCurrentMemberReport(){
+  if(!currentMember)return;
+  const monthly=memberPeriod==='monthly',custom=memberPeriod==='custom';
+  $('memberMonthWrap')?.classList.toggle('hidden',!monthly);
+  $('memberFromWrap')?.classList.toggle('hidden',!custom);
+  $('memberToWrap')?.classList.toggle('hidden',!custom);
+  $('memberApplyRange')?.classList.toggle('hidden',!monthly&&!custom);
+  renderProgressInto(currentMember,'memberPrintable',memberPeriod,memberReportRange());
+}
+function printMemberProgress(){
+  document.body.classList.add('member-report-print');
+  window.print();
+  setTimeout(()=>document.body.classList.remove('member-report-print'),900);
+}
+async function loadMember(id){currentMember=id;let [m,mi,ta,r,t,n]=await Promise.all([sb.from('members').select('*').eq('id',id).single(),sb.from('member_missions').select('*').eq('member_id',id).order('start_date',{ascending:false}),sb.from('member_targets').select('*').eq('member_id',id).order('target_date'),sb.from('member_daily_reports').select('*').eq('member_id',id).order('report_date',{ascending:false}),sb.from('member_tests').select('*').eq('member_id',id).order('test_date',{ascending:false}),sb.from('member_notices').select('*').order('created_at',{ascending:false})]);if([m,mi,ta,r,t,n].some(x=>x.error))throw new Error([m,mi,ta,r,t,n].find(x=>x.error).error.message);let mem=m.data,mis=mi.data||[],targets=ta.data||[],reports=r.data||[],tests=t.data||[],notices=n.data||[],approved=reports.filter(x=>x.status==='Approved');D.members=[mem];let pr=await sb.from('profiles').select('user_id,role,member_id');D.profiles=pr.error?[]:(pr.data||[]);D.missions=mis;D.targets=targets;D.reports=reports;D.memberTests=tests;let p=progressStats(id,'all',reports);const memberPhotoUrl=String(mem.photo_url||'').trim();const memberPhoto=$('memberProfilePhoto');memberPhoto.onerror=()=>{memberPhoto.style.display='none';};memberPhoto.onload=()=>{memberPhoto.style.display='block';};memberPhoto.src=memberPhotoUrl;memberPhoto.style.display=memberPhotoUrl?'block':'none';$('memName').textContent=mem.full_name;if($('memberWelcomeName'))$('memberWelcomeName').textContent=mem.full_name;if($('memberNoticeIdentity'))$('memberNoticeIdentity').textContent=`${mem.full_name} · ID: ${mem.id}`;$('memRole').textContent=`${mem.position} • ${mem.designation||''}`;$('memberProfileDetails').innerHTML=[
  ['MEMBER ID',mem.id],['POSITION',mem.position],['DESIGNATION',mem.designation||'—'],['JOINED',mem.joining_date||'—'],
  ['AIM',mem.aim||'Not recorded'],['SESSION',mem.session||'Not recorded'],['INSPIRED BY',mem.inspired_by||'Not recorded'],['DEVOTEE OF',mem.devotee_of||'Not recorded'],['DREAM',mem.dream||'Not recorded'],['WHY / PURPOSE',mem.why||'Not recorded'],['RESPONSIBILITY',mem.responsibility||'—']
-].map(([k,v])=>`<div class="member-detail-item"><small>${esc(k)}</small><b>${esc(v)}</b></div>`).join('');const scorePct=approved.length?Math.max(0,Math.min(100,(Number(p.score)||0)*10)):0;$('memScore').textContent=approved.length?p.score.toFixed(1):'—';$('memScorePercent').textContent=approved.length?scorePct.toFixed(0)+'%':'—';$('memberScoreBar').style.width=scorePct+'%';$('memberScoreGraphLabel').textContent=approved.length?scorePct.toFixed(0)+'% average':'No score data';$('memberPerformanceCount').textContent=approved.length?approved.length+' approved report'+(approved.length===1?'':'s'):'0 approved reports';$('memberPerformanceStatus').textContent=approved.length?'APPROVED DATA':'AWAITING RECORDS';$('memSessions').textContent=approved.length?p.sess.toFixed(0)+'%':'—';$('memRevision').textContent=approved.length?p.rev.toFixed(0)+'%':'—';$('memTargets').textContent=approved.length?p.tar.toFixed(0)+'%':'—';$('memEnglish').textContent=approved.length?p.eng.toFixed(0)+'%':'—';let active=mis.filter(x=>x.status==='Active');$('memberMissions').innerHTML=active.map(x=>{let d=missionDays(x),cat=x.category||'Academic';return `<div class="mission-card ${cat==='Character'?'character':''}"><small>${esc(cat.toUpperCase())} MISSION</small><h2>${esc(x.title)}</h2><div class="meta"><span class="chip">${esc(x.phase||'Active')}</span><span class="chip">Day ${d.day}${d.total?' / '+d.total:''}</span></div><div class="days">${d.left==null?'Ongoing':d.left+' days left'}</div><p>${esc(x.objective||'')}</p><p><b>Mission Lead:</b> ${esc(x.mission_lead||'—')}<br><b>Dedicated To:</b> ${esc(x.dedicated_to||'—')}</p><div class="progressbar"><span style="width:${d.pct}%"></span></div></div>`}).join('')||'<div class="card pad">No active mission assigned.</div>';let ac=active.filter(x=>(x.category||'Academic')==='Academic'),ch=active.filter(x=>x.category==='Character');$('academicProgress').innerHTML=`<p><b>${ac.length} active mission(s)</b></p><p>Sessions ${p.sess.toFixed(0)}% · Revision ${p.rev.toFixed(0)}% · English ${p.eng.toFixed(0)}% · Targets ${p.tar.toFixed(0)}%</p>`;$('characterProgress').innerHTML=`<p><b>${ch.length} active mission(s)</b></p><p>Avg study ${mins(p.study)} · Avg screen ${mins(p.screen)} · Better-work ${p.better.toFixed(0)}%</p>`;let todays=targets.filter(x=>x.target_date===today()).slice(0,3);$('todayTargets').innerHTML=`<div class="daily-target-panel"><div class="daily-target-heading"><b>Today's 3 Targets</b><span class="badge">${todays.length}/3 assigned</span></div><div class="daily-target-grid">${[0,1,2].map(i=>todays[i]?`<div class="daily-target-card"><span class="target-number">0${i+1}</span><b>${esc(todays[i].title)}</b><p>${esc(todays[i].details||'')}</p><span class="notice-tag">${esc(todays[i].priority||'Normal')}</span></div>`:`<div class="daily-target-card empty"><span class="target-number">0${i+1}</span><b>Awaiting target</b><p>Admin has not assigned this target yet.</p></div>`).join('')}</div></div>`;$('memberNotices').innerHTML=renderNoticeCards(notices,D.profiles||[],'member');$('memberDailyHistory').innerHTML=reports.slice(0,10).map(x=>`<p><b>${esc(x.report_date)}</b> · <span class="badge ${x.status==='Approved'?'ok':x.status==='Returned'?'bad':'warn'}">${x.status}</span>${x.score!=null?' · '+x.score+'/10':''}<br><span class="muted">${esc(x.admin_remark||'')}</span></p>`).join('')||'No reports yet.';$('memberTestHistory').innerHTML=tests.map(x=>`<p><b>${esc(x.test_type)} · ${esc(x.subject)}</b><br>${esc(x.test_name)} — ${x.marks_obtained}/${x.total_marks}</p>`).join('')||'No tests yet.';let existing=reports.find(x=>x.report_date===today());$('dailyForm').classList.toggle('hidden',!!existing&&existing.status!=='Returned');$('dailyMsg').textContent=existing?`Today's report is ${existing.status}. ${existing.status==='Returned'?'You may correct and resubmit it.':'Approved reports stay locked; submitted reports await Admin review.'}`:'';renderProgressInto(id,'memberPrintable',memberPeriod)}
-document.querySelectorAll('[data-memperiod]').forEach(b=>b.onclick=()=>{memberPeriod=b.dataset.memperiod;document.querySelectorAll('[data-memperiod]').forEach(x=>x.classList.toggle('active',x===b));renderProgressInto(currentMember,'memberPrintable',memberPeriod)});
+].map(([k,v])=>`<div class="member-detail-item"><small>${esc(k)}</small><b>${esc(v)}</b></div>`).join('');const scorePct=approved.length?Math.max(0,Math.min(100,(Number(p.score)||0)*10)):0;$('memScore').textContent=approved.length?p.score.toFixed(1):'—';$('memScorePercent').textContent=approved.length?scorePct.toFixed(0)+'%':'—';$('memberScoreBar').style.width=scorePct+'%';$('memberScoreGraphLabel').textContent=approved.length?scorePct.toFixed(0)+'% average':'No score data';$('memberPerformanceCount').textContent=approved.length?approved.length+' approved report'+(approved.length===1?'':'s'):'0 approved reports';$('memberPerformanceStatus').textContent=approved.length?'APPROVED DATA':'AWAITING RECORDS';$('memSessions').textContent=approved.length?p.sess.toFixed(0)+'%':'—';$('memRevision').textContent=approved.length?p.rev.toFixed(0)+'%':'—';$('memTargets').textContent=approved.length?p.tar.toFixed(0)+'%':'—';$('memEnglish').textContent=approved.length?p.eng.toFixed(0)+'%':'—';let active=mis.filter(x=>x.status==='Active');$('memberMissions').innerHTML=active.map(x=>{let d=missionDays(x),cat=x.category||'Academic';return `<div class="mission-card ${cat==='Character'?'character':''}"><small>${esc(cat.toUpperCase())} MISSION</small><h2>${esc(x.title)}</h2><div class="meta"><span class="chip">${esc(x.phase||'Active')}</span><span class="chip">Day ${d.day}${d.total?' / '+d.total:''}</span></div><div class="days">${d.left==null?'Ongoing':d.left+' days left'}</div><p>${esc(x.objective||'')}</p><p><b>Mission Lead:</b> ${esc(x.mission_lead||'—')}<br><b>Dedicated To:</b> ${esc(x.dedicated_to||'—')}</p><div class="progressbar"><span style="width:${d.pct}%"></span></div></div>`}).join('')||'<div class="card pad">No active mission assigned.</div>';let ac=active.filter(x=>(x.category||'Academic')==='Academic'),ch=active.filter(x=>x.category==='Character');const meter=(label,value)=>{const v=Math.max(0,Math.min(100,Number(value)||0));return `<div class="member-meter-row"><div class="member-meter-label"><span>${label}</span><b>${v.toFixed(0)}%</b></div><div class="member-meter-track"><span style="width:${v}%"></span></div></div>`};$('academicProgress').innerHTML=`<div class="member-progress-count"><b>${ac.length} active academic mission(s)</b><span>Approved daily report averages</span></div><div class="member-meter-list">${meter('Session Attendance',p.sess)}${meter('Revision Completion',p.rev)}${meter('English Practice',p.eng)}${meter('Daily Target Completion',p.tar)}</div>`;$('characterProgress').innerHTML=`<div class="member-progress-count"><b>${ch.length} active character / routine mission(s)</b><span>Daily routine averages from approved reports</span></div><div class="member-routine-kpis"><div class="member-routine-kpi study"><small>AVERAGE STUDY HOURS</small><strong>${mins(p.study)}</strong><span>Recorded study time</span></div><div class="member-routine-kpi screen"><small>AVERAGE SCREEN TIME</small><strong>${mins(p.screen)}</strong><span>Recorded screen time</span></div><div class="member-routine-kpi focus"><small>BETTER-WORK ROUTINE</small><strong>${p.better.toFixed(0)}%</strong><span>Positive routine records</span></div></div><div class="member-meter-list routine-meter">${meter('Better-work Consistency',p.better)}</div>`;let todays=targets.filter(x=>x.target_date===today()).slice(0,3);$('todayTargets').innerHTML=`<div class="daily-target-panel"><div class="daily-target-heading"><b>Today's 3 Targets</b><span class="badge">${todays.length}/3 assigned</span></div><div class="daily-target-grid">${[0,1,2].map(i=>todays[i]?`<div class="daily-target-card"><span class="target-number">0${i+1}</span><b>${esc(todays[i].title)}</b><p>${esc(todays[i].details||'')}</p><span class="notice-tag">${esc(todays[i].priority||'Normal')}</span></div>`:`<div class="daily-target-card empty"><span class="target-number">0${i+1}</span><b>Awaiting target</b><p>Admin has not assigned this target yet.</p></div>`).join('')}</div></div>`;$('memberNotices').innerHTML=renderNoticeCards(notices,D.profiles||[],'member');$('memberDailyHistory').innerHTML=reports.slice(0,10).map(x=>`<p><b>${esc(x.report_date)}</b> · <span class="badge ${x.status==='Approved'?'ok':x.status==='Returned'?'bad':'warn'}">${x.status}</span>${x.score!=null?' · '+x.score+'/10':''}<br><span class="muted">${esc(x.admin_remark||'')}</span></p>`).join('')||'No reports yet.';$('memberTestHistory').innerHTML=tests.map(x=>`<p><b>${esc(x.test_type)} · ${esc(x.subject)}</b><br>${esc(x.test_name)} — ${x.marks_obtained}/${x.total_marks}</p>`).join('')||'No tests yet.';let existing=reports.find(x=>x.report_date===today());$('dailyForm').classList.toggle('hidden',!!existing&&existing.status!=='Returned');$('dailyMsg').textContent=existing?`Today's report is ${existing.status}. ${existing.status==='Returned'?'You may correct and resubmit it.':'Approved reports stay locked; submitted reports await Admin review.'}`:'';if($('memberReportMonth')&&!$('memberReportMonth').value)$('memberReportMonth').value=month();renderCurrentMemberReport()}
+document.querySelectorAll('[data-memperiod]').forEach(b=>b.onclick=()=>{memberPeriod=b.dataset.memperiod;document.querySelectorAll('[data-memperiod]').forEach(x=>x.classList.toggle('active',x===b));renderCurrentMemberReport()});
+$('memberApplyRange')?.addEventListener('click',renderCurrentMemberReport);
+$('memberReportMonth')?.addEventListener('change',renderCurrentMemberReport);
+$('memberReportFrom')?.addEventListener('change',renderCurrentMemberReport);
+$('memberReportTo')?.addEventListener('change',renderCurrentMemberReport);
 $('dailyForm').onsubmit=async e=>{e.preventDefault();let done=Number($('rTargetsDone').value),row={member_id:currentMember,report_date:today(),session_1:$('rS1').checked,session_2:$('rS2').checked,session_3:$('rS3').checked,revision_done:$('rRevision').value==='true',english_practice:$('rEnglish').value==='true',study_minutes:Math.round(Number($('rStudy').value)*60),screen_minutes:Math.round(Number($('rScreen').value)*60),targets_completed:done,target_status:done===3?'Completed':done>0?'Partial':'Not completed',better_work:$('rBetter').value==='true',better_work_note:$('rBetterNote').value.trim(),reflection:$('rReflection').value,status:'Submitted'},existing=D.reports.find(x=>x.report_date===today()&&x.status==='Returned'),q=existing?sb.from('member_daily_reports').update(row).eq('id',existing.id).eq('status','Returned'):sb.from('member_daily_reports').insert(row),res=await q;if(res.error)return $('dailyMsg').textContent='Could not submit: '+res.error.message;$('dailyMsg').textContent='Submitted for Admin review.';await loadMember(currentMember)};
 ['attDate','fpDate','smDate','mtDate','miStart','taDate'].forEach(id=>$(id).value=today());
 if($('progressMonth'))$('progressMonth').value=month();$('feeMonth').value=month();$('fpMonth').value=month();
