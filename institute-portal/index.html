@@ -1363,7 +1363,7 @@ function memberCardMarkup(m){
  const photo=m.photo_url||'';
  const photoHtml=photo?`<img class="idcard-photo" src="${esc(photo)}" alt="Member photo">`:`<div class="idcard-photo" style="display:grid;place-items:center;color:#7b3157;font-size:9px;font-weight:900">PHOTO</div>`;
  const front=`<article class="rl-idcard idcard-front"><div class="idcard-brand"><img src="logo.png" alt="RL-33"><div><strong>RL-33</strong><small>MEMBER MISSION CENTRE</small><em>ESTABLISHED 2024</em></div></div><div class="idcard-motto">ONE MISSION · NINE SOULS · ONE LEGACY</div>${photoHtml}<div class="idcard-name">${esc(m.full_name||'Member')}</div><div class="idcard-designation">${esc(m.designation||m.position||'Member')}</div><div class="idcard-id"><small>MEMBER ID</small><b>${esc(m.id)}</b></div><div class="idcard-front-meta"><div><small>SESSION</small><b>${esc(m.session||'Not recorded')}</b></div><div><small>AIM</small><b>${esc(m.aim||'Not recorded')}</b></div></div><div class="idcard-footer">OFFICIAL RL-33 MEMBER IDENTITY</div></article>`;
- const back=`<article class="rl-idcard idcard-back"><div class="idcard-brand"><img src="logo.png" alt="RL-33"><div><strong>RL-33</strong><small>MEMBER MISSION RECORD</small></div></div><div class="idcard-back-title">Mission Identity</div><div class="idcard-back-sub">SECOND ANNIVERSARY · 2026</div><div class="idcard-back-item"><small>JOINING DATE</small><b>${esc(m.joining_date||'Not recorded')}</b></div><div class="idcard-back-item"><small>RESPONSIBILITY</small><b>${esc(m.responsibility||'Not recorded')}</b></div><div class="idcard-back-item"><small>ASSIGNED MISSIONS</small><b>${esc(missionText)}</b></div><div class="idcard-back-item"><small>INSPIRED BY</small><b>${esc(m.inspired_by||'Not recorded')}</b></div><div class="idcard-back-item"><small>DEVOTEE OF</small><b>${esc(m.devotee_of||'Not recorded')}</b></div><div class="idcard-back-item"><small>DREAM</small><b>${esc(m.dream||'Not recorded')}</b></div><div class="idcard-back-item"><small>WHY / PURPOSE</small><b>${esc(m.why||'Not recorded')}</b></div><div class="idcard-qr-placeholder">QR<br>SPACE</div><div class="idcard-signature"><i></i><small>AUTHORISED SIGNATURE</small></div></article>`;
+ const back=`<article class="rl-idcard idcard-back"><div class="idcard-brand"><img src="logo.png" alt="RL-33"><div><strong>RL-33</strong><small>MEMBER MISSION RECORD</small></div></div><div class="idcard-back-title">Mission Identity</div><div class="idcard-back-sub">SECOND ANNIVERSARY · 2026</div><div class="idcard-back-item"><small>JOINING DATE</small><b>${esc(m.joining_date||'Not recorded')}</b></div><div class="idcard-back-item"><small>RESPONSIBILITY</small><b>${esc(m.responsibility||'Not recorded')}</b></div><div class="idcard-back-item"><small>ASSIGNED MISSIONS</small><b>${esc(missionText)}</b></div><div class="idcard-back-item"><small>INSPIRED BY</small><b>${esc(m.inspired_by||'Not recorded')}</b></div><div class="idcard-back-item"><small>DEVOTEE OF</small><b>${esc(m.devotee_of||'Not recorded')}</b></div><div class="idcard-back-item"><small>DREAM</small><b>${esc(m.dream||'Not recorded')}</b></div><div class="idcard-back-item"><small>WHY / PURPOSE</small><b>${esc(m.why||'Not recorded')}</b></div><div class="idcard-signature idcard-captain-signature"><img src="sign.png" alt="Captain Signature" onerror="this.style.display='none'"><small>CAPTAIN · RL-33</small></div></article>`;
  return front+back;
 }
 function openMemberCard(){const m=D.members.find(x=>String(x.id)===String(currentMember));if(!m)return toast('Member record not loaded');$('idCardPrintArea').innerHTML=memberCardMarkup(m);openModal('memberCardModal');}
@@ -1438,10 +1438,12 @@ function reportRange(period,rangeOverride=null){
   let now=new Date(),start,end;
   if(rangeOverride){
     if(rangeOverride.type==='monthly'){
-      const v=rangeOverride.month;
-      if(!/^\d{4}-\d{2}$/.test(v||''))return null;
-      const a=v.split('-').map(Number);
-      start=new Date(a[0],a[1]-1,1);end=new Date(a[0],a[1],0);
+      const v=String(rangeOverride.month||$('memberReportMonth')?.value||$('progressMonth')?.value||month()).trim();
+      const match=v.match(/^(\d{4})-(0[1-9]|1[0-2])$/);
+      if(!match)return null;
+      const year=Number(match[1]),monthNumber=Number(match[2]);
+      start=new Date(year,monthNumber-1,1,0,0,0,0);
+      end=new Date(year,monthNumber,0,23,59,59,999);
     }else if(rangeOverride.type==='custom'){
       const f=rangeOverride.from,t=rangeOverride.to;
       if(!f||!t||f>t)return null;
@@ -1600,7 +1602,6 @@ function renderProgressInto(id,target,period='all',rangeOverride=null){
 
     <div class="rl-member-profile-print">
       <div class="rl-profile-print-heading"><span>01</span><div><b>OFFICIAL MEMBER PROFILE</b><small>Identity, career direction and personal mission</small></div></div>
-      ${m.photo_url?`<div class="rl-profile-photo-wrap"><img src="${esc(m.photo_url)}" alt="Member photograph" onerror="this.parentElement.style.display='none'"></div>`:''}
       <div class="rl-profile-print-grid">
         <div><small>MEMBER NAME</small><b>${esc(m.full_name||'—')}</b></div>
         <div><small>MEMBER ID</small><b>${esc(m.id||'—')}</b></div>
@@ -1679,7 +1680,7 @@ function renderProgressInto(id,target,period='all',rangeOverride=null){
     </div>
     <div class="rl-report-footer">
       <div><b>RL-33 CENTRAL MANAGEMENT</b><span>Official member progress record · Generated from approved entries</span></div>
-      <div class="rl-signature"><span>Authorised Signature</span><i></i></div>
+      <div class="rl-signature"><img src="sign.png" alt="Captain Signature" onerror="this.style.display='none'"><span>CAPTAIN · RL-33</span></div>
     </div>`;
 }
 
@@ -1708,7 +1709,10 @@ async function loadStudent(id){
 
 let memberPeriod='weekly';
 function memberReportRange(){
-  if(memberPeriod==='monthly')return {type:'monthly',month:$('memberReportMonth')?.value||month()};
+  if(memberPeriod==='monthly'){
+    const selected=String($('memberReportMonth')?.value||'').trim();
+    return {type:'monthly',month:/^\d{4}-(0[1-9]|1[0-2])$/.test(selected)?selected:month()};
+  }
   if(memberPeriod==='custom')return {type:'custom',from:$('memberReportFrom')?.value,to:$('memberReportTo')?.value};
   return {type:memberPeriod};
 }
@@ -1780,4 +1784,134 @@ document.addEventListener('DOMContentLoaded',()=>{const memberContactPanel=$('me
     document.querySelectorAll('[data-drawer="'+a.getAttribute('data-drawer-link')+'"]').forEach(x=>{x.setAttribute('aria-expanded','false');x.textContent='☰';});
   }));
 });
-</script></body></html>
+</script>
+<style id="rl33-final-finishing-2026">
+/* RL-33 member dashboard finishing */
+#memberPortal .member-profile-panel{
+  overflow:hidden;border:1px solid #dfc58d;border-radius:26px;
+  background:linear-gradient(145deg,#fffdfb 0%,#fff7f2 55%,#f9edf1 100%);
+  box-shadow:0 18px 44px rgba(53,19,38,.10)
+}
+#memberPortal .member-profile-heading{
+  background:radial-gradient(circle at 8% 15%,rgba(239,211,157,.22),transparent 28%),
+    linear-gradient(112deg,#351326 0%,#642344 58%,#a45b68 100%);
+  padding:28px 30px;min-height:164px
+}
+#memberPortal .member-profile-person{align-items:center;gap:22px}
+#memberPortal .member-profile-avatar-wrap{
+  flex:0 0 116px;width:116px;height:116px;display:grid;place-items:center;
+  padding:4px;border-radius:50%;background:linear-gradient(135deg,#f6dfa8,#b9853e);
+  box-shadow:0 0 0 5px rgba(242,219,169,.17)
+}
+#memberPortal .member-profile-avatar{
+  display:block!important;width:108px;height:108px;object-fit:cover;object-position:center 25%;
+  border:3px solid #fff8e9;border-radius:50%;background:#fff
+}
+#memberPortal .member-profile-seal{right:-4px;bottom:2px}
+#memberPortal .member-profile-details-wrap{padding:26px 28px 30px}
+#memberPortal .member-profile-section-title b{font-size:22px}
+#memberPortal .member-detail-grid{gap:13px}
+#memberPortal .member-detail-item{
+  min-width:0;padding:17px 18px;border:1px solid #eadde0;border-left:4px solid #c49a55;
+  border-radius:15px;background:linear-gradient(145deg,#fff,#fff8f5);
+  box-shadow:0 7px 18px rgba(53,19,38,.045)
+}
+#memberPortal .member-detail-item:nth-child(3n+2){border-left-color:#b66b87;background:linear-gradient(145deg,#fff,#fbf1f5)}
+#memberPortal .member-detail-item:nth-child(3n){border-left-color:#8c6c9d;background:linear-gradient(145deg,#fff,#f7f2fa)}
+#memberPortal .member-detail-item b{font-size:15px;line-height:1.45;overflow-wrap:anywhere;word-break:normal}
+#memberPortal .member-profile-title h1{line-height:1.12}
+@media(max-width:650px){
+  #memberPortal .member-profile-heading{padding:20px 17px;align-items:flex-start;flex-direction:column}
+  #memberPortal .member-profile-person{gap:15px}
+  #memberPortal .member-profile-avatar-wrap{flex-basis:88px;width:88px;height:88px}
+  #memberPortal .member-profile-avatar{width:80px;height:80px}
+  #memberPortal .member-profile-details-wrap{padding:20px 16px}
+  #memberPortal .member-detail-grid{grid-template-columns:1fr}
+}
+/* ID card: fill the visual space with a stronger identity hierarchy */
+.rl-idcard{padding:18px 16px 15px}
+.idcard-brand{gap:10px;padding-bottom:11px}
+.idcard-brand img{width:44px;height:44px;flex:0 0 44px}
+.idcard-brand strong{font-size:19px}
+.idcard-motto{margin:11px 0 10px;font-size:7.5px}
+.idcard-photo{width:112px;height:124px;object-fit:cover;object-position:center 25%;border-width:3px}
+.idcard-name{font-size:21px;margin:10px 0 4px}
+.idcard-designation{font-size:9px;letter-spacing:.14em}
+.idcard-id{margin-top:7px}
+.idcard-front-meta{margin-top:auto;gap:8px}
+.idcard-front-meta>div{min-width:0;padding:9px 8px;border-radius:10px}
+.idcard-front-meta b{overflow-wrap:anywhere;line-height:1.3}
+.idcard-back{gap:7px}
+.idcard-back-item{min-height:43px;padding:8px 10px;display:flex;flex-direction:column;justify-content:center;gap:4px;overflow:hidden}
+.idcard-back-item b{font-size:9px;line-height:1.35;overflow-wrap:anywhere;word-break:break-word}
+.idcard-qr-placeholder{display:none!important}
+.idcard-signature.idcard-captain-signature{
+  margin:8px auto 0;width:76%;min-height:43px;padding:5px 10px 4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px solid rgba(230,201,130,.8);border-radius:7px;background:rgba(255,250,242,.96);
+  overflow:hidden
+}
+.idcard-captain-signature img{display:block;width:100%;height:27px;object-fit:contain;object-position:center}
+.idcard-captain-signature small{font-size:6px!important;line-height:1.2;color:#5b2741!important;letter-spacing:.12em}
+.rl-signature{min-width:180px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px}
+.rl-signature img{display:block;width:54mm;height:17mm;object-fit:contain;object-position:center;background:transparent}
+.rl-signature span{font-size:8px;font-weight:800;letter-spacing:.12em;color:#69465a}
+.rl-profile-photo-wrap{display:none!important}
+/* A4 report print: remove the large first-page gap and reserve a clean repeating masthead zone */
+@page{size:A4 portrait;margin:25mm 12mm 15mm}
+@media print{
+  html,body{width:210mm!important;min-height:0!important;background:#fff!important}
+  body.member-report-print #memberPortal .portal-top,
+  body.member-report-print #memberPortal .portal-identity,
+  body.member-report-print #memberPortal .member-profile-panel,
+  body.member-report-print #memberPortal .member-average-panel,
+  body.member-report-print #memberPortal .member-progress-grid,
+  body.member-report-print #memberPortal .grid2,
+  body.member-report-print #memberPortal .portal-contact{display:none!important}
+  body.member-report-print #memberPortal,
+  body.member-report-print #memberPortal .portal-wrap,
+  body.member-report-print #memberPortal #memberReportsSection,
+  body.member-report-print #memberPortal #memberPrintable{
+    display:block!important;position:static!important;inset:auto!important;
+    width:100%!important;max-width:none!important;margin:0!important;padding:0!important;
+    border:0!important;border-radius:0!important;box-shadow:none!important;
+    background:#fff!important;overflow:visible!important
+  }
+  body.member-report-print #memberPortal #memberReportsSection .section-head,
+  body.member-report-print #memberPortal .report-tabs,
+  body.member-report-print #memberPortal .member-report-filters{display:none!important}
+  body.member-report-print .rl-print-masthead{
+    display:flex!important;position:fixed!important;top:-21mm!important;left:0!important;right:0!important;
+    height:18mm!important;box-sizing:border-box!important;align-items:center!important;gap:3mm!important;
+    padding:0 0 2mm!important;margin:0!important;border-bottom:1.2px solid #b9974d!important;
+    background:#fff!important;z-index:99999!important
+  }
+  body.member-report-print .rl-print-masthead img{display:block!important;width:14mm!important;height:14mm!important;object-fit:contain!important}
+  body.member-report-print .rl-print-masthead strong{font:700 16px Georgia,serif!important;color:#351326!important}
+  body.member-report-print .rl-print-masthead span,
+  body.member-report-print .rl-print-masthead small{font-size:6.5px!important;line-height:1.25!important}
+  body.member-report-print .rl-report-hero{margin:0 0 5mm!important;break-inside:avoid!important}
+  body.member-report-print .rl-member-profile-print{margin:0 0 5mm!important;padding:4mm!important;break-inside:avoid!important}
+  body.member-report-print .rl-profile-print-grid{gap:2mm!important}
+  body.member-report-print .rl-profile-print-grid>div{padding:2.2mm!important}
+  body.member-report-print .rl-report-kpis{margin:0 0 4mm!important}
+  body.member-report-print .rl-report-kpi,
+  body.member-report-print .rl-report-chart,
+  body.member-report-print .rl-report-section,
+  body.member-report-print .report-summary,
+  body.member-report-print .academic-box,
+  body.member-report-print .character-box{break-inside:avoid!important}
+  body.member-report-print .rl-report-footer{margin-top:5mm!important;break-inside:avoid!important}
+  body.member-report-print .rl-signature img{width:48mm!important;height:15mm!important}
+  body.member-report-print .tablewrap{overflow:visible!important}
+  body.member-report-print table{width:100%!important;table-layout:fixed!important}
+  body.member-report-print th,body.member-report-print td{font-size:7.5px!important;padding:4px 3px!important;white-space:normal!important;overflow-wrap:anywhere!important}
+  body.member-report-print .rl-report-hero,
+  body.member-report-print .rl-report-kpis,
+  body.member-report-print .rl-member-profile-print{break-after:auto!important;page-break-after:auto!important}
+  body.print-idcard-mode #idCardPrintArea{display:flex!important;position:absolute!important;left:0!important;top:0!important;width:100%!important;justify-content:center!important;align-items:flex-start!important;gap:10mm!important;padding:0!important}
+  body.print-idcard-mode .rl-idcard{width:54mm!important;height:86mm!important;flex:0 0 54mm!important;max-width:54mm!important;padding:3.5mm!important;box-shadow:none!important;overflow:hidden!important;break-inside:avoid!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}
+}
+</style>
+
+</body></html>
