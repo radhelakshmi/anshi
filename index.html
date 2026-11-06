@@ -520,6 +520,53 @@ footer p{font-family:var(--body);color:#d8c3ca}
 @media(max-width:390px){.portal-grid{grid-template-columns:1fr}.portal-card{min-height:205px}.brand{font-size:1.2rem}.hero h1{font-size:3.9rem}.side-feature-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
+
+/* ===== RL-33 CENTRAL PUBLIC INFORMATION PORTAL ===== */
+.public-portal{padding:76px 0 70px;background:radial-gradient(circle at 8% 8%,rgba(232,168,187,.16),transparent 25%),radial-gradient(circle at 92% 85%,rgba(197,154,85,.13),transparent 25%),linear-gradient(180deg,#fff9fa,#fffdfa);border-top:1px solid #eadde0;border-bottom:1px solid #eadde0}
+.public-portal-heading{text-align:center;max-width:780px;margin:0 auto 34px}
+.public-kicker{font-size:.65rem;letter-spacing:2.5px;font-weight:900;color:#a16b3c}
+.public-portal-heading h2,.public-info-panel h2{font:700 clamp(2.1rem,4.5vw,3.25rem)/1.05 var(--heading,Georgia,serif);color:#54172f;margin:9px 0}
+.public-portal-heading p,.public-info-panel>p{font-size:.88rem;line-height:1.85;color:#82717a}
+.public-portal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.public-portal-card{position:relative;display:flex;flex-direction:column;min-height:220px;padding:23px;border:1px solid #ead7dd;border-radius:20px;background:linear-gradient(150deg,#fffdfa,#fff3f6);box-shadow:0 12px 32px rgba(65,17,38,.065);transition:.22s}
+.public-portal-card:hover{transform:translateY(-5px);border-color:#d7adba;box-shadow:0 18px 40px rgba(65,17,38,.12)}
+.public-portal-card>span{font-size:.6rem;letter-spacing:2px;color:#9a713b;font-weight:900}
+.public-portal-card>b{display:grid;place-items:center;width:43px;height:43px;margin:16px 0 10px;border:1px solid #ead2d9;border-radius:13px;background:#fff7f8;color:#8b3152;font-size:1.3rem}
+.public-portal-card h3{font:700 1.4rem var(--heading,Georgia,serif);color:#54172f}
+.public-portal-card p{font-size:.77rem;color:#82717a;line-height:1.65;margin:6px 0 15px}
+.public-portal-card em{margin-top:auto;color:#9a713b;font-style:normal;font-size:.61rem;font-weight:900;letter-spacing:1px}
+.public-privacy-note{display:flex;gap:14px;align-items:flex-start;margin-top:22px;padding:17px 19px;border:1px solid #ead9c1;border-radius:15px;background:linear-gradient(120deg,#fffaf0,#fffdfa);color:#6d5b4d}
+.public-privacy-note strong{flex:none;font-size:.64rem;letter-spacing:1.2px;color:#8d652e}
+.public-privacy-note span{font-size:.76rem;line-height:1.65}
+.public-info-section{padding:30px 0;background:#fffdfa}
+.public-info-alt{background:linear-gradient(180deg,#fbf3f4,#fffdfa)}
+.public-info-panel{padding:30px;border:1px solid #eadde0;border-radius:22px;background:linear-gradient(145deg,#fffdfa,#fff7f7);box-shadow:0 12px 34px rgba(65,17,38,.055)}
+.public-info-panel h2{font-size:clamp(1.9rem,4vw,2.7rem)}
+.public-motto{margin-top:19px;padding:18px;text-align:center;border:1px solid rgba(197,154,85,.38);border-radius:14px;background:linear-gradient(120deg,#35101f,#702442);color:#f0d9a7;font:700 clamp(.8rem,2vw,1.2rem) var(--body,Arial,sans-serif);letter-spacing:1.6px}
+.public-motto i{font-style:normal;color:#fff}
+.public-overview-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.public-overview-tags span{padding:7px 10px;border:1px solid #ead9c1;border-radius:999px;background:#fffaf2;color:#765b37;font-size:.68rem;font-weight:800}
+.public-schedule-placeholder{display:flex;align-items:center;gap:13px;margin-top:20px;padding:17px;border:1px solid #ead9c1;border-radius:15px;background:#fffaf1}
+.public-status-dot{width:10px;height:10px;flex:none;border-radius:50%;background:#c59a55;box-shadow:0 0 0 5px rgba(197,154,85,.12)}
+.public-schedule-placeholder div{flex:1}
+.public-schedule-placeholder strong,.public-schedule-placeholder small{display:block}
+.public-schedule-placeholder strong{font-size:.84rem;color:#54172f}
+.public-schedule-placeholder small{font-size:.7rem;color:#82717a;margin-top:3px}
+.public-schedule-placeholder a,.public-action-link{color:#956b37;font-size:.65rem;font-weight:900;letter-spacing:.7px}
+.public-empty-state{display:grid;justify-items:center;gap:5px;margin-top:20px;padding:25px;border:1px dashed #d9bdc5;border-radius:16px;background:rgba(255,255,255,.65);text-align:center}
+.public-empty-state>span{font-size:1.7rem;color:#b88b54}
+.public-empty-state strong{font-size:.82rem;color:#54172f}
+.public-empty-state small,.public-small-note{font-size:.7rem;color:#82717a}
+.public-action-link{display:inline-block;margin-top:17px;padding:12px 15px;border:1px solid #e5d3bb;border-radius:10px;background:#fff9ed}
+.public-anchor{display:block;position:relative;top:-90px;visibility:hidden}
+.rl33-signature-box{width:min(310px,100%);min-height:145px;margin:22px 0 24px auto;padding:13px 18px 14px;border:1.5px solid #c59a55;border-radius:5px;background:linear-gradient(145deg,#35101f,#54172f);box-shadow:0 8px 22px rgba(65,17,38,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.rl33-signature-box .signature-caption{align-self:flex-start;color:#e6c68a;font-size:.55rem;font-weight:900;letter-spacing:1.8px}
+.rl33-signature-box img{width:min(220px,90%);height:62px;object-fit:contain;margin:3px auto 0;filter:brightness(0) invert(1)}
+.rl33-signature-box strong{font:700 1rem var(--heading,Georgia,serif);color:#fff}
+.rl33-signature-box span{font-size:.62rem;letter-spacing:1.1px;color:#f0d9a7;font-weight:800}
+@media(max-width:800px){.public-portal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.public-portal{padding:56px 0}.public-info-panel{padding:23px}}
+@media(max-width:560px){.public-portal-grid{grid-template-columns:1fr}.public-portal-card{min-height:185px;padding:19px}.public-privacy-note{display:block}.public-privacy-note span{display:block;margin-top:7px}.public-schedule-placeholder{align-items:flex-start;flex-wrap:wrap}.public-schedule-placeholder a{margin-left:23px}.rl33-signature-box{margin:20px auto 24px}}
+
 </style>
 </head>
 
@@ -556,6 +603,12 @@ footer p{font-family:var(--body);color:#d8c3ca}
     </div>
     <div class="side-divider"></div>
     <div class="side-links">
+      <a href="#public-portal">Central Information Portal <span>→</span></a>
+      <a href="#overview">RL-33 Overview <span>→</span></a>
+      <a href="#examination-branch">Examination Branch <span>→</span></a>
+      <a href="#event-branch">Event Branch <span>→</span></a>
+      <a href="#member-directory">Member Directory <span>→</span></a>
+      <a href="#notice-board">Notice Board <span>→</span></a>
       <a href="#anniversary">Anniversary 2026 <span>→</span></a>
       <a href="#mission">New Mission <span>→</span></a>
       <a href="#architecture">Mission Architecture <span>→</span></a>
@@ -595,6 +648,73 @@ footer p{font-family:var(--body);color:#d8c3ca}
     </div>
   </div>
 </header>
+
+<!-- RL-33 CENTRAL INFORMATION & PUBLIC PORTAL -->
+<section class="public-portal" id="public-portal">
+  <div class="container">
+    <div class="public-portal-heading reveal">
+      <div class="public-kicker">THE OFFICIAL PUBLIC INFORMATION HUB</div>
+      <h2>RL-33 Central Information Portal</h2>
+      <p>One central place for RL-33's public information, official examinations, events, approved member profiles and announcements.</p>
+    </div>
+    <div class="public-portal-grid">
+      <a class="public-portal-card" href="#overview"><span>01</span><b>✦</b><h3>RL-33 Overview</h3><p>Mission, introduction, vision and official motto.</p><em>EXPLORE OVERVIEW →</em></a>
+      <a class="public-portal-card" href="#examination-branch"><span>02</span><b>▤</b><h3>Examination Branch</h3><p>Public RL-33 examination announcements and date sheets.</p><em>VIEW EXAMINATIONS →</em></a>
+      <a class="public-portal-card" href="#event-branch"><span>03</span><b>◇</b><h3>Event Branch</h3><p>Official upcoming events, dates, timings and venues.</p><em>VIEW EVENTS →</em></a>
+      <a class="public-portal-card" href="#member-directory"><span>04</span><b>♙</b><h3>Member Directory</h3><p>Approved member profiles and public introductions.</p><em>MEET THE MEMBERS →</em></a>
+      <a class="public-portal-card" href="#notice-board"><span>05</span><b>▣</b><h3>Notice Board</h3><p>Official announcements, circulars and public updates.</p><em>READ NOTICES →</em></a>
+      <a class="public-portal-card" href="#contact"><span>06</span><b>✉</b><h3>Contact / Administration</h3><p>Central administration and official contact information.</p><em>CONTACT RL-33 →</em></a>
+    </div>
+    <div class="public-privacy-note"><strong>PUBLIC INFORMATION POLICY</strong><span>This website displays public information only. Private member examination schedules, personal records and administrative controls are not published here.</span></div>
+  </div>
+</section>
+
+<section class="public-info-section" id="overview">
+  <div class="container public-info-panel reveal">
+    <div class="public-kicker">01 · ABOUT THE ORGANISATION</div>
+    <h2>RL-33 Overview</h2>
+    <p>RL-33 is a mission-driven group established in 2024, built around learning, discipline, character, leadership, service and a shared legacy.</p>
+    <div class="public-motto">ONE MISSION <i>•</i> NINE SOULS <i>•</i> ONE LEGACY</div>
+    <div class="public-overview-tags"><span>Established 2024</span><span>Mission LP-2030</span><span>Knowledge</span><span>Discipline</span><span>Character</span><span>Leadership</span><span>Service</span></div>
+  </div>
+</section>
+
+<section class="public-info-section public-info-alt" id="examination-branch">
+  <div class="container">
+    <div class="public-info-panel reveal">
+      <div class="public-kicker">02 · PUBLIC ACADEMIC UPDATES</div>
+      <h2>RL-33 Examination Branch</h2>
+      <p>Publicly announced RL-33 examinations and common date sheets will be displayed here. Personal or member-specific schedules remain private.</p>
+      <div class="public-schedule-placeholder"><span class="public-status-dot"></span><div><strong>Public Examination Schedule</strong><small>For the currently published Annual Examination date sheet, open the official notice below.</small></div><a href="#notice-board">VIEW DATE SHEET →</a></div>
+      <p class="public-small-note">No additional public examination schedule has been announced in this page version.</p>
+    </div>
+  </div>
+</section>
+
+<section class="public-info-section" id="event-branch">
+  <div class="container">
+    <div class="public-info-panel reveal">
+      <div class="public-kicker">03 · OFFICIAL PROGRAMMES</div>
+      <h2>RL-33 Event Branch</h2>
+      <p>Upcoming public events, official programmes, event dates, reporting times and venues will be published in this section after confirmation by the administration.</p>
+      <div class="public-empty-state"><span>◇</span><strong>No upcoming public event has been published yet.</strong><small>Please refer to the official Notice Board for confirmed announcements.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="public-info-section public-info-alt" id="member-directory">
+  <div class="container">
+    <div class="public-info-panel reveal">
+      <div class="public-kicker">04 · APPROVED PUBLIC PROFILES</div>
+      <h2>RL-33 Member Directory</h2>
+      <p>Explore the approved public introductions of RL-33 members. Only information cleared for public display is included.</p>
+      <a class="public-action-link" href="#members">EXPLORE APPROVED MEMBER PROFILES →</a>
+      <p class="public-small-note">Private contact details, personal records and individual schedules are not displayed in the public directory.</p>
+    </div>
+  </div>
+</section>
+
+
 
 
 <section class="portal-section" id="main-services">
@@ -866,7 +986,7 @@ footer p{font-family:var(--body);color:#d8c3ca}
 </section>
 
 
-<section class="notice-section" id="notifications">
+<section class="notice-section" id="notifications"><span id="notice-board" class="public-anchor"></span>
   <div class="container">
     <div class="section-head reveal" style="margin-bottom:18px">
       <div class="kicker">RL-33 Studios • Official Notices</div>
@@ -1067,6 +1187,12 @@ footer p{font-family:var(--body);color:#d8c3ca}
       <tr><td>08 February</td><td>—</td><td>Physical Education</td><td>Complete Syllabus</td></tr>
       <tr><td>10 February</td><td>—</td><td>Geography</td><td>Complete Syllabus</td></tr>
       </tbody></table>
+      <div class="rl33-signature-box" aria-label="Official signature of Captain RL-33">
+        <div class="signature-caption">AUTHORISED SIGNATURE</div>
+        <img src="assets/sign.png" alt="Signature of Lakshmi Gupta" loading="lazy">
+        <strong>Lakshmi Gupta</strong>
+        <span>Captain · RL-33</span>
+      </div>
       <h3>Examination Timing</h3><p><strong>Examination Time:</strong> 10:00 AM – 1:00 PM<br><strong>Venue:</strong> RL-33 Studios, Dwarka</p>
       <h3>Important Examination Rules</h3>
       <ol style="padding-left:22px"><li>Report before the scheduled examination time.</li><li>Carry required stationery and examination materials.</li><li>Follow the prescribed CBSE syllabus and paper pattern.</li><li>Each paper covers the complete syllabus of the respective subject.</li><li>Follow instructions of the examination coordinator/invigilator.</li><li>Mobile phones and unauthorised electronic devices are not permitted.</li><li>Maintain discipline and silence inside the examination hall.</li><li>No unfair means or unauthorised material is permitted.</li><li>Manage time carefully and attempt questions according to the prescribed pattern.</li><li>Revise the complete syllabus, important concepts, competency-based questions and previous examination trends.</li><li>Any required schedule change will be communicated officially by RL-33 management.</li><li>All members are expected to maintain RL-33's academic standards.</li></ol>
