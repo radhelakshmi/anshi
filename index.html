@@ -567,6 +567,37 @@ footer p{font-family:var(--body);color:#d8c3ca}
 @media(max-width:800px){.public-portal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.public-portal{padding:56px 0}.public-info-panel{padding:23px}}
 @media(max-width:560px){.public-portal-grid{grid-template-columns:1fr}.public-portal-card{min-height:185px;padding:19px}.public-privacy-note{display:block}.public-privacy-note span{display:block;margin-top:7px}.public-schedule-placeholder{align-items:flex-start;flex-wrap:wrap}.public-schedule-placeholder a{margin-left:23px}.rl33-signature-box{margin:20px auto 24px}}
 
+
+/* RL-33 Quick Access: Events, Timeline & Official Signature */
+.rl33-command-strip{padding:28px 0 34px;background:linear-gradient(180deg,#fff9fa,#fffdf8);border-bottom:1px solid #ead9df}
+.rl33-command-wrap{background:#fff;border:1px solid #ead7dd;border-radius:22px;padding:22px;box-shadow:0 14px 38px rgba(65,17,38,.08)}
+.rl33-command-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:17px}
+.rl33-command-head .kicker{font-size:.64rem;letter-spacing:2px;color:#9a713b;font-weight:900}
+.rl33-command-head h2{font:700 clamp(1.45rem,3vw,2rem) Georgia,serif;color:#54172f;margin-top:4px}
+.rl33-command-head p{font-size:.75rem;color:#82717a;max-width:420px}
+.rl33-event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rl33-event-card{padding:16px;border:1px solid #eadce0;border-radius:15px;background:linear-gradient(145deg,#fffdfa,#fff5f7);min-width:0}
+.rl33-event-card .event-label{font-size:.58rem;letter-spacing:1.5px;color:#9a713b;font-weight:900}
+.rl33-event-card h3{font:700 1.08rem Georgia,serif;color:#54172f;margin:7px 0}
+.rl33-event-card p{font-size:.76rem;color:#82717a;line-height:1.6}
+.rl33-event-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.rl33-event-meta span{font-size:.65rem;font-weight:800;color:#6d542b;background:#fff;border:1px solid #eadcc2;border-radius:999px;padding:5px 8px}
+.rl33-lower-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin-top:14px;align-items:stretch}
+.rl33-mini-timeline{border:1px solid #eadce0;border-radius:15px;padding:17px;background:#fff}
+.rl33-mini-timeline h3{font:700 1.12rem Georgia,serif;color:#54172f;margin-bottom:12px}
+.rl33-timeline-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.rl33-timeline-point{border-top:2px solid #c89a55;padding:9px 7px 0;position:relative}
+.rl33-timeline-point:before{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#c89a55;top:-5px;left:7px}
+.rl33-timeline-point b{display:block;color:#8a641d;font:700 .8rem Georgia,serif}
+.rl33-timeline-point span{display:block;color:#6f6068;font-size:.66rem;line-height:1.45;margin-top:4px}
+.rl33-signature-panel{border:1.5px solid #c59a55;border-radius:15px;background:linear-gradient(145deg,#35101f,#54172f);padding:15px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:150px}
+.rl33-signature-panel small{font-size:.55rem;letter-spacing:1.7px;color:#e6c68a;font-weight:900}
+.rl33-signature-panel img{width:min(210px,95%);height:65px;object-fit:contain;filter:brightness(0) invert(1);margin:5px auto}
+.rl33-signature-panel strong{font:700 1rem Georgia,serif;color:#fff}
+.rl33-signature-panel span{font-size:.62rem;letter-spacing:1px;color:#f0d9a7;font-weight:800}
+@media(max-width:760px){.rl33-event-grid{grid-template-columns:1fr 1fr}.rl33-lower-grid{grid-template-columns:1fr}.rl33-timeline-list{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:14px}}
+@media(max-width:480px){.rl33-command-wrap{padding:15px}.rl33-command-head{display:block}.rl33-event-grid{grid-template-columns:1fr}.rl33-timeline-list{grid-template-columns:1fr 1fr}.rl33-timeline-point span{font-size:.7rem}}
+
 </style>
 </head>
 
@@ -648,6 +679,30 @@ footer p{font-family:var(--body);color:#d8c3ca}
     </div>
   </div>
 </header>
+<!-- RL-33 QUICK ACCESS: EVENTS, TIMELINE & OFFICIAL SIGNATURE -->
+<section class="rl33-command-strip" id="rl33-command-updates">
+  <div class="container">
+    <div class="rl33-command-wrap reveal">
+      <div class="rl33-command-head"><div><div class="kicker">RL-33 · QUICK ACCESS UPDATES</div><h2>Events, Milestones & Official Updates</h2></div><p>Important public information at a glance — placed directly below the main Quick Access area.</p></div>
+      <div class="rl33-event-grid">
+        <article class="rl33-event-card"><div class="event-label">UPCOMING · ANNIVERSARY</div><h3>RL-33 Second Anniversary</h3><p>Two years of journey, dedication and evolution. Year Three launch and family celebration.</p><div class="rl33-event-meta"><span>15 November 2026</span><span>Sunday</span><span>RL-33 Studios, Dwarka</span></div></article>
+        <article class="rl33-event-card"><div class="event-label">EVENT SCHEDULE</div><h3>Spiritual Journey</h3><p>Anniversary programme at Shri Lakshmi Narayan Divya Dham, followed by return to RL-33 Studios.</p><div class="rl33-event-meta"><span>08:00 AM · Journey</span><span>02:00 PM · Return</span></div></article>
+        <article class="rl33-event-card"><div class="event-label">ANNIVERSARY PROGRAMME</div><h3>Address, Awards & Year Three</h3><p>Captain’s address, Lakshmi Chaturdarshi Award ceremony, family gathering and next-mission opening.</p><div class="rl33-event-meta"><span>15 November 2026</span><span>Detailed timings to be announced</span></div></article>
+      </div>
+      <div class="rl33-lower-grid">
+        <div class="rl33-mini-timeline"><h3>RL-33 Journey Timeline</h3><div class="rl33-timeline-list">
+          <div class="rl33-timeline-point"><b>2024</b><span>RL-33 established as an academic group</span></div>
+          <div class="rl33-timeline-point"><b>2025</b><span>Constitution and nine-member structure</span></div>
+          <div class="rl33-timeline-point"><b>2025</b><span>First anniversary and first honours</span></div>
+          <div class="rl33-timeline-point"><b>2026</b><span>Second anniversary and Year Three launch</span></div>
+          <div class="rl33-timeline-point"><b>2026–27</b><span>Year Three · The Next Mission</span></div>
+        </div></div>
+        <div class="rl33-signature-panel"><small>OFFICIAL AUTHORIZATION</small><img src="assets/sign.png" alt="Lakshmi Gupta official signature"><strong>Lakshmi Gupta</strong><span>CAPTAIN · RL-33</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- RL-33 CENTRAL INFORMATION & PUBLIC PORTAL -->
 <section class="public-portal" id="public-portal">
