@@ -1442,5 +1442,163 @@ if(menuOverlay)menuOverlay.addEventListener('click',closeSideMenu);
 sideMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeSideMenu));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSideMenu();});
 </script>
+
+<!-- RL-33 PUBLIC LIVE UPDATES: Supabase read-only connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  'use strict';
+
+  // Same Supabase project and public publishable key used by the RL-33 Institute Portal.
+  // Never place a service_role/secret key in a public website.
+  const SUPABASE_URL = 'https://brlptuyehzdrduslnzeg.supabase.co';
+  const SUPABASE_PUBLIC_KEY = 'sb_publishable_qzyAVRpJJ69mHw9Y3PQ30w_LsIgWgg2';
+  const cbseBody = document.getElementById('publicCbseDateRows');
+  const eventsBox = document.getElementById('publicRl33EventTimeline');
+
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]));
+
+  const parseDate = value => {
+    if (!value) return null;
+    const parts = String(value).slice(0, 10).split('-').map(Number);
+    if (parts.length !== 3 || !parts.every(Number.isFinite)) return null;
+    const date = new Date(parts[0], parts[1] - 1, parts[2]);
+    return Number.isNaN(date.getTime()) ? null : date;
+  };
+
+  const formatDate = value => {
+    const date = parseDate(value);
+    return date ? new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }).format(date) : 'To be announced';
+  };
+  const formatDay = value => {
+    const date = parseDate(value);
+    return date ? new Intl.DateTimeFormat('en-IN', { weekday: 'long' }).format(date) : '—';
+  };
+  const formatTime = value => {
+    if (!value) return '';
+    const match = String(value).match(/^(\d{1,2}):(\d{2})/);
+    if (!match) return String(value);
+    let hour = Number(match[1]);
+    const minute = match[2];
+    const suffix = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12 || 12;
+    return `${String(hour).padStart(2, '0')}:${minute} ${suffix}`;
+  };
+  const setCbseMessage = (heading, detail) => {
+    if (!cbseBody) return;
+    cbseBody.innerHTML = `<tr><td colspan="5"><div class="rl33-table-empty"><b>◷</b><strong>${escapeHTML(heading)}</strong><small>${escapeHTML(detail)}</small></div></td></tr>`;
+  };
+  const setEventsMessage = (heading, detail) => {
+    if (!eventsBox) return;
+    eventsBox.innerHTML = `<div class="rl33-event-empty"><span>◇</span><strong>${escapeHTML(heading)}</strong><small>${escapeHTML(detail)}</small></div>`;
+  };
+
+  async function loadPublicCbse(client) {
+    if (!cbseBody) return;
+    setCbseMessage('Loading approved date sheet…', 'Connecting to the RL-33 public academic updates.');
+
+    const { data: sessions, error: sessionError } = await client
+      .from('public_exam_sessions')
+      .select('id, exam_name, class_name, academic_session, is_published, created_at')
+      .eq('is_published', true)
+      .order('created_at', { ascending: false });
+    if (sessionError) throw sessionError;
+
+    const class12Sessions = (sessions || []).filter(session => {
+      const className = String(session.class_name || '').toLowerCase();
+      return !className || className.includes('xii') || className.includes('12');
+    });
+    const ids = class12Sessions.map(session => session.id).filter(Boolean);
+    if (!ids.length) {
+      setCbseMessage('Date sheet awaiting publication', 'The latest approved Class XII CBSE schedule will appear here when Administration publishes it.');
+      return;
+    }
+
+    const { data: subjects, error: subjectError } = await client
+      .from('public_date_sheet_subjects')
+      .select('exam_id, subject_name, exam_date, start_time, end_time, display_order')
+      .in('exam_id', ids)
+      .order('display_order', { ascending: true })
+      .order('exam_date', { ascending: true });
+    if (subjectError) throw subjectError;
+
+    const rows = subjects || [];
+    if (!rows.length) {
+      setCbseMessage('No subjects added yet', 'The published examination session is available, but its subject-wise schedule has not been added yet.');
+      return;
+    }
+
+    cbseBody.innerHTML = rows.map(row => {
+      const time = [formatTime(row.start_time), formatTime(row.end_time)].filter(Boolean).join(' – ') || 'To be announced';
+      return `<tr>
+        <td>${escapeHTML(row.subject_name || '—')}</td>
+        <td>${escapeHTML(formatDate(row.exam_date))}</td>
+        <td>${escapeHTML(formatDay(row.exam_date))}</td>
+        <td>${escapeHTML(time)}</td>
+        <td>—</td>
+      </tr>`;
+    }).join('');
+  }
+
+  async function loadPublicEvents(client) {
+    if (!eventsBox) return;
+    setEventsMessage('Loading approved events…', 'Fetching Captain-approved public announcements.');
+
+    const { data, error } = await client
+      .from('public_events')
+      .select('id, event_name, description, event_date, venue, is_published, event_category, start_time, end_time, audience, preparation')
+      .eq('is_published', true)
+      .eq('audience', 'all')
+      .order('event_date', { ascending: true, nullsFirst: false });
+    if (error) throw error;
+
+    const rows = data || [];
+    if (!rows.length) {
+      setEventsMessage('No upcoming public event has been published yet.', 'Captain-approved event announcements and their timelines will appear here.');
+      return;
+    }
+
+    eventsBox.innerHTML = rows.map(event => {
+      const time = [formatTime(event.start_time), formatTime(event.end_time)].filter(Boolean).join(' – ');
+      const meta = [formatDate(event.event_date), formatDay(event.event_date), time, event.venue].filter(Boolean);
+      return `<article class="rl33-event-card">
+        <div class="event-label">${escapeHTML(event.event_category || 'RL-33 OFFICIAL EVENT')}</div>
+        <h3>${escapeHTML(event.event_name || 'RL-33 Event')}</h3>
+        <div class="rl33-event-meta">${meta.map(item => `<span>${escapeHTML(item)}</span>`).join('')}</div>
+        ${event.description ? `<p>${escapeHTML(event.description)}</p>` : ''}
+        ${event.preparation ? `<p><b>Preparation:</b> ${escapeHTML(event.preparation)}</p>` : ''}
+        <div class="rl-official-signature" style="margin-top:12px"><div class="rl-signature-panel"><small>Captain · RL-33 Administration</small></div></div>
+      </article>`;
+    }).join('');
+  }
+
+  async function initialisePublicUpdates() {
+    if (!cbseBody && !eventsBox) return;
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+      setCbseMessage('Connection unavailable', 'The public data service could not be loaded. Please refresh the page later.');
+      setEventsMessage('Connection unavailable', 'The public data service could not be loaded. Please refresh the page later.');
+      return;
+    }
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLIC_KEY);
+    const results = await Promise.allSettled([loadPublicCbse(client), loadPublicEvents(client)]);
+    results.forEach((result, index) => {
+      if (result.status !== 'rejected') return;
+      console.error(index === 0 ? 'RL-33 public CBSE update error:' : 'RL-33 public event update error:', result.reason);
+      const message = 'The live update could not be loaded. Please check the public read permissions (Supabase RLS) and refresh.';
+      if (index === 0) setCbseMessage('Unable to load date sheet', message);
+      else setEventsMessage('Unable to load public events', message);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialisePublicUpdates, { once: true });
+  } else {
+    initialisePublicUpdates();
+  }
+})();
+</script>
+
 </body>
 </html>
