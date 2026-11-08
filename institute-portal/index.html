@@ -1751,6 +1751,156 @@ body{background:radial-gradient(ellipse at 90% 0%,#f4dfe6 0,transparent 32%),lin
 }
 </style>
 
+
+<style id="rl33-final-print-cleanup">
+/* Final member-report print layout: remove duplicate top identity strip. */
+@page {
+  size: A4 portrait;
+  margin: 3mm 2.5mm 3mm 2.5mm;
+}
+@media print {
+  html, body {
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body.member-report-print {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body.member-report-print * {
+    visibility: hidden !important;
+  }
+  body.member-report-print #page-memberreports,
+  body.member-report-print #page-memberreports * {
+    visibility: visible !important;
+  }
+  body.member-report-print #page-memberreports {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  body.member-report-print #page-memberreports .section-head,
+  body.member-report-print #page-memberreports .toolbar {
+    display: none !important;
+  }
+  body.member-report-print #page-memberreports .report-paper {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  /* Remove the duplicate strip above the report; retain the lower signature. */
+  body.member-report-print .rl-print-masthead {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+  body.member-report-print .rl-print-running-footer {
+    display: none !important;
+  }
+
+  /* Use the available printable width and reduce unnecessary whitespace. */
+  body.member-report-print .rl-report-hero {
+    margin-top: 0 !important;
+    margin-bottom: 7px !important;
+    padding: 10px 13px !important;
+    border-radius: 7px !important;
+    break-inside: avoid;
+  }
+  body.member-report-print .rl-report-kpis {
+    gap: 5px !important;
+    margin: 7px 0 !important;
+  }
+  body.member-report-print .rl-report-kpi {
+    padding: 6px 8px !important;
+    break-inside: avoid !important;
+  }
+  body.member-report-print .rl-report-section {
+    margin: 10px 0 !important;
+  }
+  body.member-report-print .rl-report-chart {
+    padding: 8px !important;
+  }
+  body.member-report-print .rl-member-profile-print {
+    margin-top: 10px !important;
+  }
+  body.member-report-print .rl-profile-print-heading {
+    margin-bottom: 6px !important;
+  }
+  body.member-report-print .rl-profile-print-grid {
+    gap: 5px !important;
+  }
+  body.member-report-print .rl-profile-print-grid > div {
+    padding: 6px 8px !important;
+    break-inside: avoid !important;
+  }
+  body.member-report-print .rl-report-footer {
+    display: flex !important;
+    margin: 10px 0 0 !important;
+    padding: 7px 2px 2px !important;
+    break-inside: avoid !important;
+  }
+  body.member-report-print .rl-report-footer img {
+    max-height: 42px !important;
+    object-fit: contain !important;
+  }
+  body.member-report-print .rl-report-footer,
+  body.member-report-print .rl-report-footer * {
+    visibility: visible !important;
+  }
+
+  /* Prevent individual cards/rows from being split, while allowing long
+     sections and tables to continue naturally onto the following page. */
+  body.member-report-print .rl-report-kpi,
+  body.member-report-print .rl-report-chart,
+  body.member-report-print .rl-report-note,
+  body.member-report-print .rl-profile-print-grid > div,
+  body.member-report-print .rl-report-footer {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  body.member-report-print table {
+    width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: collapse !important;
+  }
+  body.member-report-print thead {
+    display: table-header-group !important;
+  }
+  body.member-report-print tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+  body.member-report-print th,
+  body.member-report-print td {
+    padding: 4px 4px !important;
+    font-size: 8px !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+</style>
+
 </head><body>
 <div id="loginGate" class="login"><div class="login-card">
   <header class="login-brand">
@@ -2542,17 +2692,9 @@ function renderCurrentMemberReport(){
   renderProgressInto(currentMember,'memberPrintable',memberPeriod,memberReportRange());
 }
 function printMemberProgress(){
-  const masthead=document.querySelector('#memberPrintable .rl-print-masthead');
-  const memberLine=masthead?.querySelector('small:last-child')?.textContent?.trim()||'Member progress report';
-  const footer=document.createElement('div');
-  footer.className='rl-print-running-footer';
-  footer.innerHTML='<span class="rl-print-footer-brand">RL-33 · OFFICIAL MEMBER RECORD</span><span class="rl-print-footer-detail"></span>';
-  footer.querySelector('.rl-print-footer-detail').textContent=memberLine;
-  document.body.appendChild(footer);
   document.body.classList.add('member-report-print');
   const cleanup=()=>{
     document.body.classList.remove('member-report-print');
-    footer.remove();
     window.removeEventListener('afterprint',cleanup);
   };
   window.addEventListener('afterprint',cleanup,{once:true});
